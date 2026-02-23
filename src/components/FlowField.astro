@@ -1,0 +1,126 @@
+---
+interface Props {
+	variant?: 'hero' | 'echo';
+}
+
+const { variant = 'hero' } = Astro.props;
+const gradientId = `flow-gradient-${Math.random().toString(36).slice(2, 9)}`;
+const blurId = `flow-blur-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+<div class:list={['flow-field', variant]} aria-hidden="true">
+	<div class="well"></div>
+	<svg viewBox="0 0 1200 800" preserveAspectRatio="none">
+		<defs>
+			<linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
+				<stop offset="0%" stop-color="rgba(58, 110, 255, 0)" />
+				<stop offset="30%" stop-color="rgba(58, 110, 255, 0.75)" />
+				<stop offset="65%" stop-color="rgba(74, 77, 255, 0.55)" />
+				<stop offset="100%" stop-color="rgba(124, 58, 237, 0)" />
+			</linearGradient>
+			<filter id={blurId}>
+				<feGaussianBlur stdDeviation="1.3" />
+			</filter>
+		</defs>
+
+		<path class="path base" d="M -120 140 C 180 120, 320 360, 620 420" />
+		<path class="path base" d="M -120 300 C 140 290, 330 410, 620 420" />
+		<path class="path base" d="M 1320 170 C 980 160, 830 360, 620 420" />
+		<path class="path base" d="M 1320 500 C 980 500, 790 470, 620 420" />
+
+		<g class="shimmer" filter={`url(#${blurId})`}>
+			<path class="path glow" stroke={`url(#${gradientId})`} d="M -120 140 C 180 120, 320 360, 620 420" />
+			<path class="path glow" stroke={`url(#${gradientId})`} d="M -120 300 C 140 290, 330 410, 620 420" />
+			<path class="path glow" stroke={`url(#${gradientId})`} d="M 1320 170 C 980 160, 830 360, 620 420" />
+			<path class="path glow" stroke={`url(#${gradientId})`} d="M 1320 500 C 980 500, 790 470, 620 420" />
+		</g>
+	</svg>
+</div>
+
+<style>
+	.flow-field {
+		position: absolute;
+		inset: -15% -18%;
+		pointer-events: none;
+		opacity: 0.13;
+		z-index: 0;
+	}
+
+	.flow-field.echo {
+		inset: -22% -20%;
+		opacity: 0.08;
+	}
+
+	.flow-field .well {
+		position: absolute;
+		left: 52%;
+		top: 43%;
+		width: min(56vw, 700px);
+		aspect-ratio: 1;
+		border-radius: 50%;
+		transform: translate(-50%, -50%);
+		background: radial-gradient(
+			circle,
+			rgba(124, 58, 237, 0.24) 0%,
+			rgba(74, 77, 255, 0.14) 25%,
+			rgba(58, 110, 255, 0.08) 45%,
+			rgba(10, 15, 28, 0) 72%
+		);
+		filter: blur(30px);
+		animation: drift 24s ease-in-out infinite;
+	}
+
+	.flow-field.echo .well {
+		width: min(46vw, 560px);
+		top: 50%;
+	}
+
+	.flow-field svg {
+		width: 100%;
+		height: 100%;
+	}
+
+	.path {
+		fill: none;
+		vector-effect: non-scaling-stroke;
+	}
+
+	.path.base {
+		stroke: rgba(255, 255, 255, 0.1);
+		stroke-width: 1.15;
+	}
+
+	.path.glow {
+		stroke-width: 1.7;
+		opacity: 0.22;
+		stroke-dasharray: 180 540;
+		stroke-dashoffset: 0;
+		animation: shimmer 16s linear infinite;
+	}
+
+	@keyframes drift {
+		0%,
+		100% {
+			transform: translate(-50%, -50%) scale(1);
+		}
+		50% {
+			transform: translate(-49%, -52%) scale(1.04);
+		}
+	}
+
+	@keyframes shimmer {
+		0% {
+			stroke-dashoffset: 0;
+		}
+		100% {
+			stroke-dashoffset: -720;
+		}
+	}
+
+	@media (max-width: 900px) {
+		.flow-field {
+			inset: -12% -24%;
+			opacity: 0.1;
+		}
+	}
+</style>

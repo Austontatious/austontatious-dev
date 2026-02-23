@@ -1,0 +1,37 @@
+---
+const today = new Date();
+---
+
+<footer>
+	<p>&copy; {today.getFullYear()} Auston Horras. All rights reserved.</p>
+	<div class="social-links">
+		<a href="mailto:auston.horras@gmail.com">Contact</a>
+		<a href="https://www.linkedin.com/in/auston-horras-17022614/" target="_blank" rel="noreferrer">
+			LinkedIn
+		</a>
+		<a href="https://github.com/austontatious" target="_blank" rel="noreferrer">GitHub</a>
+	</div>
+</footer>
+<style>
+	footer {
+		padding: 2em 1em 4em;
+		border-top: 1px solid rgba(255, 255, 255, 0.08);
+		background: rgba(5, 7, 13, 0.4);
+		color: rgba(233, 238, 255, 0.76);
+		text-align: center;
+	}
+	.social-links {
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
+		margin-top: 1em;
+	}
+	.social-links a {
+		text-decoration: none;
+		color: rgba(233, 238, 255, 0.76);
+		font-size: 0.9rem;
+	}
+	.social-links a:hover {
+		color: #fff;
+	}
+</style>

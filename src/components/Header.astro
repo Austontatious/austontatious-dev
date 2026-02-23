@@ -1,0 +1,70 @@
+---
+import HeaderLink from './HeaderLink.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<header>
+	<nav>
+		<h2><a href="/">{SITE_TITLE}</a></h2>
+		<div class="internal-links">
+			<HeaderLink href="/">Home</HeaderLink>
+			<HeaderLink href="/blog">Blog</HeaderLink>
+			<HeaderLink href="/about">About</HeaderLink>
+		</div>
+		<div class="social-links">
+			<a href="mailto:auston.horras@gmail.com">Contact</a>
+			<a href="https://www.linkedin.com/in/auston-horras-17022614/" target="_blank" rel="noreferrer">
+				LinkedIn
+			</a>
+			<a href="https://github.com/austontatious" target="_blank" rel="noreferrer">GitHub</a>
+		</div>
+	</nav>
+</header>
+<style>
+	header {
+		margin: 0;
+		padding: 0 1em;
+		background: rgba(10, 15, 28, 0.94);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+	}
+	h2 {
+		margin: 0;
+		font-size: 1em;
+	}
+
+	h2 a,
+	h2 a.active {
+		text-decoration: none;
+	}
+	nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+	nav a {
+		padding: 1em 0.5em;
+		color: rgba(233, 238, 255, 0.82);
+		border-bottom: 4px solid transparent;
+		text-decoration: none;
+	}
+	nav a.active {
+		text-decoration: none;
+		border-bottom-color: var(--g2);
+	}
+	.social-links,
+	.social-links a {
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
+	}
+	.social-links a {
+		font-size: 0.85rem;
+		padding: 1em 0.35em;
+	}
+	@media (max-width: 720px) {
+		.social-links {
+			display: none;
+		}
+	}
+</style>

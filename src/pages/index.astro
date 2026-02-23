@@ -1,0 +1,262 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import FlowField from '../components/FlowField.astro';
+import generatedProjects from '../data/projects.generated.json';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+interface ProjectCard {
+	name: string;
+	ownerRepo: string;
+	visibility: 'PUBLIC' | 'PRIVATE';
+	tag: 'Systems Builder' | 'Applied AI Engineer' | 'Automation + Quality' | 'Developer Experience';
+	oneLiner: string;
+	impact: string;
+	bullets: string[];
+	proof: string;
+	tech: string[];
+	links: {
+		publicRepoUrl: string | null;
+		requestAccess: boolean;
+	};
+}
+
+const projects = generatedProjects as ProjectCard[];
+const agentPlatformOrder = ['lex', 'friday', 'muninn', 'laila'];
+const agentPlatformSet = new Set(agentPlatformOrder);
+const systemsTags = new Set(['Systems Builder', 'Automation + Quality']);
+const lowerName = (project: ProjectCard) => project.name.toLowerCase();
+
+const agentPlatforms = projects
+	.filter((project) => agentPlatformSet.has(lowerName(project)))
+	.sort((a, b) => agentPlatformOrder.indexOf(lowerName(a)) - agentPlatformOrder.indexOf(lowerName(b)));
+
+const appliedAI = projects
+	.filter((project) => !agentPlatformSet.has(lowerName(project)) && project.tag === 'Applied AI Engineer')
+	.sort((a, b) => a.name.localeCompare(b.name));
+
+const systemsAndAutomation = projects
+	.filter((project) => !agentPlatformSet.has(lowerName(project)) && systemsTags.has(project.tag))
+	.sort((a, b) => a.name.localeCompare(b.name));
+
+const developerSideProjects = projects
+	.filter(
+		(project) =>
+			!agentPlatformSet.has(lowerName(project)) &&
+			project.tag !== 'Applied AI Engineer' &&
+			!systemsTags.has(project.tag),
+	)
+	.sort((a, b) => a.name.localeCompare(b.name));
+
+const projectGroups = [
+	{
+		title: 'Agent Platforms',
+		subtitle: 'Memory, orchestration, and interface layers for long-running assistants.',
+		items: agentPlatforms,
+	},
+	{
+		title: 'Applied AI Systems',
+		subtitle: 'Pipelines and model workflows that move from data to outcomes.',
+		items: appliedAI,
+	},
+	{
+		title: 'Systems & Automation',
+		subtitle: 'Production discipline: deployment, reliability, and operational control.',
+		items: systemsAndAutomation,
+	},
+	{
+		title: 'Developer Tooling & Side Projects',
+		subtitle: 'Smaller projects that sharpen architecture and execution range.',
+		items: developerSideProjects,
+	},
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<div class="page-shell">
+			<header class="main-nav">
+				<nav class="container nav-inner" aria-label="Primary">
+					<a href="#hero" class="brand">austontatious.dev</a>
+					<div class="nav-links">
+						<a href="#principle">Expertise</a>
+						<a href="#projects">Projects</a>
+						<a href="#cta">Contact</a>
+					</div>
+					<div class="nav-actions">
+						<a href="mailto:auston.horras@gmail.com">Email</a>
+						<a href="https://www.linkedin.com/in/auston-horras-17022614/" target="_blank" rel="noreferrer">
+							LinkedIn
+						</a>
+					</div>
+				</nav>
+			</header>
+
+			<main>
+				<section id="hero" class="section hero">
+					<FlowField variant="hero" />
+					<div class="container section-inner">
+						<p class="eyebrow">Calm systems for high-stakes decisions</p>
+						<h1>AI Architect.</h1>
+						<p class="lead">Calm inside complexity.</p>
+						<p class="support">I build AI systems that turn uncertainty into clear outcomes.</p>
+						<p class="hero-frame">
+							Built in high-reliability environments, I design systems that stay clear under pressure. I
+							scale that discipline from local workflows to multi-service AI platforms. The focus is
+							durable, user-centered AI infrastructure.
+						</p>
+					</div>
+				</section>
+
+				<section id="principle" class="section">
+					<div class="container section-inner">
+						<h2>Order from chaos — without the chaos.</h2>
+						<div class="principle-copy">
+							<p>
+								Emergency medicine taught me how to assess quickly, prioritize clearly, and act under
+								pressure.
+							</p>
+							<p>
+								AI engineering lets me scale that clarity into systems teams can trust.
+							</p>
+						</div>
+					</div>
+				</section>
+
+				<section id="projects" class="section">
+					<FlowField variant="echo" />
+					<div class="container section-inner">
+						<h2>Projects</h2>
+						<p class="projects-intro">
+							System foundations came first. Applied AI pipelines followed. Current work focuses on
+							composable agent platforms.
+						</p>
+						{
+							projectGroups.map(
+								(group) =>
+									group.items.length > 0 && (
+										<div class="project-group">
+											<h3 class="group-title">{group.title}</h3>
+											<p class="group-subtitle">{group.subtitle}</p>
+											<div class="project-grid">
+												{
+													group.items.map((project) => (
+														<article class="project-card">
+															<div class="project-card-top">
+																<div class="project-heading-row">
+																	<h4>{project.name}</h4>
+																	{project.links.requestAccess && <span class="access-badge">Access on request</span>}
+																</div>
+																<p class="project-one-liner">{project.oneLiner}</p>
+																<p class="project-impact"><span>Impact:</span> {project.impact}</p>
+																<ul class="project-bullets">
+																	{project.bullets.map((bullet) => <li>{bullet}</li>)}
+																</ul>
+																<p class="project-proof"><span>Proof:</span> {project.proof}</p>
+															</div>
+															<div class="project-card-bottom">
+																<p class="project-role">Role: {project.tag}</p>
+																<div class="tech-list">
+																	{project.tech.slice(0, 10).map((token) => <span class="tech-token">{token}</span>)}
+																</div>
+																<div class="card-links">
+																	{project.links.publicRepoUrl ? (
+																		<a class="link-chip" href={project.links.publicRepoUrl} target="_blank" rel="noreferrer">
+																			GitHub
+																		</a>
+																	) : (
+																		<span class="link-chip is-disabled">Access on request</span>
+																	)}
+																</div>
+															</div>
+														</article>
+													))
+												}
+											</div>
+										</div>
+									),
+							)
+						}
+					</div>
+				</section>
+
+				<section id="ecosystem" class="section">
+					<FlowField variant="echo" />
+					<div class="container section-inner">
+						<h2>Not isolated tools. A connected system.</h2>
+						<p class="ecosystem-intro">Lex presents. Muninn remembers. FRIDAY orchestrates.</p>
+						<div
+							class="ecosystem-diagram"
+							role="img"
+							aria-label="Lex presents the interface, Muninn provides memory, and FRIDAY orchestrates the system."
+						>
+							<div class="layer">
+								<span>Lex</span>
+								<small>Interface layer for personal AI</small>
+							</div>
+							<div class="layer">
+								<span>Muninn</span>
+								<small>Persistent memory layer for AI systems</small>
+							</div>
+							<div class="layer">
+								<span>FRIDAY</span>
+								<small>Orchestration layer for agents and tools</small>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section id="human" class="section">
+					<div class="container section-inner">
+						<h2>Decisions when it matters.</h2>
+						<div class="human-copy">
+							<p>In high-stakes environments, clarity is safety.</p>
+							<p>
+								That mindset shapes how I design AI: calm, reliable, and human-centered.
+							</p>
+						</div>
+					</div>
+				</section>
+
+				<section id="cta" class="section">
+					<div class="container section-inner">
+						<h2>If AI feels overwhelming, that's normal.</h2>
+						<p class="cta-copy">
+							You don't need to understand everything. You need systems that work — and someone who can
+								guide it calmly.
+						</p>
+						<div class="cta-actions">
+							<a class="button button-primary" href="mailto:auston.horras@gmail.com">Email / Contact</a>
+							<a
+								class="button button-secondary"
+								href="https://www.linkedin.com/in/auston-horras-17022614/"
+								target="_blank"
+								rel="noreferrer"
+							>
+								LinkedIn
+							</a>
+							<a class="button button-secondary" href="https://github.com/austontatious" target="_blank" rel="noreferrer">
+								GitHub
+							</a>
+						</div>
+					</div>
+				</section>
+			</main>
+			<footer class="site-footer">
+				<div class="container footer-inner">
+					<p>Calm systems for clear outcomes.</p>
+					<div class="footer-links">
+						<a href="mailto:auston.horras@gmail.com">Contact</a>
+						<a href="https://www.linkedin.com/in/auston-horras-17022614/" target="_blank" rel="noreferrer">
+							LinkedIn
+						</a>
+						<a href="https://github.com/austontatious" target="_blank" rel="noreferrer">GitHub</a>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</body>
+</html>

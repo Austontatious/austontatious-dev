@@ -1,0 +1,98 @@
+[
+  {
+    "name": "muninn",
+    "ownerRepo": "Austontatious/muninn",
+    "visibility": "PUBLIC",
+    "local_path": "/mnt/data/Muninn",
+    "no_local_clone": false,
+    "cloned_cache": false
+  },
+  {
+    "name": "Null_Signal",
+    "ownerRepo": "Austontatious/Null_Signal",
+    "visibility": "PUBLIC",
+    "local_path": "/mnt/data/Null_Signal",
+    "no_local_clone": false,
+    "cloned_cache": false
+  },
+  {
+    "name": "OnHand",
+    "ownerRepo": "Austontatious/OnHand",
+    "visibility": "PRIVATE",
+    "local_path": "/mnt/data/OnHand",
+    "no_local_clone": false,
+    "cloned_cache": false
+  },
+  {
+    "name": "ReadyPlayer1",
+    "ownerRepo": "Austontatious/ReadyPlayer1",
+    "visibility": "PUBLIC",
+    "local_path": "/mnt/data/ReadyPlayer1",
+    "no_local_clone": false,
+    "cloned_cache": false
+  },
+  {
+    "name": "subsim",
+    "ownerRepo": "Austontatious/subsim",
+    "visibility": "PUBLIC",
+    "local_path": "/mnt/data/subsim",
+    "no_local_clone": false,
+    "cloned_cache": false
+  },
+  {
+    "name": "friday",
+    "ownerRepo": "Austontatious/friday",
+    "visibility": "PUBLIC",
+    "local_path": "/mnt/data/friday",
+    "no_local_clone": false,
+    "cloned_cache": false
+  },
+  {
+    "name": "MemeTrader",
+    "ownerRepo": "Austontatious/MemeTrader",
+    "visibility": "PUBLIC",
+    "local_path": "/mnt/data/MemeTrader",
+    "no_local_clone": false,
+    "cloned_cache": false
+  },
+  {
+    "name": "lex",
+    "ownerRepo": "Austontatious/lex",
+    "visibility": "PRIVATE",
+    "local_path": "/mnt/data/Lex",
+    "no_local_clone": false,
+    "cloned_cache": false
+  },
+  {
+    "name": "Gauntlet",
+    "ownerRepo": "Austontatious/Gauntlet",
+    "visibility": "PUBLIC",
+    "local_path": "/mnt/data/Gauntlet",
+    "no_local_clone": false,
+    "cloned_cache": false
+  },
+  {
+    "name": "Gauntlet001",
+    "ownerRepo": "Austontatious/Gauntlet001",
+    "visibility": "PUBLIC",
+    "local_path": "/mnt/data/Guantlet001",
+    "no_local_clone": false,
+    "cloned_cache": false
+  },
+  {
+    "name": "PulseTrade",
+    "ownerRepo": "Austontatious/PulseTrade",
+    "visibility": "PUBLIC",
+    "local_path": "/mnt/data/PulseTrade",
+    "no_local_clone": false,
+    "cloned_cache": false
+  },
+  {
+    "name": "Accountant",
+    "ownerRepo": "Austontatious/Accountant",
+    "visibility": "PRIVATE",
+    "local_path": "/mnt/data/Accounting",
+    "no_local_clone": false,
+    "cloned_cache": false
+  }
+]
