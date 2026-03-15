@@ -760,6 +760,13 @@ p {
 	font-size: 1rem;
 }
 
+.workshop-hero-actions {
+	margin-top: 1.2rem;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.7rem;
+}
+
 .workshop-content {
 	display: grid;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -891,6 +898,10 @@ p {
 
 	.workshop-link {
 		font-size: 0.74rem;
+	}
+
+	.workshop-hero-actions .button {
+		width: 100%;
 	}
 
 	.family-tree-shell {
