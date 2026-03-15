@@ -1,0 +1,134 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+
+const WORKSHOP_TITLE = 'Practical Generative AI Workshops for Teams | Auston Horras';
+const WORKSHOP_DESCRIPTION =
+	'Practical generative AI workshops for teams and leaders. Learn how to work with AI effectively using clear workflows, constraints, and real-world examples.';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={WORKSHOP_TITLE} description={WORKSHOP_DESCRIPTION} />
+	</head>
+	<body>
+		<div class="page-shell">
+			<header class="main-nav">
+				<nav class="container nav-inner" aria-label="Primary">
+					<a href="/" class="brand">austontatious.dev</a>
+					<div class="nav-links">
+						<a href="/#hero">Portfolio</a>
+						<a href="/#projects">Projects</a>
+						<a href="/workshops/" aria-current="page">Workshops</a>
+					</div>
+					<div class="nav-actions">
+						<a href="mailto:auston.horras@gmail.com">Email</a>
+						<a href="https://www.linkedin.com/in/auston-horras-17022614/" target="_blank" rel="noreferrer">
+							LinkedIn
+						</a>
+					</div>
+				</nav>
+			</header>
+
+			<main class="workshop-main">
+				<section class="section workshop-hero">
+					<div class="container section-inner">
+						<p class="eyebrow">Workshops &amp; Speaking</p>
+						<h1>Practical Generative AI Workshops for Teams</h1>
+						<p class="lead workshop-lead">
+							Learn how to actually work with generative AI in real workflows, without hype, gimmicks, or
+							outdated prompt folklore.
+						</p>
+						<p class="workshop-intro">
+							Most teams are already trying tools like ChatGPT. The gap usually is not access, it is knowing
+							how to use AI effectively, safely, and consistently in day-to-day work.
+						</p>
+					</div>
+				</section>
+
+				<section class="section">
+					<div class="container section-inner workshop-content">
+						<article class="workshop-panel">
+							<h2>What participants learn</h2>
+							<ul>
+								<li>How to structure prompts with scope, context, and constraints</li>
+								<li>How to use AI as a thinking partner rather than a search box</li>
+								<li>Common failure modes such as hallucination, overconfidence, and vague outputs</li>
+								<li>Practical workflows for knowledge work, technical work, and operational work</li>
+								<li>How to evaluate when AI output is useful versus unreliable</li>
+							</ul>
+						</article>
+
+						<article class="workshop-panel">
+							<h2>Format</h2>
+							<ul>
+								<li>60-minute executive briefings</li>
+								<li>2–3 hour team workshops</li>
+								<li>Customized sessions for technical or cross-functional teams</li>
+								<li>Available remote or in person</li>
+							</ul>
+						</article>
+
+						<article class="workshop-panel">
+							<h2>Why me</h2>
+							<p>
+								I teach this from the perspective of someone who actually builds AI systems, not just someone
+								presenting trends from a slide deck. The focus is turning model capability into practical team
+								workflows that hold up under real constraints.
+							</p>
+							<p>
+								My background includes systems engineering, applied AI implementation, and frontline RN
+								experience, which is especially useful for teams operating in healthcare and regulated
+								environments.
+							</p>
+						</article>
+
+						<article class="workshop-panel">
+							<h2>Example live demos</h2>
+							<ul>
+								<li>Turning messy notes into structured reports</li>
+								<li>Converting rough ideas into technical specifications</li>
+								<li>Using AI to critique a strategy or process draft</li>
+								<li>Comparing weak prompts to scoped, constraint-driven instructions</li>
+							</ul>
+						</article>
+					</div>
+				</section>
+
+				<section class="section">
+					<div class="container section-inner">
+						<div class="workshop-cta">
+							<h2>Interested in bringing a workshop to your team?</h2>
+							<p>Contact me by email or connect on LinkedIn.</p>
+							<div class="cta-actions">
+								<a class="button button-primary" href="mailto:auston.horras@gmail.com">Contact by Email</a>
+								<a
+									class="button button-secondary"
+									href="https://www.linkedin.com/in/auston-horras-17022614/"
+									target="_blank"
+									rel="noreferrer"
+								>
+									LinkedIn
+								</a>
+							</div>
+							<a class="back-link workshop-back-link" href="/#hero">Back to portfolio</a>
+						</div>
+					</div>
+				</section>
+			</main>
+
+			<footer class="site-footer">
+				<div class="container footer-inner">
+					<p>Calm systems for clear outcomes.</p>
+					<div class="footer-links">
+						<a href="mailto:auston.horras@gmail.com">Contact</a>
+						<a href="https://www.linkedin.com/in/auston-horras-17022614/" target="_blank" rel="noreferrer">
+							LinkedIn
+						</a>
+						<a href="https://github.com/austontatious" target="_blank" rel="noreferrer">GitHub</a>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</body>
+</html>

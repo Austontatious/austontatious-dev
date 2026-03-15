@@ -1,0 +1,37 @@
+{
+  "spine": ["friday", "muninn", "laila"],
+  "branches": [
+    {
+      "from": "friday",
+      "label": "Identity evolution",
+      "nodes": ["lex"]
+    },
+    {
+      "from": "friday",
+      "label": "Experimentation waves",
+      "nodes": ["subsim", "null-signal", "gauntlet"]
+    },
+    {
+      "from": "friday",
+      "label": "Commission work (applied competencies)",
+      "nodes": ["accountant", "pulsetrade", "memetrader"]
+    },
+    {
+      "from": "accountant",
+      "label": "Inventory/vision exploration",
+      "nodes": ["onhand"]
+    },
+    {
+      "from": "subsim",
+      "label": "Automated playtesting",
+      "nodes": ["readyplayer1"]
+    }
+  ],
+  "specialNodes": [
+    {
+      "slug": "muninn",
+      "noteTop": "Started as embedded memory experiments inside FRIDAY/Lex.",
+      "noteBottom": "Extracted into reusable infrastructure (standalone memory layer)."
+    }
+  ]
+}

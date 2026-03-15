@@ -1,0 +1,93 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import projects from '../../data/projects.generated.json';
+
+interface ProjectConnection {
+	to: string;
+	type: 'inspired-by' | 'prototype-for' | 'commissioned' | 'evolved-into' | 'shared-infra';
+	note: string;
+}
+
+interface ProjectCard {
+	name: string;
+	ownerRepo: string;
+	visibility: 'PUBLIC' | 'PRIVATE';
+	slug: string;
+	shortDesc: string;
+	status: 'Core' | 'Experimental' | 'Commission' | 'Stub';
+	threads: string[];
+	connections: ProjectConnection[];
+	updatedAt: string;
+	tag: 'Systems Builder' | 'Applied AI Engineer' | 'Automation + Quality' | 'Developer Experience';
+	oneLiner: string;
+	impact: string;
+	bullets: string[];
+	proof: string;
+	tech: string[];
+	links: {
+		publicRepoUrl: string | null;
+		requestAccess: boolean;
+	};
+}
+
+export function getStaticPaths() {
+	return (projects as ProjectCard[]).map((project) => ({
+		params: { slug: project.slug },
+		props: { project },
+	}));
+}
+
+const { project } = Astro.props as { project: ProjectCard };
+
+const title = `${project.name} | austontatious.dev`;
+const description = project.shortDesc;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+	</head>
+	<body>
+		<main class="project-detail-main">
+			<div class="container">
+				<section class="project-detail-card">
+					<a class="back-link" href="/#projects">Back to Projects</a>
+					<div class="project-detail-head">
+						<h1>{project.name}</h1>
+						<div class="detail-badges">
+							<span class="badge">{project.tag}</span>
+							<span class="badge">{project.status}</span>
+							{project.links.requestAccess && <span class="badge">Access on request</span>}
+						</div>
+					</div>
+
+					<p class="detail-updated">Updated: {project.updatedAt}</p>
+					<p class="detail-one-liner">{project.oneLiner}</p>
+					<p class="detail-impact"><span>Impact:</span> {project.impact}</p>
+
+					<h2>What I built</h2>
+					<ul class="detail-bullets">
+						{project.bullets.map((bullet) => <li>{bullet}</li>)}
+					</ul>
+
+					<p class="detail-proof"><span>Proof:</span> {project.proof}</p>
+
+					<div class="tech-list detail-tech">
+						{project.tech.map((token) => <span class="tech-token">{token}</span>)}
+					</div>
+
+					<div class="detail-links">
+						{project.links.publicRepoUrl ? (
+							<a class="button button-secondary" href={project.links.publicRepoUrl} target="_blank" rel="noreferrer">
+								GitHub Repository
+							</a>
+						) : (
+							<span class="button button-secondary is-static">Access on request</span>
+						)}
+					</div>
+				</section>
+			</div>
+		</main>
+	</body>
+</html>

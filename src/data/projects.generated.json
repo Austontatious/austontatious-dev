@@ -1,212 +1,16 @@
 [
   {
-    "name": "lex",
-    "ownerRepo": "Austontatious/lex",
-    "visibility": "PRIVATE",
-    "tag": "Applied AI Engineer",
-    "oneLiner": "Personal AI companion stack with Docker deployment profiles, host-edge routing, and tool integrations for daily assistant workflows.",
-    "impact": "Moves from local prototype to repeatable, domain-backed assistant operations.",
-    "bullets": [
-      "Defined dev/live Compose profiles and shared edge-network deployment path.",
-      "Documented environment contract for LLM, ComfyUI, sessions, and user identity headers.",
-      "Added smoke and walkthrough verification scripts for startup validation."
-    ],
-    "proof": "Run `docker compose up -d` with `scripts/verify_walkthrough.sh` from the repo guide.",
-    "tech": [
-      "Python",
-      "FastAPI",
-      "Docker Compose",
-      "Traefik",
-      "Cloudflare",
-      "Vite"
-    ],
-    "links": {
-      "publicRepoUrl": null,
-      "requestAccess": true
-    }
-  },
-  {
-    "name": "friday",
-    "ownerRepo": "Austontatious/friday",
-    "visibility": "PUBLIC",
-    "tag": "Systems Builder",
-    "oneLiner": "Modular assistant backend that keeps chat online while memory and multimodal services degrade safely.",
-    "impact": "Improves production reliability for agent workflows under partial outages.",
-    "bullets": [
-      "Implemented chat, async agent runs, and gated tool execution APIs.",
-      "Integrated provider-driven memory rehydrate, staging, and confirmation flows.",
-      "Shipped multi-compose runtime scripts for dev, app, and model modes."
-    ],
-    "proof": "Run `docker compose -f docker-compose.dev.yml up --build` and `scripts/smoke_memory.sh`.",
-    "tech": [
-      "Python",
-      "FastAPI",
-      "Docker Compose",
-      "Redis",
-      "PostgreSQL",
-      "JavaScript"
-    ],
-    "links": {
-      "publicRepoUrl": "https://github.com/Austontatious/friday",
-      "requestAccess": false
-    }
-  },
-  {
-    "name": "muninn",
-    "ownerRepo": "Austontatious/muninn",
-    "visibility": "PUBLIC",
-    "tag": "Applied AI Engineer",
-    "oneLiner": "Pluggable memory service for LLM agents with SQLite durability, audit logging, and staged confirmation workflows.",
-    "impact": "Turns ad-hoc memory writes into traceable, policy-gated memory operations.",
-    "bullets": [
-      "Built namespace-scoped storage for entities, facts, episodes, and preferences.",
-      "Implemented FTS, vector, and hybrid retrieval with memory-card rendering.",
-      "Added pending-candidate review and confirmation endpoints."
-    ],
-    "proof": "Run `scripts/smoke.sh` and call `/v0/memory/*` endpoints documented in README.",
-    "tech": [
-      "Python",
-      "FastAPI",
-      "SQLite",
-      "FTS5",
-      "Pydantic"
-    ],
-    "links": {
-      "publicRepoUrl": "https://github.com/Austontatious/muninn",
-      "requestAccess": false
-    }
-  },
-  {
-    "name": "OnHand",
-    "ownerRepo": "Austontatious/OnHand",
-    "visibility": "PRIVATE",
-    "tag": "Applied AI Engineer",
-    "oneLiner": "Intent and inventory platform spanning Android client, enterprise demo stack, and optional vision-evaluation services.",
-    "impact": "Connects consumer grocery workflows to enterprise operations in one codebase.",
-    "bullets": [
-      "Maintained Compose-based FastAPI, Postgres, and React enterprise demo environment.",
-      "Shipped Android setup and instrumentation scripts for device testing.",
-      "Included optional vision vLLM service wiring for evaluation workflows."
-    ],
-    "proof": "Run `make up` in `onhand-enterprise-demo` and `make android-check` in the Android app.",
-    "tech": [
-      "Kotlin",
-      "Jetpack Compose",
-      "FastAPI",
-      "PostgreSQL",
-      "React",
-      "Docker"
-    ],
-    "links": {
-      "publicRepoUrl": null,
-      "requestAccess": true
-    }
-  },
-  {
-    "name": "Null_Signal",
-    "ownerRepo": "Austontatious/Null_Signal",
-    "visibility": "PUBLIC",
-    "tag": "Applied AI Engineer",
-    "oneLiner": "Local-first newsroom pipeline that generates dystopian short-form broadcast clips from breaking-news inputs.",
-    "impact": "Automates repeatable media generation with publish guardrails and run artifacts.",
-    "bullets": [
-      "Built script-driven ingestion, screenwriting, rendering, and export flow.",
-      "Added dry-run, dedupe, and kill-switch controls for safe publishing.",
-      "Tracked clip-level exports and run manifests for review."
-    ],
-    "proof": "Run `python3 scripts/run_newsroom.py --batch 1 --render --resume` with local env flags.",
-    "tech": [
-      "Python",
-      "FFmpeg",
-      "Docker Compose",
-      "XTTS",
-      "ComfyUI",
-      "Cron"
-    ],
-    "links": {
-      "publicRepoUrl": "https://github.com/Austontatious/Null_Signal",
-      "requestAccess": false
-    }
-  },
-  {
-    "name": "PulseTrade",
-    "ownerRepo": "Austontatious/PulseTrade",
-    "visibility": "PUBLIC",
-    "tag": "Applied AI Engineer",
-    "oneLiner": "Trading research stack combining live ingestion, feature pipelines, forecasting services, and policy-driven execution.",
-    "impact": "Creates a testable path from market data to daily allocation decisions.",
-    "bullets": [
-      "Integrated websocket and API ingestion with Postgres and Timescale storage.",
-      "Ran Celery workers, Redis queues, and forecast services in Compose.",
-      "Automated nightly backfill, forecasting, and planning jobs through scheduler scripts."
-    ],
-    "proof": "Run `docker compose up -d ingest forecast strategist worker policy api redis db`.",
-    "tech": [
-      "Python",
-      "FastAPI",
-      "PostgreSQL",
-      "TimescaleDB",
-      "Celery",
-      "Redis",
-      "Docker"
-    ],
-    "links": {
-      "publicRepoUrl": "https://github.com/Austontatious/PulseTrade",
-      "requestAccess": false
-    }
-  },
-  {
-    "name": "MemeTrader",
-    "ownerRepo": "Austontatious/MemeTrader",
-    "visibility": "PUBLIC",
-    "tag": "Applied AI Engineer",
-    "oneLiner": "Headless memecoin research engine with deterministic signals, offline backtests, and mock API providers.",
-    "impact": "Enables strategy iteration without real trading keys or wallet risk.",
-    "bullets": [
-      "Implemented mock-e2e execution mode and provider toggles.",
-      "Stored per-run decisions, summaries, and trade artifacts.",
-      "Containerized runtime with tests for repeatable local validation."
-    ],
-    "proof": "Run `python3 -m app.main mock-e2e --market-data birdeye --chain-intel helius`.",
-    "tech": [
-      "Python",
-      "Pytest",
-      "Docker",
-      "JSONL"
-    ],
-    "links": {
-      "publicRepoUrl": "https://github.com/Austontatious/MemeTrader",
-      "requestAccess": false
-    }
-  },
-  {
-    "name": "ReadyPlayer1",
-    "ownerRepo": "Austontatious/ReadyPlayer1",
-    "visibility": "PUBLIC",
-    "tag": "Applied AI Engineer",
-    "oneLiner": "Agentic playtester framework for deterministic game runs and computer-use validation against interactive apps.",
-    "impact": "Cuts QA feedback loops with reproducible traces and run reports.",
-    "bullets": [
-      "Built CLI commands for scenario runs, agent profiles, and environment checks.",
-      "Generated trace, report, log, and media artifacts per run.",
-      "Added controller profile validation for normalized input mapping."
-    ],
-    "proof": "Run `r1 subsim run --seed 7 --ticks 300 --agent baseline --out runs/`.",
-    "tech": [
-      "Python",
-      "CLI",
-      "Pytest",
-      "YAML"
-    ],
-    "links": {
-      "publicRepoUrl": "https://github.com/Austontatious/ReadyPlayer1",
-      "requestAccess": false
-    }
-  },
-  {
     "name": "Accountant",
     "ownerRepo": "Austontatious/Accountant",
     "visibility": "PRIVATE",
+    "slug": "accountant",
+    "shortDesc": "Commissioned applied competency project for secure accounting ingestion, OCR review, and export workflows.",
+    "status": "Commission",
+    "threads": [
+      "Automation & Reliability"
+    ],
+    "connections": [],
+    "updatedAt": "2025-10-21",
     "tag": "Systems Builder",
     "oneLiner": "On-prem accounting assistant stack for document ingest, OCR workflow, human review, and export automation.",
     "impact": "Brings sensitive accounting workflows into controlled local infrastructure.",
@@ -232,9 +36,58 @@
     }
   },
   {
+    "name": "friday",
+    "ownerRepo": "Austontatious/friday",
+    "visibility": "PUBLIC",
+    "slug": "friday",
+    "shortDesc": "Origin project where local coding-agent work exposed orchestration and tooling reliability problems.",
+    "status": "Core",
+    "threads": [
+      "AI Platform",
+      "Automation & Reliability"
+    ],
+    "connections": [
+      {
+        "to": "muninn",
+        "type": "shared-infra",
+        "note": "Supports Muninn-backed rehydrate and candidate staging flows."
+      }
+    ],
+    "updatedAt": "2025-07-31",
+    "tag": "Systems Builder",
+    "oneLiner": "Modular assistant backend that keeps chat online while memory and multimodal services degrade safely.",
+    "impact": "Improves production reliability for agent workflows under partial outages.",
+    "bullets": [
+      "Implemented chat, async agent runs, and gated tool execution APIs.",
+      "Integrated provider-driven memory rehydrate, staging, and confirmation flows.",
+      "Shipped multi-compose runtime scripts for dev, app, and model modes."
+    ],
+    "proof": "Run `docker compose -f docker-compose.dev.yml up --build` and `scripts/smoke_memory.sh`.",
+    "tech": [
+      "Python",
+      "FastAPI",
+      "Docker Compose",
+      "Redis",
+      "PostgreSQL",
+      "JavaScript"
+    ],
+    "links": {
+      "publicRepoUrl": "https://github.com/Austontatious/friday",
+      "requestAccess": false
+    }
+  },
+  {
     "name": "Gauntlet",
     "ownerRepo": "Austontatious/Gauntlet",
     "visibility": "PUBLIC",
+    "slug": "gauntlet",
+    "shortDesc": "Coding arena platform for challenge publishing, controlled execution, and repeatable submission scoring.",
+    "status": "Experimental",
+    "threads": [
+      "Automation & Reliability"
+    ],
+    "connections": [],
+    "updatedAt": "2025-12-31",
     "tag": "Automation + Quality",
     "oneLiner": "Competitive coding arena for challenge publishing, submission scoring, and ranked result tracking.",
     "impact": "Standardizes challenge evaluation so results stay comparable and auditable.",
@@ -257,24 +110,313 @@
     }
   },
   {
-    "name": "Gauntlet001",
-    "ownerRepo": "Austontatious/Gauntlet001",
-    "visibility": "PUBLIC",
-    "tag": "Developer Experience",
-    "oneLiner": "Minimal coding challenge package for arena bootstrap and quick validation of solution submission tooling.",
-    "impact": "Provides a lightweight baseline for challenge authoring and packaging checks.",
-    "bullets": [
-      "Defines challenge prompt and expected behavior in a self-contained repo.",
-      "Offers starter structure for solution packaging and execution.",
-      "Supports quick sanity checks before larger challenge rollout."
+    "name": "LAILA",
+    "ownerRepo": "Austontatious/LAILA",
+    "visibility": "PRIVATE",
+    "slug": "laila",
+    "shortDesc": "Next-generation assistant runtime unifying agency, Muninn memory, and identity continuity.",
+    "status": "Core",
+    "threads": [
+      "AI Platform",
+      "Automation & Reliability"
     ],
-    "proof": "Challenge spec and runnable package entrypoints are documented in README and package.json.",
+    "connections": [
+      {
+        "to": "muninn",
+        "type": "shared-infra",
+        "note": "Builds directly on Muninn-backed durable memory integration."
+      }
+    ],
+    "updatedAt": "2026-02-21",
+    "tag": "Applied AI Engineer",
+    "oneLiner": "Standalone first-party assistant runtime combining orchestration patterns, Muninn-backed memory, and identity continuity for long-running interactions.",
+    "impact": "Extends platform work into a unified runtime where agency, memory, and identity are deployed as one system.",
+    "bullets": [
+      "Implemented laila CLI workflows for start, chat, once, smoke, and gate command paths.",
+      "Integrated optional Muninn backend with strict mode and filesystem fallback controls.",
+      "Added acceptance gate, identity smoke checks, and pytest suites for behavioral enforcement."
+    ],
+    "proof": "Run `./acceptance_gate.sh`, `laila start`, and `pytest -q -m \"not integration\"` from the README.",
     "tech": [
-      "JavaScript",
-      "Node.js"
+      "Python",
+      "Pytest",
+      "CLI",
+      "Muninn",
+      "HTML",
+      "JavaScript"
     ],
     "links": {
-      "publicRepoUrl": "https://github.com/Austontatious/Gauntlet001",
+      "publicRepoUrl": null,
+      "requestAccess": true
+    }
+  },
+  {
+    "name": "lex",
+    "ownerRepo": "Austontatious/lex",
+    "visibility": "PRIVATE",
+    "slug": "lex",
+    "shortDesc": "Major divergence from capability into user experience and identity-focused assistant behavior.",
+    "status": "Core",
+    "threads": [
+      "AI Platform",
+      "Automation & Reliability"
+    ],
+    "connections": [
+      {
+        "to": "muninn",
+        "type": "shared-infra",
+        "note": "Memory integration patterns align with Muninn provider APIs."
+      }
+    ],
+    "updatedAt": "2026-01-30",
+    "tag": "Applied AI Engineer",
+    "oneLiner": "Personal AI companion stack with Docker deployment profiles, host-edge routing, and tool integrations for daily assistant workflows.",
+    "impact": "Moves from local prototype to repeatable, domain-backed assistant operations.",
+    "bullets": [
+      "Defined dev/live Compose profiles and shared edge-network deployment path.",
+      "Documented environment contract for LLM, ComfyUI, sessions, and user identity headers.",
+      "Added smoke and walkthrough verification scripts for startup validation."
+    ],
+    "proof": "Run `docker compose up -d` with `scripts/verify_walkthrough.sh` from the repo guide.",
+    "tech": [
+      "Python",
+      "FastAPI",
+      "Docker Compose",
+      "Traefik",
+      "Cloudflare",
+      "Vite"
+    ],
+    "links": {
+      "publicRepoUrl": null,
+      "requestAccess": true
+    }
+  },
+  {
+    "name": "MemeTrader",
+    "ownerRepo": "Austontatious/MemeTrader",
+    "visibility": "PUBLIC",
+    "slug": "memetrader",
+    "shortDesc": "Commissioned applied competency project for deterministic strategy evaluation and replayable market decisions.",
+    "status": "Experimental",
+    "threads": [
+      "Trading Systems"
+    ],
+    "connections": [
+      {
+        "to": "pulsetrade",
+        "type": "evolved-into",
+        "note": "Signal and run artifact patterns informed PulseTrade workflows."
+      }
+    ],
+    "updatedAt": "2026-01-21",
+    "tag": "Applied AI Engineer",
+    "oneLiner": "Headless memecoin research engine with deterministic signals, offline backtests, and mock API providers.",
+    "impact": "Enables strategy iteration without real trading keys or wallet risk.",
+    "bullets": [
+      "Implemented mock-e2e execution mode and provider toggles.",
+      "Stored per-run decisions, summaries, and trade artifacts.",
+      "Containerized runtime with tests for repeatable local validation."
+    ],
+    "proof": "Run `python3 -m app.main mock-e2e --market-data birdeye --chain-intel helius`.",
+    "tech": [
+      "Python",
+      "Pytest",
+      "Docker",
+      "JSONL"
+    ],
+    "links": {
+      "publicRepoUrl": "https://github.com/Austontatious/MemeTrader",
+      "requestAccess": false
+    }
+  },
+  {
+    "name": "muninn",
+    "ownerRepo": "Austontatious/muninn",
+    "visibility": "PUBLIC",
+    "slug": "muninn",
+    "shortDesc": "Turning point project: embedded memory work extracted into reusable infrastructure for durable AI state.",
+    "status": "Core",
+    "threads": [
+      "AI Platform",
+      "Automation & Reliability"
+    ],
+    "connections": [
+      {
+        "to": "friday",
+        "type": "shared-infra",
+        "note": "Memory APIs are consumed by FRIDAY assistant flows."
+      }
+    ],
+    "updatedAt": "2026-02-18",
+    "tag": "Applied AI Engineer",
+    "oneLiner": "Pluggable memory service for LLM agents with SQLite durability, audit logging, and staged confirmation workflows.",
+    "impact": "Turns ad-hoc memory writes into traceable, policy-gated memory operations.",
+    "bullets": [
+      "Built namespace-scoped storage for entities, facts, episodes, and preferences.",
+      "Implemented FTS, vector, and hybrid retrieval with memory-card rendering.",
+      "Added pending-candidate review and confirmation endpoints."
+    ],
+    "proof": "Run `scripts/smoke.sh` and call `/v0/memory/*` endpoints documented in README.",
+    "tech": [
+      "Python",
+      "FastAPI",
+      "SQLite",
+      "FTS5",
+      "Pydantic"
+    ],
+    "links": {
+      "publicRepoUrl": "https://github.com/Austontatious/muninn",
+      "requestAccess": false
+    }
+  },
+  {
+    "name": "Null_Signal",
+    "ownerRepo": "Austontatious/Null_Signal",
+    "visibility": "PUBLIC",
+    "slug": "null-signal",
+    "shortDesc": "Local-first autonomous media pipeline that converts news signals into scripted, rendered, and packaged short-form broadcasts.",
+    "status": "Experimental",
+    "threads": [
+      "Computer Vision",
+      "Automation & Reliability"
+    ],
+    "connections": [],
+    "updatedAt": "2026-02-11",
+    "tag": "Applied AI Engineer",
+    "oneLiner": "Local-first newsroom pipeline that generates dystopian short-form broadcast clips from breaking-news inputs.",
+    "impact": "Automates repeatable media generation with publish guardrails and run artifacts.",
+    "bullets": [
+      "Built script-driven ingestion, screenwriting, rendering, and export flow.",
+      "Added dry-run, dedupe, and kill-switch controls for safe publishing.",
+      "Tracked clip-level exports and run manifests for review."
+    ],
+    "proof": "Run `python3 scripts/run_newsroom.py --batch 1 --render --resume` with local env flags.",
+    "tech": [
+      "Python",
+      "FFmpeg",
+      "Docker Compose",
+      "XTTS",
+      "ComfyUI",
+      "Cron"
+    ],
+    "links": {
+      "publicRepoUrl": "https://github.com/Austontatious/Null_Signal",
+      "requestAccess": false
+    }
+  },
+  {
+    "name": "OnHand",
+    "ownerRepo": "Austontatious/OnHand",
+    "visibility": "PRIVATE",
+    "slug": "onhand",
+    "shortDesc": "Inventory and intent platform spanning Android client workflows, enterprise APIs, and optional vision evaluation services.",
+    "status": "Core",
+    "threads": [
+      "Computer Vision",
+      "Automation & Reliability"
+    ],
+    "connections": [],
+    "updatedAt": "2026-02-11",
+    "tag": "Applied AI Engineer",
+    "oneLiner": "Intent and inventory platform spanning Android client, enterprise demo stack, and optional vision-evaluation services.",
+    "impact": "Connects consumer grocery workflows to enterprise operations in one codebase.",
+    "bullets": [
+      "Maintained Compose-based FastAPI, Postgres, and React enterprise demo environment.",
+      "Shipped Android setup and instrumentation scripts for device testing.",
+      "Included optional vision vLLM service wiring for evaluation workflows."
+    ],
+    "proof": "Run `make up` in `onhand-enterprise-demo` and `make android-check` in the Android app.",
+    "tech": [
+      "Kotlin",
+      "Jetpack Compose",
+      "FastAPI",
+      "PostgreSQL",
+      "React",
+      "Docker"
+    ],
+    "links": {
+      "publicRepoUrl": null,
+      "requestAccess": true
+    }
+  },
+  {
+    "name": "PulseTrade",
+    "ownerRepo": "Austontatious/PulseTrade",
+    "visibility": "PUBLIC",
+    "slug": "pulsetrade",
+    "shortDesc": "Commissioned applied competency project for modular trading research and policy-driven execution planning.",
+    "status": "Core",
+    "threads": [
+      "Trading Systems",
+      "Automation & Reliability"
+    ],
+    "connections": [
+      {
+        "to": "memetrader",
+        "type": "prototype-for",
+        "note": "Expands deterministic run artifacts into a broader market pipeline."
+      }
+    ],
+    "updatedAt": "2025-12-21",
+    "tag": "Applied AI Engineer",
+    "oneLiner": "Trading research stack combining live ingestion, feature pipelines, forecasting services, and policy-driven execution.",
+    "impact": "Creates a testable path from market data to daily allocation decisions.",
+    "bullets": [
+      "Integrated websocket and API ingestion with Postgres and Timescale storage.",
+      "Ran Celery workers, Redis queues, and forecast services in Compose.",
+      "Automated nightly backfill, forecasting, and planning jobs through scheduler scripts."
+    ],
+    "proof": "Run `docker compose up -d ingest forecast strategist worker policy api redis db`.",
+    "tech": [
+      "Python",
+      "FastAPI",
+      "PostgreSQL",
+      "TimescaleDB",
+      "Celery",
+      "Redis",
+      "Docker"
+    ],
+    "links": {
+      "publicRepoUrl": "https://github.com/Austontatious/PulseTrade",
+      "requestAccess": false
+    }
+  },
+  {
+    "name": "ReadyPlayer1",
+    "ownerRepo": "Austontatious/ReadyPlayer1",
+    "visibility": "PUBLIC",
+    "slug": "readyplayer1",
+    "shortDesc": "Automated playtesting system built specifically to exercise SubSim through deterministic simulation runs.",
+    "status": "Experimental",
+    "threads": [
+      "Games & Simulation",
+      "Automation & Reliability"
+    ],
+    "connections": [
+      {
+        "to": "subsim",
+        "type": "shared-infra",
+        "note": "Uses SubSim as a benchmark environment for deterministic runs."
+      }
+    ],
+    "updatedAt": "2026-01-30",
+    "tag": "Applied AI Engineer",
+    "oneLiner": "Agentic playtester framework for deterministic game runs and computer-use validation against interactive apps.",
+    "impact": "Cuts QA feedback loops with reproducible traces and run reports.",
+    "bullets": [
+      "Built CLI commands for scenario runs, agent profiles, and environment checks.",
+      "Generated trace, report, log, and media artifacts per run.",
+      "Added controller profile validation for normalized input mapping."
+    ],
+    "proof": "Run `r1 subsim run --seed 7 --ticks 300 --agent baseline --out runs/`.",
+    "tech": [
+      "Python",
+      "CLI",
+      "Pytest",
+      "YAML"
+    ],
+    "links": {
+      "publicRepoUrl": "https://github.com/Austontatious/ReadyPlayer1",
       "requestAccess": false
     }
   },
@@ -282,6 +424,20 @@
     "name": "subsim",
     "ownerRepo": "Austontatious/subsim",
     "visibility": "PUBLIC",
+    "slug": "subsim",
+    "shortDesc": "Audio-first deterministic submarine simulation designed for fast iteration, replay traces, and headless testing.",
+    "status": "Experimental",
+    "threads": [
+      "Games & Simulation"
+    ],
+    "connections": [
+      {
+        "to": "readyplayer1",
+        "type": "evolved-into",
+        "note": "Simulation harness extends into ReadyPlayer1 playtesting workflows."
+      }
+    ],
+    "updatedAt": "2025-10-17",
     "tag": "Developer Experience",
     "oneLiner": "Deterministic audio-first submarine simulation built for rapid gameplay iteration and replayable test runs.",
     "impact": "Supports fast tuning cycles with headless smoke, trace generation, and soak testing.",

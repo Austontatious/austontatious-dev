@@ -29,6 +29,8 @@
 		"build": "astro build",
 		"cf-typegen": "wrangler types",
 		"cf:whoami": "env -u CF_API_TOKEN wrangler whoami --env-file .env",
+		"projects:gen": "node scripts/generate_projects_catalog.cjs",
+		"projects:check": "node scripts/generate_projects_catalog.cjs --check",
 		"check": "astro build && tsc && env -u CF_API_TOKEN wrangler deploy --dry-run --env-file .env",
 		"deploy": "env -u CF_API_TOKEN wrangler deploy --env-file .env",
 		"dev": "astro dev",

@@ -1,13 +1,27 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
 import FlowField from '../components/FlowField.astro';
+import FamilyTreeNode from '../components/FamilyTreeNode.astro';
 import generatedProjects from '../data/projects.generated.json';
+import familyTreeData from '../data/family_tree.json';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+interface ProjectConnection {
+	to: string;
+	type: 'inspired-by' | 'prototype-for' | 'commissioned' | 'evolved-into' | 'shared-infra';
+	note: string;
+}
 
 interface ProjectCard {
 	name: string;
 	ownerRepo: string;
 	visibility: 'PUBLIC' | 'PRIVATE';
+	slug: string;
+	shortDesc: string;
+	status: 'Core' | 'Experimental' | 'Commission' | 'Stub';
+	threads: string[];
+	connections: ProjectConnection[];
+	updatedAt: string;
 	tag: 'Systems Builder' | 'Applied AI Engineer' | 'Automation + Quality' | 'Developer Experience';
 	oneLiner: string;
 	impact: string;
@@ -20,55 +34,123 @@ interface ProjectCard {
 	};
 }
 
-const projects = generatedProjects as ProjectCard[];
-const agentPlatformOrder = ['lex', 'friday', 'muninn', 'laila'];
-const agentPlatformSet = new Set(agentPlatformOrder);
-const systemsTags = new Set(['Systems Builder', 'Automation + Quality']);
-const lowerName = (project: ProjectCard) => project.name.toLowerCase();
+interface FamilyTreeBranch {
+	from: string;
+	label: string;
+	nodes: string[];
+}
 
-const agentPlatforms = projects
-	.filter((project) => agentPlatformSet.has(lowerName(project)))
-	.sort((a, b) => agentPlatformOrder.indexOf(lowerName(a)) - agentPlatformOrder.indexOf(lowerName(b)));
+interface FamilyTreeSpecialNode {
+	slug: string;
+	noteTop?: string;
+	noteBottom?: string;
+}
 
-const appliedAI = projects
-	.filter((project) => !agentPlatformSet.has(lowerName(project)) && project.tag === 'Applied AI Engineer')
+interface FamilyTreeConfig {
+	spine: string[];
+	branches: FamilyTreeBranch[];
+	specialNodes: FamilyTreeSpecialNode[];
+}
+
+interface FamilyTreeBranchView {
+	id: string;
+	label: string;
+	nodes: FamilyTreeNodeView[];
+}
+
+interface FamilyTreeNodeView {
+	project: ProjectCard;
+	roleLabel?: string;
+	special?: FamilyTreeSpecialNode;
+	branches: FamilyTreeBranchView[];
+}
+
+const excludedSlugs = new Set(['gauntlet-010', 'gauntlet-005', 'gauntlet001']);
+const projects = (generatedProjects as ProjectCard[])
+	.filter((project) => !excludedSlugs.has(project.slug))
 	.sort((a, b) => a.name.localeCompare(b.name));
+const bySlug = new Map(projects.map((project) => [project.slug, project]));
 
-const systemsAndAutomation = projects
-	.filter((project) => !agentPlatformSet.has(lowerName(project)) && systemsTags.has(project.tag))
-	.sort((a, b) => a.name.localeCompare(b.name));
+const familyTree = familyTreeData as FamilyTreeConfig;
+const branchesByFrom = new Map<string, FamilyTreeBranch[]>();
+for (const branch of familyTree.branches) {
+	if (!branchesByFrom.has(branch.from)) branchesByFrom.set(branch.from, []);
+	branchesByFrom.get(branch.from)?.push(branch);
+}
+const specialBySlug = new Map(familyTree.specialNodes.map((node) => [node.slug, node]));
 
-const developerSideProjects = projects
-	.filter(
-		(project) =>
-			!agentPlatformSet.has(lowerName(project)) &&
-			project.tag !== 'Applied AI Engineer' &&
-			!systemsTags.has(project.tag),
-	)
-	.sort((a, b) => a.name.localeCompare(b.name));
+const spineRoleLabels = ['Origin', 'Turning Point', 'Next Gen'];
+const usedTreeSlugs = new Set<string>();
 
-const projectGroups = [
-	{
-		title: 'Agent Platforms',
-		subtitle: 'Memory, orchestration, and interface layers for long-running assistants.',
-		items: agentPlatforms,
-	},
-	{
-		title: 'Applied AI Systems',
-		subtitle: 'Pipelines and model workflows that move from data to outcomes.',
-		items: appliedAI,
-	},
-	{
-		title: 'Systems & Automation',
-		subtitle: 'Production discipline: deployment, reliability, and operational control.',
-		items: systemsAndAutomation,
-	},
-	{
-		title: 'Developer Tooling & Side Projects',
-		subtitle: 'Smaller projects that sharpen architecture and execution range.',
-		items: developerSideProjects,
-	},
-];
+function toIdPart(value: string): string {
+	return value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+}
+
+function makeBranchId(fromSlug: string, label: string): string {
+	return `branch-${toIdPart(fromSlug)}-${toIdPart(label)}`;
+}
+
+function buildTreeNode(slug: string, roleLabel?: string): FamilyTreeNodeView | null {
+	if (usedTreeSlugs.has(slug)) return null;
+	const project = bySlug.get(slug);
+	if (!project) return null;
+
+	usedTreeSlugs.add(slug);
+
+	const branchGroups = (branchesByFrom.get(slug) || [])
+		.map((branch) => {
+			const nodes = branch.nodes
+				.map((childSlug) => buildTreeNode(childSlug))
+				.filter((node): node is FamilyTreeNodeView => Boolean(node));
+			if (nodes.length === 0) return null;
+			return {
+				id: makeBranchId(slug, branch.label),
+				label: branch.label,
+				nodes,
+			};
+		})
+		.filter((group): group is FamilyTreeBranchView => Boolean(group));
+
+	return {
+		project,
+		roleLabel,
+		special: specialBySlug.get(slug),
+		branches: branchGroups,
+	};
+}
+
+const spineNodes = familyTree.spine
+	.map((slug, index) => buildTreeNode(slug, spineRoleLabels[index] || 'Stage'))
+	.filter((node): node is FamilyTreeNodeView => Boolean(node));
+
+if (spineNodes.length > 0) {
+	const unplacedNodes = projects
+		.filter((project) => !usedTreeSlugs.has(project.slug))
+		.map((project) => buildTreeNode(project.slug))
+		.filter((node): node is FamilyTreeNodeView => Boolean(node));
+
+	if (unplacedNodes.length > 0) {
+		spineNodes[spineNodes.length - 1].branches.push({
+			id: makeBranchId(spineNodes[spineNodes.length - 1].project.slug, 'Additional explorations'),
+			label: 'Additional explorations',
+			nodes: unplacedNodes,
+		});
+	}
+}
+
+const aiFocusOrder = ['friday', 'muninn', 'laila', 'lex'];
+const aiPlatformProjects = aiFocusOrder
+	.map((slug) => bySlug.get(slug))
+	.filter((project): project is ProjectCard => Boolean(project))
+	.slice(0, 5);
+
+const statusOrder: ProjectCard['status'][] = ['Core', 'Experimental', 'Commission', 'Stub'];
+const groupedByStatus = statusOrder
+	.map((status) => ({
+		status,
+		items: projects.filter((project) => project.status === status),
+	}))
+	.filter((group) => group.items.length > 0);
 ---
 
 <!doctype html>
@@ -82,9 +164,9 @@ const projectGroups = [
 				<nav class="container nav-inner" aria-label="Primary">
 					<a href="#hero" class="brand">austontatious.dev</a>
 					<div class="nav-links">
-						<a href="#principle">Expertise</a>
+						<a href="#snapshot">Snapshot</a>
+						<a href="#progression">Progression</a>
 						<a href="#projects">Projects</a>
-						<a href="#cta">Contact</a>
 					</div>
 					<div class="nav-actions">
 						<a href="mailto:auston.horras@gmail.com">Email</a>
@@ -103,156 +185,139 @@ const projectGroups = [
 						<h1>AI Architect.</h1>
 						<p class="lead">Calm inside complexity.</p>
 						<p class="support">I build AI systems that turn uncertainty into clear outcomes.</p>
-						<p class="hero-frame">
-							Built in high-reliability environments, I design systems that stay clear under pressure. I
-							scale that discipline from local workflows to multi-service AI platforms. The focus is
-							durable, user-centered AI infrastructure.
+						<p class="workshop-note">
+							I also offer practical generative AI workshops for teams, focused on how to actually work with
+							AI in real-world workflows.
+						</p>
+						<a class="workshop-link" href="/workshops/">Practical AI Workshops</a>
+					</div>
+				</section>
+
+				<section id="snapshot" class="section">
+					<div class="container section-inner">
+						<h2>Professional Snapshot</h2>
+						<p class="snapshot-title">
+							Senior Systems &amp; Applied AI Engineer building reliable automation, local-first AI platforms,
+							and production-minded developer tooling.
+						</p>
+						<div class="capability-grid">
+							<article class="capability-panel">
+								<h3>Systems Engineering</h3>
+								<ul>
+									<li>Distributed services</li>
+									<li>Docker &amp; orchestration</li>
+									<li>API-driven architecture</li>
+									<li>Reliability-focused automation</li>
+									<li>CI-friendly testing</li>
+								</ul>
+							</article>
+							<article class="capability-panel">
+								<h3>Applied AI Engineering</h3>
+								<ul>
+									<li>Agent systems</li>
+									<li>Memory architecture</li>
+									<li>Computer vision pipelines</li>
+									<li>GPU workflows</li>
+									<li>Evaluation + quality loops</li>
+								</ul>
+							</article>
+							<article class="capability-panel">
+								<h3>Developer Enablement</h3>
+								<ul>
+									<li>Dev tooling</li>
+									<li>Reproducible environments</li>
+									<li>Automation scripts</li>
+									<li>Workflow design</li>
+									<li>Operator-safe deployments</li>
+								</ul>
+							</article>
+						</div>
+						<p class="core-tech">
+							<span>Core Technologies:</span> Python • FastAPI • Docker • Linux • CUDA • PyTest • TypeScript • React • Node.js • Nginx • GitHub Actions • REST APIs • AI Agents • Computer Vision • LLM Integration
+						</p>
+						<p class="micro-signal">
+							Open to senior-level engineering roles involving systems architecture, AI infrastructure, or
+							developer productivity platforms.
 						</p>
 					</div>
 				</section>
 
-				<section id="principle" class="section">
+				<section id="progression" class="section">
+					<FlowField variant="echo" />
 					<div class="container section-inner">
-						<h2>Order from chaos — without the chaos.</h2>
-						<div class="principle-copy">
-							<p>
-								Emergency medicine taught me how to assess quickly, prioritize clearly, and act under
-								pressure.
-							</p>
-							<p>
-								AI engineering lets me scale that clarity into systems teams can trust.
-							</p>
+						<h2>Not isolated tools. A connected system.</h2>
+						<p class="progression-helper">If you only read one thing: this is the project family tree.</p>
+						<div class="family-tree-shell">
+							<ul class="family-spine-list" id="family-spine">
+								{spineNodes.map((node) => <FamilyTreeNode node={node} depth={0} />)}
+							</ul>
 						</div>
+					</div>
+				</section>
+
+				<section id="ai-focus" class="section">
+					<div class="container section-inner">
+						<h2>AI Platform Focus</h2>
+						<p class="ai-focus-copy">
+							FRIDAY began as local coding-agent orchestration. Muninn emerged when memory moved from embedded
+							feature to standalone infrastructure. LAILA now carries that spine into the next generation of
+							identity-aware runtime behavior.
+						</p>
+						<ul class="ai-focus-links">
+							{aiPlatformProjects.map((project) => <li><a href={`/projects/${project.slug}/`}>{project.name}</a></li>)}
+						</ul>
 					</div>
 				</section>
 
 				<section id="projects" class="section">
-					<FlowField variant="echo" />
 					<div class="container section-inner">
-						<h2>Projects</h2>
-						<p class="projects-intro">
-							System foundations came first. Applied AI pipelines followed. Current work focuses on
-							composable agent platforms.
-						</p>
+						<h2>Projects Index</h2>
+						<nav class="fast-scan" aria-label="Selected project fast-scan">
+							<a href="#spine-friday">Agent Platform</a>
+							<a href="#branch-friday-experimentation-waves">Applied AI</a>
+							<a href="#branch-friday-commission-work-applied-competencies">Systems / Automation</a>
+						</nav>
+
 						{
-							projectGroups.map(
-								(group) =>
-									group.items.length > 0 && (
-										<div class="project-group">
-											<h3 class="group-title">{group.title}</h3>
-											<p class="group-subtitle">{group.subtitle}</p>
-											<div class="project-grid">
-												{
-													group.items.map((project) => (
-														<article class="project-card">
-															<div class="project-card-top">
-																<div class="project-heading-row">
-																	<h4>{project.name}</h4>
-																	{project.links.requestAccess && <span class="access-badge">Access on request</span>}
-																</div>
-																<p class="project-one-liner">{project.oneLiner}</p>
-																<p class="project-impact"><span>Impact:</span> {project.impact}</p>
-																<ul class="project-bullets">
-																	{project.bullets.map((bullet) => <li>{bullet}</li>)}
-																</ul>
-																<p class="project-proof"><span>Proof:</span> {project.proof}</p>
-															</div>
-															<div class="project-card-bottom">
-																<p class="project-role">Role: {project.tag}</p>
-																<div class="tech-list">
-																	{project.tech.slice(0, 10).map((token) => <span class="tech-token">{token}</span>)}
-																</div>
-																<div class="card-links">
-																	{project.links.publicRepoUrl ? (
-																		<a class="link-chip" href={project.links.publicRepoUrl} target="_blank" rel="noreferrer">
-																			GitHub
-																		</a>
-																	) : (
-																		<span class="link-chip is-disabled">Access on request</span>
-																	)}
-																</div>
-															</div>
-														</article>
-													))
-												}
-											</div>
-										</div>
-									),
-							)
+							groupedByStatus.map((group) => (
+								<section class="status-group" id={`status-${group.status.toLowerCase()}`}>
+									<h3>{group.status}</h3>
+									<div class="projects-index-list">
+										{
+											group.items.map((project) => (
+												<article class="project-row">
+													<div class="project-row-head">
+														<a class="project-row-name" href={`/projects/${project.slug}/`}>{project.name}</a>
+														<div class="project-row-badges">
+															<span class="badge">{project.tag}</span>
+															<span class="badge">{project.status}</span>
+															{project.links.requestAccess && <span class="badge">Access on request</span>}
+														</div>
+													</div>
+													<p class="project-row-desc">{project.shortDesc}</p>
+													<div class="project-row-meta">
+														<span>Updated: {project.updatedAt.slice(0, 7)}</span>
+														{project.links.publicRepoUrl && (
+															<a href={project.links.publicRepoUrl} target="_blank" rel="noreferrer">GitHub</a>
+														)}
+													</div>
+												</article>
+											))
+										}
+									</div>
+								</section>
+							))
 						}
 					</div>
 				</section>
-
-				<section id="ecosystem" class="section">
-					<FlowField variant="echo" />
-					<div class="container section-inner">
-						<h2>Not isolated tools. A connected system.</h2>
-						<p class="ecosystem-intro">Lex presents. Muninn remembers. FRIDAY orchestrates.</p>
-						<div
-							class="ecosystem-diagram"
-							role="img"
-							aria-label="Lex presents the interface, Muninn provides memory, and FRIDAY orchestrates the system."
-						>
-							<div class="layer">
-								<span>Lex</span>
-								<small>Interface layer for personal AI</small>
-							</div>
-							<div class="layer">
-								<span>Muninn</span>
-								<small>Persistent memory layer for AI systems</small>
-							</div>
-							<div class="layer">
-								<span>FRIDAY</span>
-								<small>Orchestration layer for agents and tools</small>
-							</div>
-						</div>
-					</div>
-				</section>
-
-				<section id="human" class="section">
-					<div class="container section-inner">
-						<h2>Decisions when it matters.</h2>
-						<div class="human-copy">
-							<p>In high-stakes environments, clarity is safety.</p>
-							<p>
-								That mindset shapes how I design AI: calm, reliable, and human-centered.
-							</p>
-						</div>
-					</div>
-				</section>
-
-				<section id="cta" class="section">
-					<div class="container section-inner">
-						<h2>If AI feels overwhelming, that's normal.</h2>
-						<p class="cta-copy">
-							You don't need to understand everything. You need systems that work — and someone who can
-								guide it calmly.
-						</p>
-						<div class="cta-actions">
-							<a class="button button-primary" href="mailto:auston.horras@gmail.com">Email / Contact</a>
-							<a
-								class="button button-secondary"
-								href="https://www.linkedin.com/in/auston-horras-17022614/"
-								target="_blank"
-								rel="noreferrer"
-							>
-								LinkedIn
-							</a>
-							<a class="button button-secondary" href="https://github.com/austontatious" target="_blank" rel="noreferrer">
-								GitHub
-							</a>
-						</div>
-					</div>
-				</section>
 			</main>
+
 			<footer class="site-footer">
 				<div class="container footer-inner">
 					<p>Calm systems for clear outcomes.</p>
 					<div class="footer-links">
 						<a href="mailto:auston.horras@gmail.com">Contact</a>
-						<a href="https://www.linkedin.com/in/auston-horras-17022614/" target="_blank" rel="noreferrer">
-							LinkedIn
-						</a>
+						<a href="https://www.linkedin.com/in/auston-horras-17022614/" target="_blank" rel="noreferrer">LinkedIn</a>
 						<a href="https://github.com/austontatious" target="_blank" rel="noreferrer">GitHub</a>
 					</div>
 				</div>

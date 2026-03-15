@@ -1,0 +1,66 @@
+---
+interface ProjectCard {
+	name: string;
+	slug: string;
+	shortDesc: string;
+	status: 'Core' | 'Experimental' | 'Commission' | 'Stub';
+}
+
+interface FamilyTreeSpecialNode {
+	slug: string;
+	noteTop?: string;
+	noteBottom?: string;
+}
+
+interface FamilyTreeBranchView {
+	id: string;
+	label: string;
+	nodes: FamilyTreeNodeView[];
+}
+
+interface FamilyTreeNodeView {
+	project: ProjectCard;
+	roleLabel?: string;
+	special?: FamilyTreeSpecialNode;
+	branches: FamilyTreeBranchView[];
+}
+
+interface Props {
+	node: FamilyTreeNodeView;
+	depth?: number;
+}
+
+const { node, depth = 0 } = Astro.props as Props;
+const cappedDepth = Math.min(depth, 4);
+---
+
+<li class:list={['tree-node', `depth-${cappedDepth}`]} id={depth === 0 ? `spine-${node.project.slug}` : undefined}>
+	<div class="tree-node-card">
+		<div class="tree-head">
+			<a class="tree-name" href={`/projects/${node.project.slug}/`}>{node.project.name}</a>
+			<div class="tree-head-meta">
+				{node.roleLabel && <span class="tree-role">{node.roleLabel}</span>}
+				<span class="badge">{node.project.status}</span>
+			</div>
+		</div>
+
+		{node.special?.noteTop && <p class="tree-special-note">{node.special.noteTop}</p>}
+		<p class="tree-summary">{node.project.shortDesc}</p>
+		{node.special?.noteBottom && <p class="tree-special-note">{node.special.noteBottom}</p>}
+	</div>
+
+	{
+		node.branches.length > 0 && (
+			<div class="tree-branches">
+				{node.branches.map((branch) => (
+					<section class="tree-branch-group" id={branch.id}>
+						<p class="tree-branch-label">{branch.label}</p>
+						<ul class="tree-branch-list">
+							{branch.nodes.map((childNode) => <Astro.self node={childNode} depth={depth + 1} />)}
+						</ul>
+					</section>
+				))}
+			</div>
+		)
+	}
+</li>
