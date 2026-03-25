@@ -1,0 +1,169 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+
+const MIMIR_TITLE = 'Mímir | austontatious.dev';
+const MIMIR_DESCRIPTION = 'A codebase memory and navigation layer for AI systems.';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={MIMIR_TITLE} description={MIMIR_DESCRIPTION} image="/images/mimir/mimir-search-vs-navigation.png" />
+		<style>
+			.mimir-lexicon-callout {
+				margin-top: 1rem;
+				padding: 0.8rem 0.95rem;
+				border-radius: 0.75rem;
+				border: 1px solid rgba(255, 255, 255, 0.2);
+				background: linear-gradient(180deg, rgba(22, 31, 56, 0.78), rgba(13, 19, 34, 0.88));
+				color: rgba(245, 248, 255, 0.96);
+			}
+
+			.mimir-gps-bridge {
+				margin-top: 1rem;
+				font-size: 1.02rem;
+				color: rgba(245, 248, 255, 0.95);
+			}
+
+			.mimir-gps-bridge-note {
+				color: rgba(233, 238, 255, 0.84);
+			}
+		</style>
+	</head>
+	<body>
+		<div class="page-shell">
+			<header class="main-nav">
+				<nav class="container nav-inner" aria-label="Primary">
+					<a href="/" class="brand">austontatious.dev</a>
+					<div class="nav-links nav-links-primary">
+						<a href="/">Home</a>
+						<a href="/workshops/">Workshops</a>
+						<a href="/Mimir" aria-current="page">Mímir</a>
+						<a href="https://github.com/austontatious" target="_blank" rel="noreferrer">GitHub</a>
+						<a href="mailto:auston.horras@gmail.com">Contact</a>
+					</div>
+				</nav>
+			</header>
+
+			<main class="mimir-main">
+				<section class="section mimir-hero">
+					<div class="container section-inner">
+						<a class="back-link" href="/">Back to home</a>
+						<p class="eyebrow">AI Infrastructure Thesis</p>
+						<h1>Mímir</h1>
+						<p class="lead mimir-subheadline">A codebase memory and navigation layer for AI systems</p>
+						<p class="mimir-intro">
+							Most AI coding systems still retrieve code like search engines and reason about codebases like first-time visitors. Mímir is designed to fix that by giving AI a persistent structural sense of orientation inside a software project: what exists, where it lives, how parts connect, and how context should be rebuilt when work begins.
+						</p>
+						<figure class="mimir-figure mimir-hero-figure">
+							<img src="/images/mimir/mimir-search-vs-navigation.png" alt="Search-style retrieval contrasted with structure-aware codebase navigation." loading="eager" />
+						</figure>
+					</div>
+				</section>
+
+				<section class="section">
+					<div class="container section-inner">
+						<div class="mimir-panel">
+							<h2>The problem</h2>
+							<div class="mimir-section-copy">
+								<p>
+									Today’s coding assistants can look impressive in short bursts and still fail across real software systems. They retrieve useful snippets, but they do not reliably maintain orientation inside a codebase.
+								</p>
+								<p>
+									They lose track of structure, confuse local context with system-level understanding, and repeatedly solve navigation problems from scratch. That creates waste: redundant retrieval, fragile edits, broken assumptions, repeated mistakes, and lower trust.
+								</p>
+								<p>
+									The core issue is not that the models cannot read code. It is that every new interaction begins from the same disadvantaged position: reconstructing the repository from fragments before meaningful work can begin.
+								</p>
+							</div>
+							<figure class="mimir-figure">
+								<img src="/images/mimir/traditional-rag-context-window.png" alt="Traditional RAG workflow showing retrieval and context windows overloaded with reconstruction work." loading="lazy" />
+							</figure>
+						</div>
+					</div>
+				</section>
+
+				<section class="section">
+					<div class="container section-inner">
+						<div class="mimir-panel">
+							<h2>What Mímir is meant to do</h2>
+							<div class="mimir-section-copy">
+								<p>
+									Mímir is a persistent memory layer for software systems. Instead of forcing an AI agent to rediscover a repository from scratch every time it gets a task, Mímir gives that agent an evolving structural understanding of how the codebase is organized, what each part does, how those parts connect, what has changed, and what has already been learned from past work.
+								</p>
+								<p class="mimir-lexicon-callout">
+									<strong>Mímir turns a repository into a navigable topology: cards capture meaning, bindings preserve attachment, signals separate what matters from noise, and adjacencies reveal how the system is actually connected.</strong>
+								</p>
+								<p>A card is a unit of understanding about the system. A binding keeps that understanding attached to code as the code changes. Signals strengthen or revise that understanding over time. Adjacencies show what is structurally nearby, connected, upstream, downstream, or dependent.</p>
+								<p>
+									The result is a system that can navigate a codebase instead of repeatedly approximating it from search results. Rather than stuffing large amounts of source into a context window and hoping the model sorts it out, Mímir narrows from subsystem to file to symbol to exact working context.
+								</p>
+								<p class="mimir-gps-bridge"><strong>Mímir is a GPS for a codebase, not a search engine.</strong></p>
+								<p class="mimir-gps-bridge-note">Search tells the system what looks similar. Mímir tells it where it is, what is nearby, and what path is most likely to be correct.</p>
+							</div>
+							<figure class="mimir-figure">
+								<img src="/images/mimir/mimir-structured-map-to-context.png" alt="Structured map approach that narrows from subsystem to file to symbol before assembling working context." loading="lazy" />
+							</figure>
+						</div>
+					</div>
+				</section>
+
+				<section class="section">
+					<div class="container section-inner">
+						<div class="mimir-panel">
+							<h2>Current state</h2>
+							<div class="mimir-section-copy">
+								<p>
+									This matters because today&rsquo;s AI coding tools spend too much time and token budget reorienting themselves inside a codebase. That drives shallow retrieval, brittle edits, repeated mistakes, and lower trust.
+								</p>
+								<p>
+									Mímir is not just a concept. Core ingestion, card formation, bindings, structural signals, adjacency-aware retrieval, lifecycle tracking, and repair logic are already in place.
+								</p>
+								<p>
+									The open work is not proving the problem exists. The open work is hardening the structural layer: maintaining the topology, preserving bindings across refactors, tracking dependencies cleanly, and turning a working technical system into something robust enough to become foundational.
+								</p>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section class="section">
+					<div class="container section-inner">
+						<div class="mimir-panel">
+							<h2>Who I want to talk to</h2>
+							<p class="mimir-section-copy">
+								I&rsquo;m interested in talking to people who immediately understand why better code intelligence may require better memory and navigation, not just larger context windows.
+							</p>
+							<p class="mimir-section-copy">Especially:</p>
+							<ul class="mimir-contact-list">
+								<li>Technical cofounders who understand developer tools, retrieval, agent systems, or code intelligence</li>
+								<li>Business-minded operators who know how to take strong infrastructure products to market</li>
+								<li>Engineering leaders who see structural memory as a missing layer in AI coding workflows</li>
+								<li>Investors or strategic partners who understand the category implications of reliable repository navigation</li>
+							</ul>
+							<p class="mimir-section-copy">
+								If you see what Mímir could become, I&rsquo;d like to talk.
+							</p>
+							<div class="cta-actions">
+								<a class="button button-primary" href="mailto:auston.horras@gmail.com?subject=M%C3%ADmir%20conversation">Start a conversation</a>
+								<a class="button button-secondary" href="mailto:auston.horras@gmail.com">Contact by email</a>
+								<a class="button button-secondary" href="/workshops/">Workshops</a>
+							</div>
+						</div>
+					</div>
+				</section>
+			</main>
+
+			<footer class="site-footer">
+				<div class="container footer-inner">
+					<p>Calm systems for clear outcomes.</p>
+					<div class="footer-links">
+						<a href="mailto:auston.horras@gmail.com">Contact</a>
+						<a href="https://www.linkedin.com/in/auston-horras-17022614/" target="_blank" rel="noreferrer">LinkedIn</a>
+						<a href="https://github.com/austontatious" target="_blank" rel="noreferrer">GitHub</a>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</body>
+</html>

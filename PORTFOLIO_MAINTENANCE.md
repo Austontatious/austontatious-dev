@@ -8,6 +8,24 @@ This document is the operational runbook for keeping `austontatious.dev` current
 - Deployment target: Cloudflare Workers + custom domains
 - Canonical URL: `https://www.austontatious.dev/`
 
+## Mímir Lexicon
+
+Use this terminology consistently across architecture notes, retrieval workflows, repair logic, docs, and UI copy.
+
+- **Cards** capture meaning. A card is a unit of understanding about some part of the system.
+- **Bindings** preserve attachment. A binding keeps that understanding attached to code as the code changes.
+- **Signals** separate what matters from noise. Signals strengthen, weaken, or revise system understanding over time.
+- **Adjacencies** reveal how the system is actually connected. They describe what is structurally nearby, upstream, downstream, dependent, or otherwise relevant.
+- **Topology** is the larger navigable structure created by cards, bindings, signals, and adjacencies.
+
+Public-facing shorthand:
+
+> Mímir turns a repository into a navigable topology: cards capture meaning, bindings preserve attachment, signals separate what matters from noise, and adjacencies reveal how the system is actually connected.
+
+Implementation note:
+
+When updating docs, code comments, prompts, or UI copy, prefer this lexicon over older terms such as `anchors`, `relationships`, or `evidence` unless referring to legacy implementation details.
+
 ## Source of Truth
 
 Primary editable files:

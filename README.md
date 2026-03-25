@@ -55,6 +55,24 @@ All commands are run from the root of the project, from a terminal:
 | `npm run build && npm run deploy` | Deploy your production site to Cloudflare        |
 | `npm wrangler tail`               | View real-time logs for all Workers              |
 
+## Mímir Lexicon
+
+Mímir uses a small set of core terms consistently across architecture, retrieval, repair, and product documentation.
+
+- **Cards** capture meaning. A card is a unit of understanding about some part of the system.
+- **Bindings** preserve attachment. A binding keeps that understanding attached to code as the code changes.
+- **Signals** separate what matters from noise. Signals strengthen, weaken, or revise system understanding over time.
+- **Adjacencies** reveal how the system is actually connected. They describe what is structurally nearby, upstream, downstream, dependent, or otherwise relevant.
+- **Topology** is the larger navigable structure created by cards, bindings, signals, and adjacencies.
+
+Public-facing shorthand:
+
+> Mímir turns a repository into a navigable topology: cards capture meaning, bindings preserve attachment, signals separate what matters from noise, and adjacencies reveal how the system is actually connected.
+
+Maintainer note:
+
+When updating docs, code comments, prompts, or UI copy, prefer this lexicon over older terms such as `anchors`, `relationships`, or `evidence` unless referring to legacy implementation details.
+
 ## 👀 Want to learn more?
 
 Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
