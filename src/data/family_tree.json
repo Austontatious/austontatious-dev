@@ -17,6 +17,11 @@
       "nodes": ["accountant", "pulsetrade", "memetrader"]
     },
     {
+      "from": "muninn",
+      "label": "Codebase topology branch",
+      "nodes": ["mimir"]
+    },
+    {
       "from": "accountant",
       "label": "Inventory/vision exploration",
       "nodes": ["onhand"]
@@ -32,6 +37,10 @@
       "slug": "muninn",
       "noteTop": "Started as embedded memory experiments inside FRIDAY/Lex.",
       "noteBottom": "Extracted into reusable infrastructure (standalone memory layer)."
+    },
+    {
+      "slug": "mimir",
+      "noteTop": "Extends the Muninn memory thread into repository navigation, attachment, and rehydration."
     }
   ]
 }

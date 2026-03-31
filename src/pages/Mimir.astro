@@ -2,7 +2,108 @@
 import BaseHead from '../components/BaseHead.astro';
 
 const MIMIR_TITLE = 'Mímir | austontatious.dev';
-const MIMIR_DESCRIPTION = 'A codebase memory and navigation layer for AI systems.';
+const MIMIR_DESCRIPTION = 'A persistent repository self-model for AI coding systems.';
+
+const thesisPoints = [
+	{
+		title: 'Persistent orientation',
+		copy: 'Give an agent a durable sense of where it is inside a codebase instead of forcing rediscovery on every task.',
+	},
+	{
+		title: 'Continuity through change',
+		copy: 'Preserve understanding across renames, moves, splits, merges, and refactors rather than losing memory when structure shifts.',
+	},
+	{
+		title: 'Context at the right level',
+		copy: 'Narrow from subsystem to file to symbol to exact working span so models spend tokens reasoning, not reconstructing.',
+	},
+];
+
+const failureModes = [
+	'Retrieval is asked to guess the path instead of narrowing a known one.',
+	'Memory floats beside the codebase as snippets and summaries instead of attaching to durable structure.',
+	'Context windows get stuffed with reconstruction work that should have been solved before generation begins.',
+	'Every new session burns time and tokens rebuilding orientation, and the same mistakes get repeated.',
+];
+
+const understandingLayers = [
+	{
+		title: 'Structural graph',
+		whatItKnows:
+			'Symbols, calls, imports, dependencies, containment, and the code-level relationships that define what the repository is doing right now.',
+		whyItMatters:
+			'It gives the system a grounded map of the current repository instead of a pile of text.',
+	},
+	{
+		title: 'Semantic / topology layer',
+		whatItKnows:
+			'Subsystem role, interface boundary, workflow, invariant, test coverage, and the nearby architectural context that explains what parts of the system mean.',
+		whyItMatters:
+			'It lets the agent navigate by purpose, not just syntax.',
+	},
+	{
+		title: 'Temporal continuity layer',
+		whatItKnows:
+			'Renames, moves, splits, merges, co-change patterns, and what stayed effectively the same thing after refactor.',
+		whyItMatters:
+			'It preserves memory through repository change instead of losing orientation every time the shape shifts.',
+	},
+];
+
+const coreConcepts = [
+	{
+		title: 'Cards',
+		copy: 'Normalized units of understanding about a subsystem, file, symbol, boundary, invariant, workflow, or implementation detail.',
+	},
+	{
+		title: 'Bindings',
+		copy: 'Attachments that keep understanding anchored to code as paths, names, and local structure change over time.',
+	},
+	{
+		title: 'Signals',
+		copy: 'Evidence from structure, tooling, history, outcomes, and repeated use that shapes confidence and revises understanding.',
+	},
+	{
+		title: 'Adjacencies',
+		copy: 'The structural and behavioral connections that reveal what is nearby, upstream, downstream, dependent, or safety-critical.',
+	},
+	{
+		title: 'Topology',
+		copy: 'The navigable graph formed by cards, bindings, adjacencies, and continuity links that gives an agent real orientation.',
+	},
+];
+
+const operatingSteps = [
+	{
+		title: 'Ingest',
+		copy: 'Parse the repository into structural units, create cards for stable concepts, attach bindings, record adjacencies, and start continuity from history.',
+	},
+	{
+		title: 'Maintain',
+		copy: 'Update bindings and topology incrementally as code changes so understanding is remapped instead of discarded.',
+	},
+	{
+		title: 'Rehydrate',
+		copy: 'Resolve likely subsystem, then likely file, then likely symbol or region, and return the smallest useful bundle of code, summaries, adjacencies, continuity, and confidence.',
+	},
+	{
+		title: 'Learn',
+		copy: 'Use verified outcomes, successful traversals, and change history to improve routing, continuity preservation, stale-memory detection, and first-target selection.',
+	},
+];
+
+const momentumSignals = [
+	'The memory layer exists.',
+	'Rehydration already works.',
+	'Telemetry exists at both the "what happened" level and the "why did this path get taken" level.',
+	'The open work is now hardening and finishing the repository self-model, not proving the category should exist.',
+];
+
+const conversationTargets = [
+	'Investors who understand why reliability in AI software development will require a durable structural layer, not just better prompting and bigger windows.',
+	'Operators who know how to position foundational infrastructure and turn a working technical system into a company and a category.',
+	'Technical partners who understand developer tools, retrieval, agent systems, code intelligence, and the realities of large evolving repositories.',
+];
 ---
 
 <!doctype html>
@@ -10,23 +111,261 @@ const MIMIR_DESCRIPTION = 'A codebase memory and navigation layer for AI systems
 	<head>
 		<BaseHead title={MIMIR_TITLE} description={MIMIR_DESCRIPTION} image="/images/mimir/mimir-search-vs-navigation.png" />
 		<style>
-			.mimir-lexicon-callout {
+			.mimir-hero-grid {
+				display: grid;
+				grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.85fr);
+				gap: 1rem;
+				align-items: start;
+			}
+
+			.mimir-subheadline {
+				max-width: 20ch;
+			}
+
+			.mimir-intro {
 				margin-top: 1rem;
-				padding: 0.8rem 0.95rem;
-				border-radius: 0.75rem;
-				border: 1px solid rgba(255, 255, 255, 0.2);
+				max-width: 72ch;
+				font-size: 1.02rem;
+				color: rgba(233, 238, 255, 0.88);
+			}
+
+			.mimir-thesis-panel,
+			.mimir-quote-panel,
+			.mimir-proof-panel,
+			.mimir-cta-panel {
+				padding: 1rem 1.05rem;
+				border-radius: 1rem;
+				border: 1px solid rgba(255, 255, 255, 0.12);
+				background: linear-gradient(180deg, rgba(22, 31, 56, 0.82), rgba(13, 19, 34, 0.92));
+				box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+			}
+
+			.mimir-kicker {
+				margin: 0;
+				font-size: 0.72rem;
+				letter-spacing: 0.14em;
+				text-transform: uppercase;
+				color: rgba(233, 238, 255, 0.62);
+			}
+
+			.mimir-thesis-panel h2,
+			.mimir-proof-panel h2,
+			.mimir-cta-panel h2 {
+				margin-top: 0.55rem;
+				font-size: 1.2rem;
+			}
+
+			.mimir-mini-list,
+			.mimir-step-list,
+			.mimir-contact-list,
+			.mimir-contact-meta {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+
+			.mimir-mini-list {
+				margin-top: 0.9rem;
+				display: grid;
+				gap: 0.8rem;
+			}
+
+			.mimir-mini-list li {
+				padding-top: 0.8rem;
+				border-top: 1px solid rgba(255, 255, 255, 0.1);
+			}
+
+			.mimir-mini-list li:first-child {
+				padding-top: 0;
+				border-top: 0;
+			}
+
+			.mimir-mini-list strong {
+				display: block;
+				font-size: 0.96rem;
+				color: rgba(245, 248, 255, 0.96);
+			}
+
+			.mimir-mini-list span {
+				display: block;
+				margin-top: 0.32rem;
+				font-size: 0.9rem;
+				color: rgba(233, 238, 255, 0.78);
+			}
+
+			.mimir-hero-figure {
+				margin-top: 1.35rem;
+			}
+
+			.mimir-lexicon-callout,
+			.mimir-highlight {
+				margin-top: 1rem;
+				padding: 0.9rem 1rem;
+				border-radius: 0.85rem;
+				border: 1px solid rgba(255, 255, 255, 0.18);
 				background: linear-gradient(180deg, rgba(22, 31, 56, 0.78), rgba(13, 19, 34, 0.88));
 				color: rgba(245, 248, 255, 0.96);
 			}
 
+			.mimir-quote-panel {
+				margin-top: 1rem;
+			}
+
+			.mimir-quote {
+				margin: 0;
+				font-size: 1.08rem;
+				line-height: 1.55;
+				color: rgba(245, 248, 255, 0.95);
+			}
+
+			.mimir-quote-panel p:last-child {
+				margin: 0.6rem 0 0;
+				color: rgba(233, 238, 255, 0.78);
+			}
+
+			.mimir-failure-grid,
+			.mimir-layer-grid,
+			.mimir-concept-grid,
+			.mimir-proof-grid {
+				margin-top: 1rem;
+				display: grid;
+				gap: 0.8rem;
+			}
+
+			.mimir-failure-grid,
+			.mimir-proof-grid {
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+			}
+
+			.mimir-layer-grid {
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+			}
+
+			.mimir-concept-grid {
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+			}
+
+			.mimir-failure-card,
+			.mimir-layer-card,
+			.mimir-concept-card,
+			.mimir-proof-card,
+			.mimir-step {
+				padding: 0.95rem 1rem;
+				border-radius: 0.9rem;
+				border: 1px solid rgba(255, 255, 255, 0.1);
+				background: linear-gradient(180deg, rgba(12, 18, 32, 0.58), rgba(12, 18, 32, 0.76));
+			}
+
+			.mimir-failure-card p,
+			.mimir-layer-card p,
+			.mimir-concept-card p,
+			.mimir-proof-card p,
+			.mimir-step p {
+				margin: 0.45rem 0 0;
+				font-size: 0.92rem;
+				color: rgba(233, 238, 255, 0.8);
+			}
+
+			.mimir-failure-card strong,
+			.mimir-layer-card h3,
+			.mimir-concept-card h3,
+			.mimir-proof-card h3,
+			.mimir-step strong {
+				display: block;
+				font-size: 0.96rem;
+				color: rgba(245, 248, 255, 0.95);
+			}
+
+			.mimir-layer-card h3,
+			.mimir-concept-card h3,
+			.mimir-proof-card h3 {
+				margin: 0;
+			}
+
+			.mimir-layer-card p + p {
+				margin-top: 0.65rem;
+			}
+
+			.mimir-layer-card .mimir-layer-label {
+				font-size: 0.72rem;
+				letter-spacing: 0.12em;
+				text-transform: uppercase;
+				color: rgba(233, 238, 255, 0.58);
+			}
+
 			.mimir-gps-bridge {
 				margin-top: 1rem;
-				font-size: 1.02rem;
+				font-size: 1.05rem;
 				color: rgba(245, 248, 255, 0.95);
 			}
 
 			.mimir-gps-bridge-note {
 				color: rgba(233, 238, 255, 0.84);
+			}
+
+			.mimir-step-list {
+				margin-top: 1rem;
+				display: grid;
+				gap: 0.8rem;
+			}
+
+			.mimir-step span {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 1.7rem;
+				height: 1.7rem;
+				margin-right: 0.55rem;
+				border-radius: 999px;
+				background: rgba(111, 179, 255, 0.16);
+				color: rgba(214, 234, 255, 0.95);
+				font-size: 0.88rem;
+				font-weight: 700;
+			}
+
+			.mimir-proof-panel p,
+			.mimir-cta-panel p {
+				margin-top: 0.7rem;
+				max-width: 70ch;
+				color: rgba(233, 238, 255, 0.84);
+			}
+
+			.mimir-contact-list {
+				margin-top: 1rem;
+				display: grid;
+				gap: 0.55rem;
+				padding-left: 1.15rem;
+				list-style: disc;
+			}
+
+			.mimir-contact-list li {
+				font-size: 0.94rem;
+				color: rgba(233, 238, 255, 0.84);
+			}
+
+			.mimir-contact-meta {
+				margin-top: 1rem;
+				display: grid;
+				gap: 0.38rem;
+			}
+
+			.mimir-contact-meta a {
+				color: rgba(245, 248, 255, 0.95);
+				text-decoration: none;
+			}
+
+			.mimir-contact-meta a:hover {
+				text-decoration: underline;
+			}
+
+			@media (max-width: 960px) {
+				.mimir-hero-grid,
+				.mimir-failure-grid,
+				.mimir-layer-grid,
+				.mimir-concept-grid,
+				.mimir-proof-grid {
+					grid-template-columns: 1fr;
+				}
 			}
 		</style>
 	</head>
@@ -49,12 +388,31 @@ const MIMIR_DESCRIPTION = 'A codebase memory and navigation layer for AI systems
 				<section class="section mimir-hero">
 					<div class="container section-inner">
 						<a class="back-link" href="/">Back to home</a>
-						<p class="eyebrow">AI Infrastructure Thesis</p>
-						<h1>Mímir</h1>
-						<p class="lead mimir-subheadline">A codebase memory and navigation layer for AI systems</p>
-						<p class="mimir-intro">
-							Most AI coding systems still retrieve code like search engines and reason about codebases like first-time visitors. Mímir is designed to fix that by giving AI a persistent structural sense of orientation inside a software project: what exists, where it lives, how parts connect, and how context should be rebuilt when work begins.
-						</p>
+						<div class="mimir-hero-grid">
+							<div>
+								<p class="eyebrow">Repository Self-Model For AI Coding</p>
+								<h1>Mímir</h1>
+								<p class="lead mimir-subheadline">The missing structural layer between AI models and real software systems</p>
+								<p class="mimir-intro">
+									AI coding systems can look impressive right up to the moment they need to work inside a large, evolving codebase. Mímir is a persistent repository self-model designed to stop that failure mode by giving an agent durable orientation: where it is, what is nearby, what changed, and what path through the system is safest.
+								</p>
+								<p class="mimir-intro">
+									This is not a claim that models need more code in context. It is a claim that they need a maintained map of the system they are operating inside. That shift turns AI coding from repeated rediscovery into navigation.
+								</p>
+							</div>
+							<aside class="mimir-thesis-panel">
+								<p class="mimir-kicker">Why This Matters</p>
+								<h2>What Mímir changes</h2>
+								<ul class="mimir-mini-list">
+									{thesisPoints.map((point) => (
+										<li>
+											<strong>{point.title}</strong>
+											<span>{point.copy}</span>
+										</li>
+									))}
+								</ul>
+							</aside>
+						</div>
 						<figure class="mimir-figure mimir-hero-figure">
 							<img src="/images/mimir/mimir-search-vs-navigation.png" alt="Search-style retrieval contrasted with structure-aware codebase navigation." loading="eager" />
 						</figure>
@@ -64,17 +422,21 @@ const MIMIR_DESCRIPTION = 'A codebase memory and navigation layer for AI systems
 				<section class="section">
 					<div class="container section-inner">
 						<div class="mimir-panel">
-							<h2>The problem</h2>
+							<h2>The quiet failure in AI software development</h2>
 							<div class="mimir-section-copy">
 								<p>
-									Today’s coding assistants can look impressive in short bursts and still fail across real software systems. They retrieve useful snippets, but they do not reliably maintain orientation inside a codebase.
+									There is a moment happening on engineering teams right now: someone opens a codebase, asks an AI system where a behavior is handled, gets a fast confident answer, follows it, makes the change, and only later discovers drift somewhere else in the system.
 								</p>
 								<p>
-									They lose track of structure, confuse local context with system-level understanding, and repeatedly solve navigation problems from scratch. That creates waste: redundant retrieval, fragile edits, broken assumptions, repeated mistakes, and lower trust.
+									The failure is not that the model produced code. It is not even that the answer was locally plausible. The failure is that the system gave the appearance of understanding without actually being oriented inside the thing it was changing.
 								</p>
 								<p>
-									The core issue is not that the models cannot read code. It is that every new interaction begins from the same disadvantaged position: reconstructing the repository from fragments before meaningful work can begin.
+									That distinction is easy to miss on a narrow task. It becomes obvious inside a real software system, where almost nothing exists in isolation and a correct-looking answer can still be wrong one layer over.
 								</p>
+							</div>
+							<div class="mimir-quote-panel">
+								<p class="mimir-quote">The system does not mainly need to get better at guessing. It needs a way to stop guessing where it is.</p>
+								<p>That is the gap Mímir is built to close.</p>
 							</div>
 							<figure class="mimir-figure">
 								<img src="/images/mimir/traditional-rag-context-window.png" alt="Traditional RAG workflow showing retrieval and context windows overloaded with reconstruction work." loading="lazy" />
@@ -86,20 +448,49 @@ const MIMIR_DESCRIPTION = 'A codebase memory and navigation layer for AI systems
 				<section class="section">
 					<div class="container section-inner">
 						<div class="mimir-panel">
-							<h2>What Mímir is meant to do</h2>
+							<h2>Why the current stack stalls out</h2>
 							<div class="mimir-section-copy">
 								<p>
-									Mímir is a persistent memory layer for software systems. Instead of forcing an AI agent to rediscover a repository from scratch every time it gets a task, Mímir gives that agent an evolving structural understanding of how the codebase is organized, what each part does, how those parts connect, what has changed, and what has already been learned from past work.
+									Most teams are trying to solve this with some variation of retrieval, memory, reranking, and generation. For a meaningful class of tasks that works well enough to create the impression that the remaining gaps are incremental.
+								</p>
+								<p>
+									But the core problem is upstream of all of that. Each new interaction starts from the same disadvantaged position: the system has to reconstruct the repository from fragments before it can do useful work inside it.
+								</p>
+							</div>
+							<div class="mimir-failure-grid">
+								{failureModes.map((item) => (
+									<div class="mimir-failure-card">
+										<strong>Current failure mode</strong>
+										<p>{item}</p>
+									</div>
+								))}
+							</div>
+							<p class="mimir-highlight">
+								<strong>From the outside this can still look like intelligence. From the inside it is continuous reconstruction.</strong>
+							</p>
+						</div>
+					</div>
+				</section>
+
+				<section class="section">
+					<div class="container section-inner">
+						<div class="mimir-panel">
+							<h2>What Mímir is</h2>
+							<div class="mimir-section-copy">
+								<p>
+									Mímir is a persistent repository self-model for AI coding systems. Instead of forcing an agent to rediscover a repository from scratch every time it gets a task, Mímir gives that agent an evolving understanding of how the codebase is structured, what each part does, how those parts relate, how those relationships have changed, and what has already been learned from prior work.
 								</p>
 								<p class="mimir-lexicon-callout">
 									<strong>Mímir turns a repository into a navigable topology: cards capture meaning, bindings preserve attachment, signals separate what matters from noise, and adjacencies reveal how the system is actually connected.</strong>
 								</p>
-								<p>A card is a unit of understanding about the system. A binding keeps that understanding attached to code as the code changes. Signals strengthen or revise that understanding over time. Adjacencies show what is structurally nearby, connected, upstream, downstream, or dependent.</p>
 								<p>
-									The result is a system that can navigate a codebase instead of repeatedly approximating it from search results. Rather than stuffing large amounts of source into a context window and hoping the model sorts it out, Mímir narrows from subsystem to file to symbol to exact working context.
+									A card is a unit of understanding about the system. A binding keeps that understanding attached to code as the code changes. Signals strengthen or revise that understanding over time. Adjacencies show what is structurally nearby, connected, upstream, downstream, or dependent.
+								</p>
+								<p>
+									Instead of dumping whole files into a context window and hoping the model sorts them out, Mímir narrows the problem first. It identifies the likely subsystem, then the likely files, then the likely symbol or region, and only then returns the exact spans of code, summaries, adjacencies, confidence, and continuity that matter.
 								</p>
 								<p class="mimir-gps-bridge"><strong>Mímir is a GPS for a codebase, not a search engine.</strong></p>
-								<p class="mimir-gps-bridge-note">Search tells the system what looks similar. Mímir tells it where it is, what is nearby, and what path is most likely to be correct.</p>
+								<p class="mimir-gps-bridge-note">Search tells a system what looks similar. Mímir tells it where it is, what is nearby, what changed since the last visit, and what path is most likely to be correct.</p>
 							</div>
 							<figure class="mimir-figure">
 								<img src="/images/mimir/mimir-structured-map-to-context.png" alt="Structured map approach that narrows from subsystem to file to symbol before assembling working context." loading="lazy" />
@@ -111,17 +502,21 @@ const MIMIR_DESCRIPTION = 'A codebase memory and navigation layer for AI systems
 				<section class="section">
 					<div class="container section-inner">
 						<div class="mimir-panel">
-							<h2>Current state</h2>
+							<h2>The three layers of understanding</h2>
 							<div class="mimir-section-copy">
 								<p>
-									This matters because today&rsquo;s AI coding tools spend too much time and token budget reorienting themselves inside a codebase. That drives shallow retrieval, brittle edits, repeated mistakes, and lower trust.
+									Underneath the product thesis is a maintained repository world-state with three kinds of knowledge layered together. The proprietary idea is not the existence of a graph. It is the learned repository self-model that can read across all three layers, preserve identity through change, and surface the right structure to an agent at the right level of abstraction.
 								</p>
-								<p>
-									Mímir is not just a concept. Core ingestion, card formation, bindings, structural signals, adjacency-aware retrieval, lifecycle tracking, and repair logic are already in place.
-								</p>
-								<p>
-									The open work is not proving the problem exists. The open work is hardening the structural layer: maintaining the topology, preserving bindings across refactors, tracking dependencies cleanly, and turning a working technical system into something robust enough to become foundational.
-								</p>
+							</div>
+							<div class="mimir-layer-grid">
+								{understandingLayers.map((layer) => (
+									<article class="mimir-layer-card">
+										<p class="mimir-layer-label">Layer</p>
+										<h3>{layer.title}</h3>
+										<p><strong>What it knows:</strong> {layer.whatItKnows}</p>
+										<p><strong>Why it matters:</strong> {layer.whyItMatters}</p>
+									</article>
+								))}
 							</div>
 						</div>
 					</div>
@@ -130,25 +525,83 @@ const MIMIR_DESCRIPTION = 'A codebase memory and navigation layer for AI systems
 				<section class="section">
 					<div class="container section-inner">
 						<div class="mimir-panel">
-							<h2>Who I want to talk to</h2>
-							<p class="mimir-section-copy">
-								I&rsquo;m interested in talking to people who immediately understand why better code intelligence may require better memory and navigation, not just larger context windows.
+							<h2>How Mímir works</h2>
+							<div class="mimir-section-copy">
+								<p>
+									At a high level, Mímir turns a repository into a navigable topology made of cards, bindings, signals, adjacencies, and a maintained world-state of the repository itself. It is designed to preserve orientation across sessions and across change so the model can spend its effort on reasoning rather than rediscovery.
+								</p>
+							</div>
+							<div class="mimir-concept-grid">
+								{coreConcepts.map((concept) => (
+									<div class="mimir-concept-card">
+										<h3>{concept.title}</h3>
+										<p>{concept.copy}</p>
+									</div>
+								))}
+							</div>
+							<ol class="mimir-step-list">
+								{operatingSteps.map((step, index) => (
+									<li class="mimir-step">
+										<strong><span>{index + 1}</span>{step.title}</strong>
+										<p>{step.copy}</p>
+									</li>
+								))}
+							</ol>
+						</div>
+					</div>
+				</section>
+
+				<section class="section">
+					<div class="container section-inner">
+						<div class="mimir-proof-panel">
+							<p class="mimir-kicker">Why Now</p>
+							<h2>The foundation exists. The remaining work is hard, but bounded.</h2>
+							<p>
+								The reason this is worth paying attention to now is that the system no longer lives only at the level of idea. The difficult leap was building something that does not reset every time you touch it. That part is done.
 							</p>
-							<p class="mimir-section-copy">Especially:</p>
+							<div class="mimir-proof-grid">
+								{momentumSignals.map((signal) => (
+									<div class="mimir-proof-card">
+										<h3>Current signal</h3>
+										<p>{signal}</p>
+									</div>
+								))}
+							</div>
+							<p>
+								The open work is hardening and finishing the repository self-model: maintaining the structural graph, enriching the semantic and topology layer, preserving bindings across refactors, tracking change over time, and turning a working technical system into something robust enough to become foundational.
+							</p>
+							<p>
+								That is not a vague research prompt. It is a concrete product and infrastructure agenda with category-level implications for AI software development.
+							</p>
+						</div>
+					</div>
+				</section>
+
+				<section class="section">
+					<div class="container section-inner">
+						<div class="mimir-cta-panel">
+							<p class="mimir-kicker">Conversations</p>
+							<h2>Who I want in the room</h2>
+							<p>
+								I am looking for people who see early that reliable AI software development will require more than bigger context windows and better retrieval. I am interested in the people who understand how to harden a working technical system, position it correctly, and help turn it into a company and a category.
+							</p>
 							<ul class="mimir-contact-list">
-								<li>Technical cofounders who understand developer tools, retrieval, agent systems, or code intelligence</li>
-								<li>Business-minded operators who know how to take strong infrastructure products to market</li>
-								<li>Engineering leaders who see structural memory as a missing layer in AI coding workflows</li>
-								<li>Investors or strategic partners who understand the category implications of reliable repository navigation</li>
+								{conversationTargets.map((target) => (
+									<li>{target}</li>
+								))}
 							</ul>
-							<p class="mimir-section-copy">
-								If you see what Mímir could become, I&rsquo;d like to talk.
+							<p>
+								If that describes you, I would like to talk.
 							</p>
 							<div class="cta-actions">
-								<a class="button button-primary" href="mailto:auston.horras@gmail.com?subject=M%C3%ADmir%20conversation">Start a conversation</a>
-								<a class="button button-secondary" href="mailto:auston.horras@gmail.com">Contact by email</a>
-								<a class="button button-secondary" href="/workshops/">Workshops</a>
+								<a class="button button-primary" href="mailto:auston.horras@gmail.com?subject=M%C3%ADmir%20investor%20conversation">Start a conversation</a>
+								<a class="button button-secondary" href="https://www.linkedin.com/in/auston-horras-17022614/" target="_blank" rel="noreferrer">LinkedIn</a>
+								<a class="button button-secondary" href="tel:+15152990161">515-299-0161</a>
 							</div>
+							<ul class="mimir-contact-meta">
+								<li><a href="mailto:auston.horras@gmail.com">auston.horras@gmail.com</a></li>
+								<li><a href="https://www.austontatious.dev/Mimir" target="_blank" rel="noreferrer">www.austontatious.dev/Mimir</a></li>
+							</ul>
 						</div>
 					</div>
 				</section>

@@ -59,17 +59,93 @@ interface FamilyTreeBranchView {
 }
 
 interface FamilyTreeNodeView {
-	project: ProjectCard;
+	project: HomeProjectCard;
 	roleLabel?: string;
 	special?: FamilyTreeSpecialNode;
 	branches: FamilyTreeBranchView[];
 }
+
+interface FeaturedPath {
+	title: string;
+	description: string;
+	bullets?: string[];
+	href: string;
+	cta: string;
+}
+
+interface HomeProjectCard {
+	name: string;
+	slug: string;
+	shortDesc: string;
+	status: 'Core' | 'Experimental' | 'Commission' | 'Stub';
+	tag: 'Systems Builder' | 'Applied AI Engineer' | 'Automation + Quality' | 'Developer Experience';
+	updatedAt: string;
+	links: {
+		publicRepoUrl: string | null;
+		requestAccess: boolean;
+	};
+	href?: string;
+}
+
+const mimirProjectCard: HomeProjectCard = {
+	name: 'Mímir',
+	slug: 'mimir',
+	href: '/Mimir',
+	tag: 'Applied AI Engineer',
+	status: 'Core',
+	shortDesc:
+		'Codebase topology and structural memory layer for AI systems, designed to preserve attachment, navigate repositories, and rehydrate the right working context across change.',
+	updatedAt: '2026-03',
+	links: {
+		publicRepoUrl: null,
+		requestAccess: false,
+	},
+};
+
+const featuredPaths: FeaturedPath[] = [
+	{
+		title: 'Practical Generative AI Workshops',
+		description:
+			'For leadership teams, operators, and organizations trying to move past vague AI enthusiasm into real understanding and usable workflow change.',
+		bullets: [
+			'How to think clearly about AI systems',
+			'How to use AI as a teammate instead of a novelty',
+			'Where current models help, fail, and mislead',
+			'How to build better habits around prompting, review, and implementation',
+		],
+		href: '/workshops/',
+		cta: 'See Workshops',
+	},
+	{
+		title: 'Mímir',
+		description:
+			'A codebase topology and structural memory layer that gives AI systems a stable sense of place inside evolving software.',
+		href: '/Mimir',
+		cta: 'Explore Mímir',
+	},
+	{
+		title: 'Selected Projects',
+		description:
+			'A portfolio of systems built across memory architecture, multimodal AI, orchestration, applied workflows, computer vision, and developer tooling.',
+		href: '#selected-work',
+		cta: 'Browse Projects',
+	},
+];
 
 const excludedSlugs = new Set(['gauntlet-010', 'gauntlet-005', 'gauntlet001']);
 const projects = (generatedProjects as ProjectCard[])
 	.filter((project) => !excludedSlugs.has(project.slug))
 	.sort((a, b) => a.name.localeCompare(b.name));
 const bySlug = new Map(projects.map((project) => [project.slug, project]));
+const homeBySlug = new Map<string, HomeProjectCard>([
+	...projects.map((project) => [project.slug, project]),
+	[mimirProjectCard.slug, mimirProjectCard],
+]);
+
+const selectedWorkSlugs = ['muninn', 'mimir', 'laila', 'friday', 'null-signal', 'pulsetrade'];
+const selectedWork = selectedWorkSlugs
+	.map((slug) => homeBySlug.get(slug))
+	.filter((project): project is HomeProjectCard => Boolean(project));
 
 const familyTree = familyTreeData as FamilyTreeConfig;
 const branchesByFrom = new Map<string, FamilyTreeBranch[]>();
@@ -90,9 +166,13 @@ function makeBranchId(fromSlug: string, label: string): string {
 	return `branch-${toIdPart(fromSlug)}-${toIdPart(label)}`;
 }
 
+function projectHref(project: { slug: string; href?: string }): string {
+	return project.href ?? `/projects/${project.slug}/`;
+}
+
 function buildTreeNode(slug: string, roleLabel?: string): FamilyTreeNodeView | null {
 	if (usedTreeSlugs.has(slug)) return null;
-	const project = bySlug.get(slug);
+	const project = homeBySlug.get(slug);
 	if (!project) return null;
 
 	usedTreeSlugs.add(slug);
@@ -124,7 +204,7 @@ const spineNodes = familyTree.spine
 	.filter((node): node is FamilyTreeNodeView => Boolean(node));
 
 if (spineNodes.length > 0) {
-	const unplacedNodes = projects
+	const unplacedNodes = [...homeBySlug.values()]
 		.filter((project) => !usedTreeSlugs.has(project.slug))
 		.map((project) => buildTreeNode(project.slug))
 		.filter((node): node is FamilyTreeNodeView => Boolean(node));
@@ -137,12 +217,6 @@ if (spineNodes.length > 0) {
 		});
 	}
 }
-
-const aiFocusOrder = ['friday', 'muninn', 'laila', 'lex'];
-const aiPlatformProjects = aiFocusOrder
-	.map((slug) => bySlug.get(slug))
-	.filter((project): project is ProjectCard => Boolean(project))
-	.slice(0, 5);
 
 const statusOrder: ProjectCard['status'][] = ['Core', 'Experimental', 'Commission', 'Stub'];
 const groupedByStatus = statusOrder
@@ -162,132 +236,125 @@ const groupedByStatus = statusOrder
 		<div class="page-shell">
 			<header class="main-nav">
 				<nav class="container nav-inner" aria-label="Primary">
-					<a href="#hero" class="brand">austontatious.dev</a>
-					<div class="nav-links">
-						<a href="#snapshot">Snapshot</a>
-						<a href="#progression">Progression</a>
-						<a href="#projects">Projects</a>
-					</div>
-					<div class="nav-actions">
-						<a href="mailto:auston.horras@gmail.com">Email</a>
-						<a href="https://www.linkedin.com/in/auston-horras-17022614/" target="_blank" rel="noreferrer">
-							LinkedIn
-						</a>
+					<a href="/" class="brand">austontatious.dev</a>
+					<div class="nav-links nav-links-primary">
+						<a href="/" aria-current="page">Home</a>
+						<a href="/workshops/">Workshops</a>
+						<a href="/Mimir">Mímir</a>
+						<a href="https://github.com/austontatious" target="_blank" rel="noreferrer">GitHub</a>
+						<a href="mailto:auston.horras@gmail.com">Contact</a>
 					</div>
 				</nav>
 			</header>
 
 			<main>
-				<section id="hero" class="section hero">
+				<section id="hero" class="section hero home-hero">
 					<FlowField variant="hero" />
 					<div class="container section-inner">
 						<p class="eyebrow">Calm systems for high-stakes decisions</p>
-						<h1>AI Architect.</h1>
-						<p class="lead">Calm inside complexity.</p>
-						<p class="support">I build AI systems that turn uncertainty into clear outcomes.</p>
-						<p class="workshop-note">
-							I also offer practical generative AI workshops for teams, focused on how to actually work with
-							AI in real-world workflows.
-						</p>
-						<a class="workshop-link" href="/workshops/">Practical AI Workshops</a>
-					</div>
-				</section>
-
-				<section id="snapshot" class="section">
-					<div class="container section-inner">
-						<h2>Professional Snapshot</h2>
-						<p class="snapshot-title">
-							Senior Systems &amp; Applied AI Engineer building reliable automation, local-first AI platforms,
-							and production-minded developer tooling.
-						</p>
-						<div class="capability-grid">
-							<article class="capability-panel">
-								<h3>Systems Engineering</h3>
-								<ul>
-									<li>Distributed services</li>
-									<li>Docker &amp; orchestration</li>
-									<li>API-driven architecture</li>
-									<li>Reliability-focused automation</li>
-									<li>CI-friendly testing</li>
-								</ul>
-							</article>
-							<article class="capability-panel">
-								<h3>Applied AI Engineering</h3>
-								<ul>
-									<li>Agent systems</li>
-									<li>Memory architecture</li>
-									<li>Computer vision pipelines</li>
-									<li>GPU workflows</li>
-									<li>Evaluation + quality loops</li>
-								</ul>
-							</article>
-							<article class="capability-panel">
-								<h3>Developer Enablement</h3>
-								<ul>
-									<li>Dev tooling</li>
-									<li>Reproducible environments</li>
-									<li>Automation scripts</li>
-									<li>Workflow design</li>
-									<li>Operator-safe deployments</li>
-								</ul>
-							</article>
+						<h1>I build AI systems that turn uncertainty into clear outcomes.</h1>
+						<div class="hero-cta-row">
+							<a class="button button-primary" href="/workshops/">Practical AI Workshops</a>
+							<a class="button button-secondary" href="/Mimir">Explore Mímir</a>
 						</div>
-						<p class="core-tech">
-							<span>Core Technologies:</span> Python • FastAPI • Docker • Linux • CUDA • PyTest • TypeScript • React • Node.js • Nginx • GitHub Actions • REST APIs • AI Agents • Computer Vision • LLM Integration
-						</p>
-						<p class="micro-signal">
-							Open to senior-level engineering roles involving systems architecture, AI infrastructure, or
-							developer productivity platforms.
-						</p>
+						<a class="hero-tertiary-link" href="#selected-work">Browse projects</a>
 					</div>
 				</section>
 
-				<section id="progression" class="section">
+				<section class="section">
+					<div class="container section-inner">
+						<h2>Featured paths</h2>
+						<p class="home-section-copy">The three most important doors on this site.</p>
+						<div class="featured-path-grid">
+							{featuredPaths.map((path) => (
+								<article class="featured-path-card">
+									<h3>{path.title}</h3>
+									<p>{path.description}</p>
+									{path.bullets && (
+										<ul>
+											{path.bullets.map((item) => <li>{item}</li>)}
+										</ul>
+									)}
+									<a class="button button-secondary" href={path.href}>{path.cta}</a>
+								</article>
+							))}
+						</div>
+					</div>
+				</section>
+
+				<section class="section">
+					<div class="container section-inner">
+						<div class="home-identity-panel">
+							<h2>Built from the operator side, not just the slide deck side</h2>
+							<p>
+								Senior Systems &amp; Applied AI Engineer building reliable automation, local-first AI platforms, memory architectures, and production-minded developer tooling. I come from healthcare, operations, and hands-on systems building, so the standard is practical usefulness under real constraints.
+							</p>
+							<p class="home-capability-line">
+								Core capabilities: agent systems, memory infrastructure, multimodal pipelines, workflow automation, and production-minded tooling.
+							</p>
+						</div>
+					</div>
+				</section>
+
+				<section id="selected-work" class="section">
+					<div class="container section-inner">
+						<h2>Selected work</h2>
+						<p class="home-section-copy">
+							These projects span agent systems, memory layers, multimodal pipelines, distributed tooling, and applied AI interfaces. Together they show the through-line in my work: systems that stay grounded, stateful, and usable.
+						</p>
+						<div class="selected-work-grid">
+							{selectedWork.map((project) => (
+								<article class="project-row selected-work-card">
+									<div class="project-row-head">
+										<a class="project-row-name" href={projectHref(project)}>{project.name}</a>
+										<div class="project-row-badges">
+											<span class="badge">{project.tag}</span>
+											<span class="badge">{project.status}</span>
+										</div>
+									</div>
+									<p class="project-row-desc">{project.shortDesc}</p>
+									<div class="project-row-meta">
+										<span>Updated: {project.updatedAt.slice(0, 7)}</span>
+										{project.links.publicRepoUrl && (
+											<a href={project.links.publicRepoUrl} target="_blank" rel="noreferrer">GitHub</a>
+										)}
+									</div>
+								</article>
+							))}
+						</div>
+						<a class="workshop-link home-index-link" href="#project-index">Open full project index</a>
+					</div>
+				</section>
+
+				<section id="project-index" class="section">
 					<FlowField variant="echo" />
 					<div class="container section-inner">
-						<h2>Not isolated tools. A connected system.</h2>
-						<p class="progression-helper">If you only read one thing: this is the project family tree.</p>
+						<h2>How the work connects</h2>
+						<p class="home-section-copy">
+							The platform thread behind these projects spans memory systems, agent infrastructure, multimodal tools, and applied product experiments.
+						</p>
+
 						<div class="family-tree-shell">
 							<ul class="family-spine-list" id="family-spine">
 								{spineNodes.map((node) => <FamilyTreeNode node={node} depth={0} />)}
 							</ul>
 						</div>
-					</div>
-				</section>
 
-				<section id="ai-focus" class="section">
-					<div class="container section-inner">
-						<h2>AI Platform Focus</h2>
-						<p class="ai-focus-copy">
-							FRIDAY began as local coding-agent orchestration. Muninn emerged when memory moved from embedded
-							feature to standalone infrastructure. LAILA now carries that spine into the next generation of
-							identity-aware runtime behavior.
+						<h3 class="project-index-heading">Project index</h3>
+						<p class="home-section-copy">
+							The broader index shows the full portfolio across core systems, experiments, and commissioned applied competency work.
 						</p>
-						<ul class="ai-focus-links">
-							{aiPlatformProjects.map((project) => <li><a href={`/projects/${project.slug}/`}>{project.name}</a></li>)}
-						</ul>
-					</div>
-				</section>
-
-				<section id="projects" class="section">
-					<div class="container section-inner">
-						<h2>Projects Index</h2>
-						<nav class="fast-scan" aria-label="Selected project fast-scan">
-							<a href="#spine-friday">Agent Platform</a>
-							<a href="#branch-friday-experimentation-waves">Applied AI</a>
-							<a href="#branch-friday-commission-work-applied-competencies">Systems / Automation</a>
-						</nav>
 
 						{
 							groupedByStatus.map((group) => (
 								<section class="status-group" id={`status-${group.status.toLowerCase()}`}>
 									<h3>{group.status}</h3>
 									<div class="projects-index-list">
-										{
-											group.items.map((project) => (
+										{group.items.map((project) => (
+											<>
 												<article class="project-row">
 													<div class="project-row-head">
-														<a class="project-row-name" href={`/projects/${project.slug}/`}>{project.name}</a>
+														<a class="project-row-name" href={projectHref(project)}>{project.name}</a>
 														<div class="project-row-badges">
 															<span class="badge">{project.tag}</span>
 															<span class="badge">{project.status}</span>
@@ -302,12 +369,43 @@ const groupedByStatus = statusOrder
 														)}
 													</div>
 												</article>
-											))
-										}
+												{group.status === 'Core' && project.slug === 'muninn' && (
+													<article class="project-row">
+														<div class="project-row-head">
+															<a class="project-row-name" href={mimirProjectCard.href}>{mimirProjectCard.name}</a>
+															<div class="project-row-badges">
+																<span class="badge">{mimirProjectCard.tag}</span>
+																<span class="badge">{mimirProjectCard.status}</span>
+															</div>
+														</div>
+														<p class="project-row-desc">{mimirProjectCard.shortDesc}</p>
+														<div class="project-row-meta">
+															<span>Updated: {mimirProjectCard.updatedAt}</span>
+														</div>
+													</article>
+												)}
+											</>
+										))}
 									</div>
 								</section>
 							))
 						}
+					</div>
+				</section>
+
+				<section class="section">
+					<div class="container section-inner">
+						<div class="home-contact-panel">
+							<h2>Interested in working together?</h2>
+							<p>
+								Whether you are looking for a practical AI workshop, want to talk through a system idea, or think Mímir points toward something worth building, I am open to serious conversations.
+							</p>
+							<div class="cta-actions">
+								<a class="button button-primary" href="mailto:auston.horras@gmail.com">Contact</a>
+								<a class="button button-secondary" href="/workshops/">Workshops</a>
+								<a class="button button-secondary" href="/Mimir">Mímir</a>
+							</div>
+						</div>
 					</div>
 				</section>
 			</main>

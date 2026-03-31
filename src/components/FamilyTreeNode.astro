@@ -4,6 +4,7 @@ interface ProjectCard {
 	slug: string;
 	shortDesc: string;
 	status: 'Core' | 'Experimental' | 'Commission' | 'Stub';
+	href?: string;
 }
 
 interface FamilyTreeSpecialNode {
@@ -32,12 +33,13 @@ interface Props {
 
 const { node, depth = 0 } = Astro.props as Props;
 const cappedDepth = Math.min(depth, 4);
+const nodeHref = node.project.href ?? `/projects/${node.project.slug}/`;
 ---
 
 <li class:list={['tree-node', `depth-${cappedDepth}`]} id={depth === 0 ? `spine-${node.project.slug}` : undefined}>
 	<div class="tree-node-card">
 		<div class="tree-head">
-			<a class="tree-name" href={`/projects/${node.project.slug}/`}>{node.project.name}</a>
+			<a class="tree-name" href={nodeHref}>{node.project.name}</a>
 			<div class="tree-head-meta">
 				{node.roleLabel && <span class="tree-role">{node.roleLabel}</span>}
 				<span class="badge">{node.project.status}</span>
