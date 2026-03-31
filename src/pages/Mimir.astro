@@ -160,12 +160,16 @@ const audienceCards = [
 				color: #fff;
 			}
 
-			.mimir-hero-grid,
-			.mimir-problem-grid {
+			.mimir-hero-grid {
 				display: grid;
-				grid-template-columns: minmax(0, 1fr) minmax(340px, 0.96fr);
+				grid-template-columns: minmax(0, 0.92fr) minmax(380px, 1.08fr);
 				gap: clamp(1.4rem, 3vw, 3rem);
 				align-items: start;
+			}
+
+			.mimir-problem-stack {
+				display: grid;
+				gap: 1.1rem;
 			}
 
 			.mimir-eyebrow {
@@ -311,9 +315,9 @@ const audienceCards = [
 
 			.mimir-symptom-list {
 				display: grid;
-				grid-template-columns: repeat(2, minmax(0, 1fr));
+				grid-template-columns: repeat(5, minmax(0, 1fr));
 				gap: 0.6rem;
-				margin-top: 0.9rem;
+				margin-top: 0;
 			}
 
 			.mimir-symptom-list li {
@@ -362,11 +366,44 @@ const audienceCards = [
 			}
 
 			.mimir-hero-figure {
-				align-self: stretch;
+				align-self: end;
+				width: 138%;
+				margin-top: 2rem;
+				margin-left: -28%;
+			}
+
+			.mimir-problem-copy h2 {
+				max-width: 19ch;
+			}
+
+			.mimir-problem-copy p {
+				max-width: 66ch;
 			}
 
 			.mimir-problem-panel .mimir-figure {
 				margin-top: 1rem;
+			}
+
+			.mimir-problem-visual {
+				padding-top: 1rem;
+			}
+
+			.mimir-problem-head {
+				display: grid;
+				grid-template-columns: 220px minmax(0, 1fr);
+				gap: 1rem 1.2rem;
+				align-items: start;
+			}
+
+			.mimir-problem-caption {
+				display: grid;
+				grid-template-columns: 220px minmax(0, 1fr);
+				gap: 1rem 1.2rem;
+				align-items: start;
+			}
+
+			.mimir-problem-caption strong {
+				margin-bottom: 0;
 			}
 
 			.mimir-diagram-stack {
@@ -529,7 +566,6 @@ const audienceCards = [
 
 			@media (max-width: 960px) {
 				.mimir-hero-grid,
-				.mimir-problem-grid,
 				.mimir-capability-grid,
 				.mimir-proof-grid,
 				.mimir-outcome-grid,
@@ -541,8 +577,19 @@ const audienceCards = [
 					grid-template-columns: 1fr;
 				}
 
-				.mimir-symptom-list {
+				.mimir-hero-figure {
+					width: 100%;
+					margin-top: 1rem;
+					margin-left: 0;
+				}
+
+				.mimir-problem-head,
+				.mimir-problem-caption {
 					grid-template-columns: 1fr;
+				}
+
+				.mimir-symptom-list {
+					grid-template-columns: repeat(2, minmax(0, 1fr));
 				}
 			}
 
@@ -553,6 +600,10 @@ const audienceCards = [
 
 				.mimir-hero {
 					padding-top: 2.2rem;
+				}
+
+				.mimir-symptom-list {
+					grid-template-columns: 1fr;
 				}
 
 				.mimir-cta-row .button {
@@ -613,26 +664,28 @@ const audienceCards = [
 
 				<section class="mimir-section">
 					<div class="container">
-						<div class="mimir-problem-grid">
-							<div class="mimir-copy-panel">
+						<div class="mimir-problem-stack">
+							<div class="mimir-copy-panel mimir-problem-copy">
 								<p class="mimir-eyebrow">The Problem</p>
 								<h2>AI coding tools keep re-solving orientation from scratch.</h2>
 								<p>
 									Search, reranking, and larger context windows can help, but they still ask the model to reconstruct where it is before it can act safely. That makes repository-scale work slower, noisier, and less trustworthy than it looks in a demo.
 								</p>
 							</div>
-							<div class="mimir-problem-panel">
-								<p class="mimir-meta-label">Failure symptoms</p>
-								<ul class="mimir-symptom-list">
-									{failureSymptoms.map((symptom) => (
-										<li>{symptom}</li>
-									))}
-								</ul>
+							<div class="mimir-problem-panel mimir-problem-visual">
+								<div class="mimir-problem-head">
+									<p class="mimir-meta-label">Failure symptoms</p>
+									<ul class="mimir-symptom-list">
+										{failureSymptoms.map((symptom) => (
+											<li>{symptom}</li>
+										))}
+									</ul>
+								</div>
 								<figure class="mimir-figure">
 									<div class="mimir-figure-frame">
 										<img src="/images/mimir/traditional-rag-context-window.png" alt="Traditional RAG workflow showing retrieval and context windows overloaded with reconstruction work." loading="lazy" />
 									</div>
-									<figcaption>
+									<figcaption class="mimir-problem-caption">
 										<strong>Where the stack bends</strong>
 										Traditional RAG pushes orientation work into retrieval and the context window instead of solving it structurally first.
 									</figcaption>
