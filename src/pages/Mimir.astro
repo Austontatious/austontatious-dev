@@ -89,25 +89,26 @@ const audienceCards = [
 		<BaseHead title={MIMIR_TITLE} description={MIMIR_DESCRIPTION} image="/images/mimir/mimir-search-vs-navigation.png" />
 		<style>
 			:root {
-				--mimir-bg: #eef2f7;
-				--mimir-bg-soft: #f6f8fb;
-				--mimir-surface: rgba(255, 255, 255, 0.82);
-				--mimir-surface-strong: rgba(255, 255, 255, 0.94);
-				--mimir-border: rgba(15, 23, 42, 0.1);
-				--mimir-border-strong: rgba(37, 99, 235, 0.2);
-				--mimir-text: #122033;
-				--mimir-text-strong: #081322;
-				--mimir-muted: #4a5b71;
-				--mimir-muted-strong: #334155;
-				--mimir-accent: #2563eb;
-				--mimir-accent-soft: rgba(37, 99, 235, 0.08);
-				--mimir-shadow: 0 18px 60px rgba(15, 23, 42, 0.08);
+				--mimir-border: rgba(255, 255, 255, 0.12);
+				--mimir-border-soft: rgba(255, 255, 255, 0.08);
+				--mimir-border-strong: rgba(58, 110, 255, 0.34);
+				--mimir-text: var(--text);
+				--mimir-text-strong: #f4f7ff;
+				--mimir-muted: rgba(233, 238, 255, 0.76);
+				--mimir-muted-strong: rgba(233, 238, 255, 0.86);
+				--mimir-accent: var(--g1);
+				--mimir-accent-soft: rgba(58, 110, 255, 0.12);
+				--mimir-panel-bg: linear-gradient(180deg, rgba(18, 26, 46, 0.74), rgba(15, 21, 37, 0.86));
+				--mimir-panel-bg-soft: linear-gradient(180deg, rgba(12, 18, 32, 0.58), rgba(12, 18, 32, 0.76));
+				--mimir-panel-bg-strong: linear-gradient(180deg, rgba(18, 26, 46, 0.82), rgba(15, 21, 37, 0.92));
+				--mimir-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 			}
 
 			body.mimir-page-body {
 				background:
-					radial-gradient(circle at top right, rgba(37, 99, 235, 0.08), transparent 32%),
-					linear-gradient(180deg, #f7f9fc 0%, var(--mimir-bg) 100%);
+					radial-gradient(circle at 78% -12%, rgba(58, 110, 255, 0.14) 0%, rgba(10, 15, 28, 0) 40%),
+					radial-gradient(circle at 14% 120%, rgba(124, 58, 237, 0.1) 0%, rgba(5, 7, 13, 0) 45%),
+					linear-gradient(180deg, var(--bg1) 0%, var(--bg0) 50%, var(--bg1) 100%);
 				color: var(--mimir-text);
 			}
 
@@ -116,7 +117,7 @@ const audienceCards = [
 			}
 
 			.mimir-page .container {
-				width: min(1120px, calc(100% - 2.5rem));
+				width: min(1120px, calc(100% - 3rem));
 			}
 
 			.mimir-page h1,
@@ -129,70 +130,13 @@ const audienceCards = [
 				color: var(--mimir-muted);
 			}
 
-			.mimir-header {
-				position: sticky;
-				top: 0;
-				z-index: 40;
-				border-bottom: 1px solid rgba(15, 23, 42, 0.08);
-				backdrop-filter: blur(16px);
-				background: rgba(246, 248, 251, 0.84);
-			}
-
-			.mimir-nav {
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				gap: 1rem;
-				min-height: 4.2rem;
-			}
-
-			.mimir-brand-block {
-				display: flex;
-				flex-direction: column;
-				gap: 0.18rem;
-			}
-
-			.mimir-brand {
-				font-size: 0.82rem;
-				font-weight: 700;
-				letter-spacing: 0.14em;
-				text-transform: uppercase;
-				text-decoration: none;
-				color: var(--mimir-text-strong);
-			}
-
-			.mimir-brand-note {
-				font-size: 0.8rem;
-				color: var(--mimir-muted);
-			}
-
-			.mimir-nav-links {
-				display: flex;
-				align-items: center;
-				gap: 1rem;
-			}
-
-			.mimir-nav-links a {
-				font-size: 0.8rem;
-				font-weight: 600;
-				letter-spacing: 0.1em;
-				text-transform: uppercase;
-				text-decoration: none;
-				color: var(--mimir-muted-strong);
-				transition: color 180ms ease;
-			}
-
-			.mimir-nav-links a:hover {
-				color: var(--mimir-accent);
-			}
-
 			.mimir-main {
 				padding-bottom: 2rem;
 			}
 
 			.mimir-section {
 				padding: clamp(3.6rem, 7vw, 5.75rem) 0;
-				border-top: 1px solid rgba(15, 23, 42, 0.08);
+				border-top: 1px solid var(--line);
 			}
 
 			.mimir-hero {
@@ -208,12 +152,12 @@ const audienceCards = [
 				font-size: 0.82rem;
 				letter-spacing: 0.06em;
 				text-decoration: none;
-				color: var(--mimir-muted);
+				color: rgba(233, 238, 255, 0.72);
 				transition: color 180ms ease;
 			}
 
 			.mimir-back-link:hover {
-				color: var(--mimir-accent);
+				color: #fff;
 			}
 
 			.mimir-hero-grid,
@@ -230,7 +174,7 @@ const audienceCards = [
 				font-weight: 700;
 				letter-spacing: 0.16em;
 				text-transform: uppercase;
-				color: var(--mimir-accent);
+				color: rgba(233, 238, 255, 0.72);
 			}
 
 			.mimir-page h1 {
@@ -245,7 +189,7 @@ const audienceCards = [
 				max-width: 18ch;
 				font-size: clamp(1.45rem, 3vw, 2.2rem);
 				line-height: 1.12;
-				color: var(--mimir-text);
+				color: var(--mimir-text-strong);
 			}
 
 			.mimir-hero-support {
@@ -253,7 +197,7 @@ const audienceCards = [
 				max-width: 40ch;
 				font-size: 1.03rem;
 				line-height: 1.58;
-				color: var(--mimir-muted-strong);
+				color: var(--mimir-muted);
 			}
 
 			.mimir-cta-row {
@@ -263,49 +207,8 @@ const audienceCards = [
 				margin-top: 1.35rem;
 			}
 
-			.mimir-button {
-				display: inline-flex;
-				align-items: center;
-				justify-content: center;
-				min-height: 2.8rem;
-				padding: 0.75rem 1.05rem;
-				border-radius: 0.85rem;
-				border: 1px solid transparent;
-				font-size: 0.9rem;
-				font-weight: 600;
-				text-decoration: none;
-				transition:
-					transform 180ms ease,
-					border-color 180ms ease,
-					background 180ms ease,
-					color 180ms ease,
-					box-shadow 180ms ease;
-			}
-
-			.mimir-button:hover {
-				transform: translateY(-1px);
-			}
-
-			.mimir-button-primary {
-				background: var(--mimir-accent);
-				color: #fff;
-				box-shadow: 0 14px 26px rgba(37, 99, 235, 0.16);
-			}
-
-			.mimir-button-primary:hover {
-				background: #1f56ce;
-			}
-
-			.mimir-button-secondary {
-				border-color: rgba(15, 23, 42, 0.12);
-				background: rgba(255, 255, 255, 0.82);
-				color: var(--mimir-text-strong);
-			}
-
-			.mimir-button-secondary:hover {
-				border-color: var(--mimir-border-strong);
-				background: rgba(37, 99, 235, 0.05);
-				color: var(--mimir-accent);
+			.mimir-cta-row .button-primary {
+				box-shadow: 0 14px 30px rgba(58, 110, 255, 0.2);
 			}
 
 			.mimir-value-strip {
@@ -321,12 +224,12 @@ const audienceCards = [
 				gap: 0.68rem;
 				padding: 0.88rem 1rem;
 				border-radius: 1rem;
-				border: 1px solid rgba(15, 23, 42, 0.09);
-				background: rgba(255, 255, 255, 0.74);
+				border: 1px solid var(--mimir-border);
+				background: var(--mimir-panel-bg-soft);
 				font-size: 0.93rem;
 				font-weight: 600;
-				color: var(--mimir-text);
-				box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+				color: var(--mimir-text-strong);
+				box-shadow: var(--mimir-shadow);
 			}
 
 			.mimir-chip::before {
@@ -335,7 +238,7 @@ const audienceCards = [
 				height: 0.62rem;
 				border-radius: 999px;
 				background: var(--mimir-accent);
-				box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.12);
+				box-shadow: 0 0 0 5px rgba(58, 110, 255, 0.14);
 				flex: 0 0 auto;
 			}
 
@@ -354,7 +257,7 @@ const audienceCards = [
 				max-width: 44rem;
 				font-size: 1rem;
 				line-height: 1.62;
-				color: var(--mimir-muted-strong);
+				color: var(--mimir-muted);
 			}
 
 			.mimir-copy-panel,
@@ -364,9 +267,9 @@ const audienceCards = [
 			.mimir-capability-card,
 			.mimir-outcome-card,
 			.mimir-closing-shell {
-				border: 1px solid rgba(15, 23, 42, 0.1);
+				border: 1px solid var(--mimir-border);
 				border-radius: 1.3rem;
-				background: var(--mimir-surface);
+				background: var(--mimir-panel-bg);
 				box-shadow: var(--mimir-shadow);
 			}
 
@@ -387,7 +290,7 @@ const audienceCards = [
 				max-width: 36ch;
 				font-size: 1rem;
 				line-height: 1.62;
-				color: var(--mimir-muted-strong);
+				color: var(--mimir-muted);
 			}
 
 			.mimir-meta-label {
@@ -396,7 +299,7 @@ const audienceCards = [
 				font-weight: 700;
 				letter-spacing: 0.16em;
 				text-transform: uppercase;
-				color: var(--mimir-accent);
+				color: rgba(233, 238, 255, 0.68);
 			}
 
 			.mimir-symptom-list,
@@ -416,11 +319,11 @@ const audienceCards = [
 			.mimir-symptom-list li {
 				padding: 0.72rem 0.78rem;
 				border-radius: 0.9rem;
-				border: 1px solid rgba(15, 23, 42, 0.08);
-				background: rgba(255, 255, 255, 0.8);
+				border: 1px solid var(--mimir-border-soft);
+				background: var(--mimir-panel-bg-soft);
 				font-size: 0.89rem;
 				font-weight: 600;
-				color: var(--mimir-text);
+				color: var(--mimir-text-strong);
 			}
 
 			.mimir-figure {
@@ -430,8 +333,8 @@ const audienceCards = [
 			.mimir-figure-frame {
 				overflow: hidden;
 				border-radius: 1.35rem;
-				border: 1px solid rgba(15, 23, 42, 0.1);
-				background: var(--mimir-surface-strong);
+				border: 1px solid var(--mimir-border);
+				background: rgba(9, 13, 23, 0.72);
 				box-shadow: var(--mimir-shadow);
 			}
 
@@ -445,7 +348,7 @@ const audienceCards = [
 				margin-top: 0.72rem;
 				font-size: 0.88rem;
 				line-height: 1.52;
-				color: var(--mimir-muted);
+				color: rgba(233, 238, 255, 0.72);
 			}
 
 			.mimir-figure figcaption strong {
@@ -455,7 +358,7 @@ const audienceCards = [
 				font-weight: 700;
 				letter-spacing: 0.14em;
 				text-transform: uppercase;
-				color: var(--mimir-accent);
+				color: rgba(233, 238, 255, 0.58);
 			}
 
 			.mimir-hero-figure {
@@ -476,11 +379,11 @@ const audienceCards = [
 				margin-top: 1rem;
 				padding: 0.6rem 0.85rem;
 				border-radius: 999px;
-				border: 1px solid rgba(37, 99, 235, 0.16);
-				background: rgba(37, 99, 235, 0.06);
+				border: 1px solid var(--mimir-border-strong);
+				background: var(--mimir-accent-soft);
 				font-size: 0.88rem;
 				font-weight: 600;
-				color: var(--mimir-accent);
+				color: rgba(214, 230, 255, 0.96);
 			}
 
 			.mimir-capability-grid,
@@ -517,8 +420,8 @@ const audienceCards = [
 			.mimir-outcome-card:hover,
 			.mimir-audience-card:hover {
 				transform: translateY(-2px);
-				border-color: rgba(37, 99, 235, 0.18);
-				background: rgba(255, 255, 255, 0.9);
+				border-color: var(--mimir-border-strong);
+				background: linear-gradient(180deg, rgba(22, 31, 56, 0.88), rgba(15, 21, 37, 0.94));
 			}
 
 			.mimir-capability-card h3,
@@ -548,8 +451,8 @@ const audienceCards = [
 			.mimir-proof-column {
 				padding: 1rem 1.05rem;
 				border-radius: 1rem;
-				border: 1px solid rgba(15, 23, 42, 0.08);
-				background: rgba(255, 255, 255, 0.84);
+				border: 1px solid var(--mimir-border-soft);
+				background: var(--mimir-panel-bg-soft);
 			}
 
 			.mimir-proof-column h3 {
@@ -557,7 +460,7 @@ const audienceCards = [
 				font-weight: 700;
 				letter-spacing: 0.14em;
 				text-transform: uppercase;
-				color: var(--mimir-accent);
+				color: rgba(233, 238, 255, 0.68);
 			}
 
 			.mimir-proof-list {
@@ -571,7 +474,7 @@ const audienceCards = [
 				padding-left: 1rem;
 				font-size: 0.95rem;
 				line-height: 1.52;
-				color: var(--mimir-text);
+				color: var(--mimir-muted-strong);
 			}
 
 			.mimir-proof-list li::before {
@@ -588,15 +491,14 @@ const audienceCards = [
 			.mimir-proof-note {
 				margin-top: 1rem;
 				font-size: 0.88rem;
-				color: var(--mimir-muted);
+				color: rgba(233, 238, 255, 0.72);
 			}
 
 			.mimir-closing-shell {
 				display: grid;
 				gap: 0.9rem;
-				border-color: rgba(37, 99, 235, 0.18);
-				background:
-					linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(244, 248, 255, 0.94));
+				border-color: var(--mimir-border-strong);
+				background: linear-gradient(180deg, rgba(21, 31, 56, 0.94), rgba(15, 21, 37, 0.96));
 			}
 
 			.mimir-closing-shell h2 {
@@ -613,46 +515,16 @@ const audienceCards = [
 
 			.mimir-contact-line {
 				font-size: 0.9rem;
-				color: var(--mimir-muted);
+				color: rgba(233, 238, 255, 0.72);
 			}
 
 			.mimir-contact-line a {
-				color: var(--mimir-muted-strong);
+				color: var(--mimir-text-strong);
 				text-decoration: none;
 			}
 
 			.mimir-contact-line a:hover {
-				color: var(--mimir-accent);
-			}
-
-			.mimir-footer {
-				padding: 0 0 2.6rem;
-			}
-
-			.mimir-footer-inner {
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				gap: 1rem;
-				padding-top: 1.2rem;
-				border-top: 1px solid rgba(15, 23, 42, 0.08);
-			}
-
-			.mimir-footer p,
-			.mimir-footer a {
-				font-size: 0.84rem;
-				color: var(--mimir-muted);
-				text-decoration: none;
-			}
-
-			.mimir-footer a:hover {
-				color: var(--mimir-accent);
-			}
-
-			.mimir-footer-links {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 1rem;
+				color: #fff;
 			}
 
 			@media (max-width: 960px) {
@@ -676,49 +548,27 @@ const audienceCards = [
 
 			@media (max-width: 720px) {
 				.mimir-page .container {
-					width: min(1120px, calc(100% - 1.5rem));
-				}
-
-				.mimir-nav {
-					align-items: flex-start;
-					flex-direction: column;
-					padding: 0.9rem 0;
-				}
-
-				.mimir-nav-links {
-					width: 100%;
-					justify-content: space-between;
+					width: min(1120px, calc(100% - 2rem));
 				}
 
 				.mimir-hero {
 					padding-top: 2.2rem;
 				}
 
-				.mimir-cta-row,
-				.mimir-footer-inner {
-					flex-direction: column;
-					align-items: stretch;
-				}
-
-				.mimir-button {
+				.mimir-cta-row .button {
 					width: 100%;
-				}
-
-				.mimir-footer-links {
-					justify-content: space-between;
 				}
 			}
 		</style>
 	</head>
 	<body class="mimir-page-body">
 		<div class="page-shell mimir-page">
-			<header class="mimir-header">
-				<nav class="container mimir-nav" aria-label="Primary">
-					<div class="mimir-brand-block">
-						<a href="/" class="mimir-brand">austontatious.dev</a>
-						<span class="mimir-brand-note">Mímir technical concept page</span>
-					</div>
-					<div class="mimir-nav-links">
+			<header class="main-nav">
+				<nav class="container nav-inner" aria-label="Primary">
+					<a href="/" class="brand">austontatious.dev</a>
+					<div class="nav-links nav-links-primary">
+						<a href="/">Home</a>
+						<a href="/workshops/">Workshops</a>
 						<a href="/Mimir" aria-current="page">Mímir</a>
 						<a href="https://github.com/austontatious" target="_blank" rel="noreferrer">GitHub</a>
 						<a href="mailto:auston.horras@gmail.com">Contact</a>
@@ -739,8 +589,8 @@ const audienceCards = [
 									Most AI coding systems still behave like first-time visitors in unfamiliar repositories. Mímir gives them durable orientation so context can be navigated instead of reconstructed.
 								</p>
 								<div class="mimir-cta-row">
-									<a class="mimir-button mimir-button-primary" href="mailto:auston.horras@gmail.com?subject=M%C3%ADmir%20conversation">Start a conversation</a>
-									<a class="mimir-button mimir-button-secondary" href="https://github.com/austontatious" target="_blank" rel="noreferrer">View GitHub</a>
+									<a class="button button-primary" href="mailto:auston.horras@gmail.com?subject=M%C3%ADmir%20conversation">Start a conversation</a>
+									<a class="button button-secondary" href="https://github.com/austontatious" target="_blank" rel="noreferrer">View GitHub</a>
 								</div>
 							</div>
 							<figure class="mimir-figure mimir-hero-figure">
@@ -903,8 +753,8 @@ const audienceCards = [
 								I'm looking for technical, product, and strategic conversations around where persistent codebase intelligence should live.
 							</p>
 							<div class="mimir-cta-row">
-								<a class="mimir-button mimir-button-primary" href="mailto:auston.horras@gmail.com?subject=M%C3%ADmir%20conversation">Contact by email</a>
-								<a class="mimir-button mimir-button-secondary" href="https://github.com/austontatious" target="_blank" rel="noreferrer">GitHub</a>
+								<a class="button button-primary" href="mailto:auston.horras@gmail.com?subject=M%C3%ADmir%20conversation">Contact by email</a>
+								<a class="button button-secondary" href="https://github.com/austontatious" target="_blank" rel="noreferrer">GitHub</a>
 							</div>
 							<p class="mimir-contact-line">
 								<a href="mailto:auston.horras@gmail.com">auston.horras@gmail.com</a> | <a href="tel:+15152990161">515-299-0161</a>
@@ -914,10 +764,10 @@ const audienceCards = [
 				</section>
 			</main>
 
-			<footer class="mimir-footer">
-				<div class="container mimir-footer-inner">
+			<footer class="site-footer">
+				<div class="container footer-inner">
 					<p>Calm systems for clear outcomes.</p>
-					<div class="mimir-footer-links">
+					<div class="footer-links">
 						<a href="/">Home</a>
 						<a href="mailto:auston.horras@gmail.com">Contact</a>
 						<a href="https://www.linkedin.com/in/auston-horras-17022614/" target="_blank" rel="noreferrer">LinkedIn</a>
