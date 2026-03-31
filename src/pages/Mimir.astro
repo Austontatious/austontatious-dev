@@ -2,107 +2,84 @@
 import BaseHead from '../components/BaseHead.astro';
 
 const MIMIR_TITLE = 'Mímir | austontatious.dev';
-const MIMIR_DESCRIPTION = 'A persistent repository self-model for AI coding systems.';
+const MIMIR_DESCRIPTION = 'A persistent memory and navigation layer for AI systems working inside real codebases.';
 
-const thesisPoints = [
-	{
-		title: 'Persistent orientation',
-		copy: 'Give an agent a durable sense of where it is inside a codebase instead of forcing rediscovery on every task.',
-	},
-	{
-		title: 'Continuity through change',
-		copy: 'Preserve understanding across renames, moves, splits, merges, and refactors rather than losing memory when structure shifts.',
-	},
-	{
-		title: 'Context at the right level',
-		copy: 'Narrow from subsystem to file to symbol to exact working span so models spend tokens reasoning, not reconstructing.',
-	},
+const valueChips = ['Persistent structure', 'Stable references', 'Relationship-aware context'];
+
+const failureSymptoms = [
+	'redundant search',
+	'shallow retrieval',
+	'brittle edits',
+	'confused scope',
+	'repeated reorientation cost',
 ];
 
-const failureModes = [
-	'Retrieval is asked to guess the path instead of narrowing a known one.',
-	'Memory floats beside the codebase as snippets and summaries instead of attaching to durable structure.',
-	'Context windows get stuffed with reconstruction work that should have been solved before generation begins.',
-	'Every new session burns time and tokens rebuilding orientation, and the same mistakes get repeated.',
-];
-
-const understandingLayers = [
-	{
-		title: 'Structural graph',
-		whatItKnows:
-			'Symbols, calls, imports, dependencies, containment, and the code-level relationships that define what the repository is doing right now.',
-		whyItMatters:
-			'It gives the system a grounded map of the current repository instead of a pile of text.',
-	},
-	{
-		title: 'Semantic / topology layer',
-		whatItKnows:
-			'Subsystem role, interface boundary, workflow, invariant, test coverage, and the nearby architectural context that explains what parts of the system mean.',
-		whyItMatters:
-			'It lets the agent navigate by purpose, not just syntax.',
-	},
-	{
-		title: 'Temporal continuity layer',
-		whatItKnows:
-			'Renames, moves, splits, merges, co-change patterns, and what stayed effectively the same thing after refactor.',
-		whyItMatters:
-			'It preserves memory through repository change instead of losing orientation every time the shape shifts.',
-	},
-];
-
-const coreConcepts = [
+const capabilityCards = [
 	{
 		title: 'Cards',
-		copy: 'Normalized units of understanding about a subsystem, file, symbol, boundary, invariant, workflow, or implementation detail.',
+		copy: 'Capture durable repository meaning so the system is working with normalized understanding, not loose snippets.',
 	},
 	{
 		title: 'Bindings',
-		copy: 'Attachments that keep understanding anchored to code as paths, names, and local structure change over time.',
+		copy: 'Preserve attachment to real code locations as paths move, names change, and local structure shifts.',
 	},
 	{
 		title: 'Signals',
-		copy: 'Evidence from structure, tooling, history, outcomes, and repeated use that shapes confidence and revises understanding.',
+		copy: 'Separate meaningful change from churn so memory quality improves instead of accumulating noise.',
 	},
 	{
 		title: 'Adjacencies',
-		copy: 'The structural and behavioral connections that reveal what is nearby, upstream, downstream, dependent, or safety-critical.',
-	},
-	{
-		title: 'Topology',
-		copy: 'The navigable graph formed by cards, bindings, adjacencies, and continuity links that gives an agent real orientation.',
+		copy: 'Expose structural relationships so retrieval follows the system topology rather than surface similarity alone.',
 	},
 ];
 
-const operatingSteps = [
+const builtItems = [
+	'ingestion pipeline in place',
+	'stable bindings implemented',
+	'signals and evidence model in place',
+	'adjacency population implemented',
+	'repair and remap workflows implemented',
+];
+
+const scopeItems = [
+	'semantic layer intentionally deferred',
+	'current value is structure plus rehydration',
+	'designed for evolving repos, not static snapshots',
+	'aimed at agent navigation, not just retrieval demos',
+];
+
+const outcomeCards = [
 	{
-		title: 'Ingest',
-		copy: 'Parse the repository into structural units, create cards for stable concepts, attach bindings, record adjacencies, and start continuity from history.',
+		title: 'Lower token waste',
+		copy: 'Less context budget spent reconstructing orientation before useful work begins.',
 	},
 	{
-		title: 'Maintain',
-		copy: 'Update bindings and topology incrementally as code changes so understanding is remapped instead of discarded.',
+		title: 'Better first-target selection',
+		copy: 'Agents get pointed at the right subsystem, file, and symbol earlier in the task.',
 	},
 	{
-		title: 'Rehydrate',
-		copy: 'Resolve likely subsystem, then likely file, then likely symbol or region, and return the smallest useful bundle of code, summaries, adjacencies, continuity, and confidence.',
-	},
-	{
-		title: 'Learn',
-		copy: 'Use verified outcomes, successful traversals, and change history to improve routing, continuity preservation, stale-memory detection, and first-target selection.',
+		title: 'Higher trust in repo-scale work',
+		copy: 'Fewer brittle edits and fewer failures caused by losing the surrounding system context.',
 	},
 ];
 
-const momentumSignals = [
-	'The memory layer exists.',
-	'Rehydration already works.',
-	'Telemetry exists at both the "what happened" level and the "why did this path get taken" level.',
-	'The open work is now hardening and finishing the repository self-model, not proving the category should exist.',
-];
-
-const conversationTargets = [
-	'Investors who understand why reliability in AI software development will require a durable structural layer, not just better prompting and bigger windows.',
-	'Operators who know how to position foundational infrastructure and turn a working technical system into a company and a category.',
-	'Technical partners who understand developer tools, retrieval, agent systems, code intelligence, and the realities of large evolving repositories.',
+const audienceCards = [
+	{
+		title: 'Technical cofounders',
+		copy: 'People who immediately see structural memory as missing infrastructure for AI software systems.',
+	},
+	{
+		title: 'Devtools / infra operators',
+		copy: 'Teams that know how to harden a sharp technical system and position it as foundational tooling.',
+	},
+	{
+		title: 'Engineering leaders',
+		copy: 'Builders who feel the cost of repeated reorientation in large, fast-moving repositories.',
+	},
+	{
+		title: 'Strategic partners / investors',
+		copy: 'People who recognize where persistent codebase intelligence could sit in the stack if built correctly.',
+	},
 ];
 ---
 
@@ -111,272 +88,637 @@ const conversationTargets = [
 	<head>
 		<BaseHead title={MIMIR_TITLE} description={MIMIR_DESCRIPTION} image="/images/mimir/mimir-search-vs-navigation.png" />
 		<style>
-			.mimir-hero-grid {
-				display: grid;
-				grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.85fr);
+			:root {
+				--mimir-bg: #eef2f7;
+				--mimir-bg-soft: #f6f8fb;
+				--mimir-surface: rgba(255, 255, 255, 0.82);
+				--mimir-surface-strong: rgba(255, 255, 255, 0.94);
+				--mimir-border: rgba(15, 23, 42, 0.1);
+				--mimir-border-strong: rgba(37, 99, 235, 0.2);
+				--mimir-text: #122033;
+				--mimir-text-strong: #081322;
+				--mimir-muted: #4a5b71;
+				--mimir-muted-strong: #334155;
+				--mimir-accent: #2563eb;
+				--mimir-accent-soft: rgba(37, 99, 235, 0.08);
+				--mimir-shadow: 0 18px 60px rgba(15, 23, 42, 0.08);
+			}
+
+			body.mimir-page-body {
+				background:
+					radial-gradient(circle at top right, rgba(37, 99, 235, 0.08), transparent 32%),
+					linear-gradient(180deg, #f7f9fc 0%, var(--mimir-bg) 100%);
+				color: var(--mimir-text);
+			}
+
+			.mimir-page {
+				color: var(--mimir-text);
+			}
+
+			.mimir-page .container {
+				width: min(1120px, calc(100% - 2.5rem));
+			}
+
+			.mimir-page h1,
+			.mimir-page h2,
+			.mimir-page h3 {
+				color: var(--mimir-text-strong);
+			}
+
+			.mimir-page p {
+				color: var(--mimir-muted);
+			}
+
+			.mimir-header {
+				position: sticky;
+				top: 0;
+				z-index: 40;
+				border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+				backdrop-filter: blur(16px);
+				background: rgba(246, 248, 251, 0.84);
+			}
+
+			.mimir-nav {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
 				gap: 1rem;
+				min-height: 4.2rem;
+			}
+
+			.mimir-brand-block {
+				display: flex;
+				flex-direction: column;
+				gap: 0.18rem;
+			}
+
+			.mimir-brand {
+				font-size: 0.82rem;
+				font-weight: 700;
+				letter-spacing: 0.14em;
+				text-transform: uppercase;
+				text-decoration: none;
+				color: var(--mimir-text-strong);
+			}
+
+			.mimir-brand-note {
+				font-size: 0.8rem;
+				color: var(--mimir-muted);
+			}
+
+			.mimir-nav-links {
+				display: flex;
+				align-items: center;
+				gap: 1rem;
+			}
+
+			.mimir-nav-links a {
+				font-size: 0.8rem;
+				font-weight: 600;
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
+				text-decoration: none;
+				color: var(--mimir-muted-strong);
+				transition: color 180ms ease;
+			}
+
+			.mimir-nav-links a:hover {
+				color: var(--mimir-accent);
+			}
+
+			.mimir-main {
+				padding-bottom: 2rem;
+			}
+
+			.mimir-section {
+				padding: clamp(3.6rem, 7vw, 5.75rem) 0;
+				border-top: 1px solid rgba(15, 23, 42, 0.08);
+			}
+
+			.mimir-hero {
+				border-top: 0;
+				padding-top: clamp(2.8rem, 6vw, 4.75rem);
+			}
+
+			.mimir-back-link {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.4rem;
+				margin-bottom: 1.15rem;
+				font-size: 0.82rem;
+				letter-spacing: 0.06em;
+				text-decoration: none;
+				color: var(--mimir-muted);
+				transition: color 180ms ease;
+			}
+
+			.mimir-back-link:hover {
+				color: var(--mimir-accent);
+			}
+
+			.mimir-hero-grid,
+			.mimir-problem-grid {
+				display: grid;
+				grid-template-columns: minmax(0, 1fr) minmax(340px, 0.96fr);
+				gap: clamp(1.4rem, 3vw, 3rem);
 				align-items: start;
 			}
 
-			.mimir-subheadline {
-				max-width: 20ch;
-			}
-
-			.mimir-intro {
-				margin-top: 1rem;
-				max-width: 72ch;
-				font-size: 1.02rem;
-				color: rgba(233, 238, 255, 0.88);
-			}
-
-			.mimir-thesis-panel,
-			.mimir-quote-panel,
-			.mimir-proof-panel,
-			.mimir-cta-panel {
-				padding: 1rem 1.05rem;
-				border-radius: 1rem;
-				border: 1px solid rgba(255, 255, 255, 0.12);
-				background: linear-gradient(180deg, rgba(22, 31, 56, 0.82), rgba(13, 19, 34, 0.92));
-				box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
-			}
-
-			.mimir-kicker {
+			.mimir-eyebrow {
 				margin: 0;
-				font-size: 0.72rem;
-				letter-spacing: 0.14em;
+				font-size: 0.78rem;
+				font-weight: 700;
+				letter-spacing: 0.16em;
 				text-transform: uppercase;
-				color: rgba(233, 238, 255, 0.62);
+				color: var(--mimir-accent);
 			}
 
-			.mimir-thesis-panel h2,
-			.mimir-proof-panel h2,
-			.mimir-cta-panel h2 {
-				margin-top: 0.55rem;
-				font-size: 1.2rem;
+			.mimir-page h1 {
+				margin-top: 0.7rem;
+				font-size: clamp(3.15rem, 8vw, 5.9rem);
+				font-weight: 700;
+				letter-spacing: -0.05em;
 			}
 
-			.mimir-mini-list,
-			.mimir-step-list,
-			.mimir-contact-list,
-			.mimir-contact-meta {
+			.mimir-hero-subhead {
+				margin-top: 0.9rem;
+				max-width: 18ch;
+				font-size: clamp(1.45rem, 3vw, 2.2rem);
+				line-height: 1.12;
+				color: var(--mimir-text);
+			}
+
+			.mimir-hero-support {
+				margin-top: 1rem;
+				max-width: 40ch;
+				font-size: 1.03rem;
+				line-height: 1.58;
+				color: var(--mimir-muted-strong);
+			}
+
+			.mimir-cta-row {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.75rem;
+				margin-top: 1.35rem;
+			}
+
+			.mimir-button {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				min-height: 2.8rem;
+				padding: 0.75rem 1.05rem;
+				border-radius: 0.85rem;
+				border: 1px solid transparent;
+				font-size: 0.9rem;
+				font-weight: 600;
+				text-decoration: none;
+				transition:
+					transform 180ms ease,
+					border-color 180ms ease,
+					background 180ms ease,
+					color 180ms ease,
+					box-shadow 180ms ease;
+			}
+
+			.mimir-button:hover {
+				transform: translateY(-1px);
+			}
+
+			.mimir-button-primary {
+				background: var(--mimir-accent);
+				color: #fff;
+				box-shadow: 0 14px 26px rgba(37, 99, 235, 0.16);
+			}
+
+			.mimir-button-primary:hover {
+				background: #1f56ce;
+			}
+
+			.mimir-button-secondary {
+				border-color: rgba(15, 23, 42, 0.12);
+				background: rgba(255, 255, 255, 0.82);
+				color: var(--mimir-text-strong);
+			}
+
+			.mimir-button-secondary:hover {
+				border-color: var(--mimir-border-strong);
+				background: rgba(37, 99, 235, 0.05);
+				color: var(--mimir-accent);
+			}
+
+			.mimir-value-strip {
+				display: grid;
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+				gap: 0.75rem;
+				margin-top: 1.45rem;
+			}
+
+			.mimir-chip {
+				display: flex;
+				align-items: center;
+				gap: 0.68rem;
+				padding: 0.88rem 1rem;
+				border-radius: 1rem;
+				border: 1px solid rgba(15, 23, 42, 0.09);
+				background: rgba(255, 255, 255, 0.74);
+				font-size: 0.93rem;
+				font-weight: 600;
+				color: var(--mimir-text);
+				box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+			}
+
+			.mimir-chip::before {
+				content: '';
+				width: 0.62rem;
+				height: 0.62rem;
+				border-radius: 999px;
+				background: var(--mimir-accent);
+				box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.12);
+				flex: 0 0 auto;
+			}
+
+			.mimir-section-heading {
+				max-width: 43rem;
+			}
+
+			.mimir-section-heading h2 {
+				font-size: clamp(1.85rem, 4vw, 3rem);
+				font-weight: 650;
+				letter-spacing: -0.04em;
+			}
+
+			.mimir-section-heading p {
+				margin-top: 0.8rem;
+				max-width: 44rem;
+				font-size: 1rem;
+				line-height: 1.62;
+				color: var(--mimir-muted-strong);
+			}
+
+			.mimir-copy-panel,
+			.mimir-problem-panel,
+			.mimir-proof-shell,
+			.mimir-audience-card,
+			.mimir-capability-card,
+			.mimir-outcome-card,
+			.mimir-closing-shell {
+				border: 1px solid rgba(15, 23, 42, 0.1);
+				border-radius: 1.3rem;
+				background: var(--mimir-surface);
+				box-shadow: var(--mimir-shadow);
+			}
+
+			.mimir-copy-panel,
+			.mimir-problem-panel,
+			.mimir-proof-shell,
+			.mimir-closing-shell {
+				padding: clamp(1.2rem, 2.8vw, 1.75rem);
+			}
+
+			.mimir-copy-panel h2 {
+				font-size: clamp(1.75rem, 3vw, 2.45rem);
+				letter-spacing: -0.04em;
+			}
+
+			.mimir-copy-panel p {
+				margin-top: 0.85rem;
+				max-width: 36ch;
+				font-size: 1rem;
+				line-height: 1.62;
+				color: var(--mimir-muted-strong);
+			}
+
+			.mimir-meta-label {
+				margin: 0;
+				font-size: 0.76rem;
+				font-weight: 700;
+				letter-spacing: 0.16em;
+				text-transform: uppercase;
+				color: var(--mimir-accent);
+			}
+
+			.mimir-symptom-list,
+			.mimir-proof-list {
 				margin: 0;
 				padding: 0;
 				list-style: none;
 			}
 
-			.mimir-mini-list {
-				margin-top: 0.9rem;
+			.mimir-symptom-list {
 				display: grid;
-				gap: 0.8rem;
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+				gap: 0.6rem;
+				margin-top: 0.9rem;
 			}
 
-			.mimir-mini-list li {
-				padding-top: 0.8rem;
-				border-top: 1px solid rgba(255, 255, 255, 0.1);
+			.mimir-symptom-list li {
+				padding: 0.72rem 0.78rem;
+				border-radius: 0.9rem;
+				border: 1px solid rgba(15, 23, 42, 0.08);
+				background: rgba(255, 255, 255, 0.8);
+				font-size: 0.89rem;
+				font-weight: 600;
+				color: var(--mimir-text);
 			}
 
-			.mimir-mini-list li:first-child {
-				padding-top: 0;
-				border-top: 0;
+			.mimir-figure {
+				margin: 0;
 			}
 
-			.mimir-mini-list strong {
+			.mimir-figure-frame {
+				overflow: hidden;
+				border-radius: 1.35rem;
+				border: 1px solid rgba(15, 23, 42, 0.1);
+				background: var(--mimir-surface-strong);
+				box-shadow: var(--mimir-shadow);
+			}
+
+			.mimir-figure-frame img {
 				display: block;
-				font-size: 0.96rem;
-				color: rgba(245, 248, 255, 0.96);
+				width: 100%;
+				height: auto;
 			}
 
-			.mimir-mini-list span {
+			.mimir-figure figcaption {
+				margin-top: 0.72rem;
+				font-size: 0.88rem;
+				line-height: 1.52;
+				color: var(--mimir-muted);
+			}
+
+			.mimir-figure figcaption strong {
 				display: block;
-				margin-top: 0.32rem;
-				font-size: 0.9rem;
-				color: rgba(233, 238, 255, 0.78);
+				margin-bottom: 0.14rem;
+				font-size: 0.75rem;
+				font-weight: 700;
+				letter-spacing: 0.14em;
+				text-transform: uppercase;
+				color: var(--mimir-accent);
 			}
 
 			.mimir-hero-figure {
+				align-self: stretch;
+			}
+
+			.mimir-problem-panel .mimir-figure {
+				margin-top: 1rem;
+			}
+
+			.mimir-diagram-stack {
 				margin-top: 1.35rem;
 			}
 
-			.mimir-lexicon-callout,
-			.mimir-highlight {
+			.mimir-inline-callout {
+				display: inline-flex;
+				align-items: center;
 				margin-top: 1rem;
-				padding: 0.9rem 1rem;
-				border-radius: 0.85rem;
-				border: 1px solid rgba(255, 255, 255, 0.18);
-				background: linear-gradient(180deg, rgba(22, 31, 56, 0.78), rgba(13, 19, 34, 0.88));
-				color: rgba(245, 248, 255, 0.96);
+				padding: 0.6rem 0.85rem;
+				border-radius: 999px;
+				border: 1px solid rgba(37, 99, 235, 0.16);
+				background: rgba(37, 99, 235, 0.06);
+				font-size: 0.88rem;
+				font-weight: 600;
+				color: var(--mimir-accent);
 			}
 
-			.mimir-quote-panel {
-				margin-top: 1rem;
-			}
-
-			.mimir-quote {
-				margin: 0;
-				font-size: 1.08rem;
-				line-height: 1.55;
-				color: rgba(245, 248, 255, 0.95);
-			}
-
-			.mimir-quote-panel p:last-child {
-				margin: 0.6rem 0 0;
-				color: rgba(233, 238, 255, 0.78);
-			}
-
-			.mimir-failure-grid,
-			.mimir-layer-grid,
-			.mimir-concept-grid,
-			.mimir-proof-grid {
-				margin-top: 1rem;
+			.mimir-capability-grid,
+			.mimir-outcome-grid,
+			.mimir-audience-grid {
 				display: grid;
-				gap: 0.8rem;
+				gap: 0.85rem;
+				margin-top: 1.3rem;
 			}
 
-			.mimir-failure-grid,
-			.mimir-proof-grid {
-				grid-template-columns: repeat(2, minmax(0, 1fr));
+			.mimir-capability-grid {
+				grid-template-columns: repeat(4, minmax(0, 1fr));
 			}
 
-			.mimir-layer-grid {
+			.mimir-outcome-grid {
 				grid-template-columns: repeat(3, minmax(0, 1fr));
 			}
 
-			.mimir-concept-grid {
+			.mimir-audience-grid {
 				grid-template-columns: repeat(2, minmax(0, 1fr));
 			}
 
-			.mimir-failure-card,
-			.mimir-layer-card,
-			.mimir-concept-card,
-			.mimir-proof-card,
-			.mimir-step {
-				padding: 0.95rem 1rem;
-				border-radius: 0.9rem;
-				border: 1px solid rgba(255, 255, 255, 0.1);
-				background: linear-gradient(180deg, rgba(12, 18, 32, 0.58), rgba(12, 18, 32, 0.76));
+			.mimir-capability-card,
+			.mimir-outcome-card,
+			.mimir-audience-card {
+				padding: 1rem 1.05rem;
+				transition:
+					transform 180ms ease,
+					border-color 180ms ease,
+					background 180ms ease;
 			}
 
-			.mimir-failure-card p,
-			.mimir-layer-card p,
-			.mimir-concept-card p,
-			.mimir-proof-card p,
-			.mimir-step p {
-				margin: 0.45rem 0 0;
-				font-size: 0.92rem;
-				color: rgba(233, 238, 255, 0.8);
+			.mimir-capability-card:hover,
+			.mimir-outcome-card:hover,
+			.mimir-audience-card:hover {
+				transform: translateY(-2px);
+				border-color: rgba(37, 99, 235, 0.18);
+				background: rgba(255, 255, 255, 0.9);
 			}
 
-			.mimir-failure-card strong,
-			.mimir-layer-card h3,
-			.mimir-concept-card h3,
-			.mimir-proof-card h3,
-			.mimir-step strong {
-				display: block;
-				font-size: 0.96rem;
-				color: rgba(245, 248, 255, 0.95);
+			.mimir-capability-card h3,
+			.mimir-outcome-card h3,
+			.mimir-audience-card h3 {
+				font-size: 1rem;
+				font-weight: 650;
+				letter-spacing: -0.02em;
 			}
 
-			.mimir-layer-card h3,
-			.mimir-concept-card h3,
-			.mimir-proof-card h3 {
-				margin: 0;
-			}
-
-			.mimir-layer-card p + p {
-				margin-top: 0.65rem;
-			}
-
-			.mimir-layer-card .mimir-layer-label {
-				font-size: 0.72rem;
-				letter-spacing: 0.12em;
-				text-transform: uppercase;
-				color: rgba(233, 238, 255, 0.58);
-			}
-
-			.mimir-gps-bridge {
-				margin-top: 1rem;
-				font-size: 1.05rem;
-				color: rgba(245, 248, 255, 0.95);
-			}
-
-			.mimir-gps-bridge-note {
-				color: rgba(233, 238, 255, 0.84);
-			}
-
-			.mimir-step-list {
-				margin-top: 1rem;
-				display: grid;
-				gap: 0.8rem;
-			}
-
-			.mimir-step span {
-				display: inline-flex;
-				align-items: center;
-				justify-content: center;
-				width: 1.7rem;
-				height: 1.7rem;
-				margin-right: 0.55rem;
-				border-radius: 999px;
-				background: rgba(111, 179, 255, 0.16);
-				color: rgba(214, 234, 255, 0.95);
-				font-size: 0.88rem;
-				font-weight: 700;
-			}
-
-			.mimir-proof-panel p,
-			.mimir-cta-panel p {
-				margin-top: 0.7rem;
-				max-width: 70ch;
-				color: rgba(233, 238, 255, 0.84);
-			}
-
-			.mimir-contact-list {
-				margin-top: 1rem;
-				display: grid;
-				gap: 0.55rem;
-				padding-left: 1.15rem;
-				list-style: disc;
-			}
-
-			.mimir-contact-list li {
+			.mimir-capability-card p,
+			.mimir-outcome-card p,
+			.mimir-audience-card p {
+				margin-top: 0.52rem;
 				font-size: 0.94rem;
-				color: rgba(233, 238, 255, 0.84);
+				line-height: 1.55;
+				color: var(--mimir-muted);
 			}
 
-			.mimir-contact-meta {
-				margin-top: 1rem;
+			.mimir-proof-grid {
 				display: grid;
-				gap: 0.38rem;
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+				gap: 0.9rem;
+				margin-top: 1.2rem;
 			}
 
-			.mimir-contact-meta a {
-				color: rgba(245, 248, 255, 0.95);
+			.mimir-proof-column {
+				padding: 1rem 1.05rem;
+				border-radius: 1rem;
+				border: 1px solid rgba(15, 23, 42, 0.08);
+				background: rgba(255, 255, 255, 0.84);
+			}
+
+			.mimir-proof-column h3 {
+				font-size: 0.8rem;
+				font-weight: 700;
+				letter-spacing: 0.14em;
+				text-transform: uppercase;
+				color: var(--mimir-accent);
+			}
+
+			.mimir-proof-list {
+				display: grid;
+				gap: 0.7rem;
+				margin-top: 0.85rem;
+			}
+
+			.mimir-proof-list li {
+				position: relative;
+				padding-left: 1rem;
+				font-size: 0.95rem;
+				line-height: 1.52;
+				color: var(--mimir-text);
+			}
+
+			.mimir-proof-list li::before {
+				content: '';
+				position: absolute;
+				left: 0;
+				top: 0.54rem;
+				width: 0.42rem;
+				height: 0.42rem;
+				border-radius: 999px;
+				background: var(--mimir-accent);
+			}
+
+			.mimir-proof-note {
+				margin-top: 1rem;
+				font-size: 0.88rem;
+				color: var(--mimir-muted);
+			}
+
+			.mimir-closing-shell {
+				display: grid;
+				gap: 0.9rem;
+				border-color: rgba(37, 99, 235, 0.18);
+				background:
+					linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(244, 248, 255, 0.94));
+			}
+
+			.mimir-closing-shell h2 {
+				font-size: clamp(1.9rem, 4vw, 2.9rem);
+				letter-spacing: -0.04em;
+			}
+
+			.mimir-closing-shell p {
+				max-width: 42rem;
+				font-size: 1rem;
+				line-height: 1.62;
+				color: var(--mimir-muted-strong);
+			}
+
+			.mimir-contact-line {
+				font-size: 0.9rem;
+				color: var(--mimir-muted);
+			}
+
+			.mimir-contact-line a {
+				color: var(--mimir-muted-strong);
 				text-decoration: none;
 			}
 
-			.mimir-contact-meta a:hover {
-				text-decoration: underline;
+			.mimir-contact-line a:hover {
+				color: var(--mimir-accent);
+			}
+
+			.mimir-footer {
+				padding: 0 0 2.6rem;
+			}
+
+			.mimir-footer-inner {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 1rem;
+				padding-top: 1.2rem;
+				border-top: 1px solid rgba(15, 23, 42, 0.08);
+			}
+
+			.mimir-footer p,
+			.mimir-footer a {
+				font-size: 0.84rem;
+				color: var(--mimir-muted);
+				text-decoration: none;
+			}
+
+			.mimir-footer a:hover {
+				color: var(--mimir-accent);
+			}
+
+			.mimir-footer-links {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 1rem;
 			}
 
 			@media (max-width: 960px) {
 				.mimir-hero-grid,
-				.mimir-failure-grid,
-				.mimir-layer-grid,
-				.mimir-concept-grid,
-				.mimir-proof-grid {
+				.mimir-problem-grid,
+				.mimir-capability-grid,
+				.mimir-proof-grid,
+				.mimir-outcome-grid,
+				.mimir-audience-grid {
 					grid-template-columns: 1fr;
+				}
+
+				.mimir-value-strip {
+					grid-template-columns: 1fr;
+				}
+
+				.mimir-symptom-list {
+					grid-template-columns: 1fr;
+				}
+			}
+
+			@media (max-width: 720px) {
+				.mimir-page .container {
+					width: min(1120px, calc(100% - 1.5rem));
+				}
+
+				.mimir-nav {
+					align-items: flex-start;
+					flex-direction: column;
+					padding: 0.9rem 0;
+				}
+
+				.mimir-nav-links {
+					width: 100%;
+					justify-content: space-between;
+				}
+
+				.mimir-hero {
+					padding-top: 2.2rem;
+				}
+
+				.mimir-cta-row,
+				.mimir-footer-inner {
+					flex-direction: column;
+					align-items: stretch;
+				}
+
+				.mimir-button {
+					width: 100%;
+				}
+
+				.mimir-footer-links {
+					justify-content: space-between;
 				}
 			}
 		</style>
 	</head>
-	<body>
-		<div class="page-shell">
-			<header class="main-nav">
-				<nav class="container nav-inner" aria-label="Primary">
-					<a href="/" class="brand">austontatious.dev</a>
-					<div class="nav-links nav-links-primary">
-						<a href="/">Home</a>
-						<a href="/workshops/">Workshops</a>
+	<body class="mimir-page-body">
+		<div class="page-shell mimir-page">
+			<header class="mimir-header">
+				<nav class="container mimir-nav" aria-label="Primary">
+					<div class="mimir-brand-block">
+						<a href="/" class="mimir-brand">austontatious.dev</a>
+						<span class="mimir-brand-note">Mímir technical concept page</span>
+					</div>
+					<div class="mimir-nav-links">
 						<a href="/Mimir" aria-current="page">Mímir</a>
 						<a href="https://github.com/austontatious" target="_blank" rel="noreferrer">GitHub</a>
 						<a href="mailto:auston.horras@gmail.com">Contact</a>
@@ -385,235 +727,200 @@ const conversationTargets = [
 			</header>
 
 			<main class="mimir-main">
-				<section class="section mimir-hero">
-					<div class="container section-inner">
-						<a class="back-link" href="/">Back to home</a>
+				<section class="mimir-section mimir-hero">
+					<div class="container">
+						<a class="mimir-back-link" href="/">Return to home</a>
 						<div class="mimir-hero-grid">
-							<div>
-								<p class="eyebrow">Repository Self-Model For AI Coding</p>
+							<div class="mimir-hero-copy">
+								<p class="mimir-eyebrow">Codebase Intelligence Infrastructure</p>
 								<h1>Mímir</h1>
-								<p class="lead mimir-subheadline">The missing structural layer between AI models and real software systems</p>
-								<p class="mimir-intro">
-									AI coding systems can look impressive right up to the moment they need to work inside a large, evolving codebase. Mímir is a persistent repository self-model designed to stop that failure mode by giving an agent durable orientation: where it is, what is nearby, what changed, and what path through the system is safest.
+								<p class="mimir-hero-subhead">A persistent memory and navigation layer for AI systems working inside real codebases.</p>
+								<p class="mimir-hero-support">
+									Most AI coding systems still behave like first-time visitors in unfamiliar repositories. Mímir gives them durable orientation so context can be navigated instead of reconstructed.
 								</p>
-								<p class="mimir-intro">
-									This is not a claim that models need more code in context. It is a claim that they need a maintained map of the system they are operating inside. That shift turns AI coding from repeated rediscovery into navigation.
+								<div class="mimir-cta-row">
+									<a class="mimir-button mimir-button-primary" href="mailto:auston.horras@gmail.com?subject=M%C3%ADmir%20conversation">Start a conversation</a>
+									<a class="mimir-button mimir-button-secondary" href="https://github.com/austontatious" target="_blank" rel="noreferrer">View GitHub</a>
+								</div>
+							</div>
+							<figure class="mimir-figure mimir-hero-figure">
+								<div class="mimir-figure-frame">
+									<img src="/images/mimir/mimir-search-vs-navigation.png" alt="Search-style retrieval contrasted with structure-aware codebase navigation." loading="eager" />
+								</div>
+								<figcaption>
+									<strong>Featured diagram</strong>
+									Search-style retrieval versus structure-aware navigation inside a real repository.
+								</figcaption>
+							</figure>
+						</div>
+						<div class="mimir-value-strip">
+							{valueChips.map((chip) => (
+								<div class="mimir-chip">{chip}</div>
+							))}
+						</div>
+					</div>
+				</section>
+
+				<section class="mimir-section">
+					<div class="container">
+						<div class="mimir-problem-grid">
+							<div class="mimir-copy-panel">
+								<p class="mimir-eyebrow">The Problem</p>
+								<h2>AI coding tools keep re-solving orientation from scratch.</h2>
+								<p>
+									Search, reranking, and larger context windows can help, but they still ask the model to reconstruct where it is before it can act safely. That makes repository-scale work slower, noisier, and less trustworthy than it looks in a demo.
 								</p>
 							</div>
-							<aside class="mimir-thesis-panel">
-								<p class="mimir-kicker">Why This Matters</p>
-								<h2>What Mímir changes</h2>
-								<ul class="mimir-mini-list">
-									{thesisPoints.map((point) => (
-										<li>
-											<strong>{point.title}</strong>
-											<span>{point.copy}</span>
-										</li>
+							<div class="mimir-problem-panel">
+								<p class="mimir-meta-label">Failure symptoms</p>
+								<ul class="mimir-symptom-list">
+									{failureSymptoms.map((symptom) => (
+										<li>{symptom}</li>
 									))}
 								</ul>
-							</aside>
-						</div>
-						<figure class="mimir-figure mimir-hero-figure">
-							<img src="/images/mimir/mimir-search-vs-navigation.png" alt="Search-style retrieval contrasted with structure-aware codebase navigation." loading="eager" />
-						</figure>
-					</div>
-				</section>
-
-				<section class="section">
-					<div class="container section-inner">
-						<div class="mimir-panel">
-							<h2>The quiet failure in AI software development</h2>
-							<div class="mimir-section-copy">
-								<p>
-									There is a moment happening on engineering teams right now: someone opens a codebase, asks an AI system where a behavior is handled, gets a fast confident answer, follows it, makes the change, and only later discovers drift somewhere else in the system.
-								</p>
-								<p>
-									The failure is not that the model produced code. It is not even that the answer was locally plausible. The failure is that the system gave the appearance of understanding without actually being oriented inside the thing it was changing.
-								</p>
-								<p>
-									That distinction is easy to miss on a narrow task. It becomes obvious inside a real software system, where almost nothing exists in isolation and a correct-looking answer can still be wrong one layer over.
-								</p>
-							</div>
-							<div class="mimir-quote-panel">
-								<p class="mimir-quote">The system does not mainly need to get better at guessing. It needs a way to stop guessing where it is.</p>
-								<p>That is the gap Mímir is built to close.</p>
-							</div>
-							<figure class="mimir-figure">
-								<img src="/images/mimir/traditional-rag-context-window.png" alt="Traditional RAG workflow showing retrieval and context windows overloaded with reconstruction work." loading="lazy" />
-							</figure>
-						</div>
-					</div>
-				</section>
-
-				<section class="section">
-					<div class="container section-inner">
-						<div class="mimir-panel">
-							<h2>Why the current stack stalls out</h2>
-							<div class="mimir-section-copy">
-								<p>
-									Most teams are trying to solve this with some variation of retrieval, memory, reranking, and generation. For a meaningful class of tasks that works well enough to create the impression that the remaining gaps are incremental.
-								</p>
-								<p>
-									But the core problem is upstream of all of that. Each new interaction starts from the same disadvantaged position: the system has to reconstruct the repository from fragments before it can do useful work inside it.
-								</p>
-							</div>
-							<div class="mimir-failure-grid">
-								{failureModes.map((item) => (
-									<div class="mimir-failure-card">
-										<strong>Current failure mode</strong>
-										<p>{item}</p>
+								<figure class="mimir-figure">
+									<div class="mimir-figure-frame">
+										<img src="/images/mimir/traditional-rag-context-window.png" alt="Traditional RAG workflow showing retrieval and context windows overloaded with reconstruction work." loading="lazy" />
 									</div>
-								))}
-							</div>
-							<p class="mimir-highlight">
-								<strong>From the outside this can still look like intelligence. From the inside it is continuous reconstruction.</strong>
-							</p>
-						</div>
-					</div>
-				</section>
-
-				<section class="section">
-					<div class="container section-inner">
-						<div class="mimir-panel">
-							<h2>What Mímir is</h2>
-							<div class="mimir-section-copy">
-								<p>
-									Mímir is a persistent repository self-model for AI coding systems. Instead of forcing an agent to rediscover a repository from scratch every time it gets a task, Mímir gives that agent an evolving understanding of how the codebase is structured, what each part does, how those parts relate, how those relationships have changed, and what has already been learned from prior work.
-								</p>
-								<p class="mimir-lexicon-callout">
-									<strong>Mímir turns a repository into a navigable topology: cards capture meaning, bindings preserve attachment, signals separate what matters from noise, and adjacencies reveal how the system is actually connected.</strong>
-								</p>
-								<p>
-									A card is a unit of understanding about the system. A binding keeps that understanding attached to code as the code changes. Signals strengthen or revise that understanding over time. Adjacencies show what is structurally nearby, connected, upstream, downstream, or dependent.
-								</p>
-								<p>
-									Instead of dumping whole files into a context window and hoping the model sorts them out, Mímir narrows the problem first. It identifies the likely subsystem, then the likely files, then the likely symbol or region, and only then returns the exact spans of code, summaries, adjacencies, confidence, and continuity that matter.
-								</p>
-								<p class="mimir-gps-bridge"><strong>Mímir is a GPS for a codebase, not a search engine.</strong></p>
-								<p class="mimir-gps-bridge-note">Search tells a system what looks similar. Mímir tells it where it is, what is nearby, what changed since the last visit, and what path is most likely to be correct.</p>
-							</div>
-							<figure class="mimir-figure">
-								<img src="/images/mimir/mimir-structured-map-to-context.png" alt="Structured map approach that narrows from subsystem to file to symbol before assembling working context." loading="lazy" />
-							</figure>
-						</div>
-					</div>
-				</section>
-
-				<section class="section">
-					<div class="container section-inner">
-						<div class="mimir-panel">
-							<h2>The three layers of understanding</h2>
-							<div class="mimir-section-copy">
-								<p>
-									Underneath the product thesis is a maintained repository world-state with three kinds of knowledge layered together. The proprietary idea is not the existence of a graph. It is the learned repository self-model that can read across all three layers, preserve identity through change, and surface the right structure to an agent at the right level of abstraction.
-								</p>
-							</div>
-							<div class="mimir-layer-grid">
-								{understandingLayers.map((layer) => (
-									<article class="mimir-layer-card">
-										<p class="mimir-layer-label">Layer</p>
-										<h3>{layer.title}</h3>
-										<p><strong>What it knows:</strong> {layer.whatItKnows}</p>
-										<p><strong>Why it matters:</strong> {layer.whyItMatters}</p>
-									</article>
-								))}
+									<figcaption>
+										<strong>Where the stack bends</strong>
+										Traditional RAG pushes orientation work into retrieval and the context window instead of solving it structurally first.
+									</figcaption>
+								</figure>
 							</div>
 						</div>
 					</div>
 				</section>
 
-				<section class="section">
-					<div class="container section-inner">
-						<div class="mimir-panel">
-							<h2>How Mímir works</h2>
-							<div class="mimir-section-copy">
-								<p>
-									At a high level, Mímir turns a repository into a navigable topology made of cards, bindings, signals, adjacencies, and a maintained world-state of the repository itself. It is designed to preserve orientation across sessions and across change so the model can spend its effort on reasoning rather than rediscovery.
-								</p>
-							</div>
-							<div class="mimir-concept-grid">
-								{coreConcepts.map((concept) => (
-									<div class="mimir-concept-card">
-										<h3>{concept.title}</h3>
-										<p>{concept.copy}</p>
-									</div>
-								))}
-							</div>
-							<ol class="mimir-step-list">
-								{operatingSteps.map((step, index) => (
-									<li class="mimir-step">
-										<strong><span>{index + 1}</span>{step.title}</strong>
-										<p>{step.copy}</p>
-									</li>
-								))}
-							</ol>
-						</div>
-					</div>
-				</section>
-
-				<section class="section">
-					<div class="container section-inner">
-						<div class="mimir-proof-panel">
-							<p class="mimir-kicker">Why Now</p>
-							<h2>The foundation exists. The remaining work is hard, but bounded.</h2>
+				<section class="mimir-section">
+					<div class="container">
+						<div class="mimir-section-heading">
+							<p class="mimir-eyebrow">What Mímir Changes</p>
+							<h2>Mímir is a structural layer, not a search feature.</h2>
 							<p>
-								The reason this is worth paying attention to now is that the system no longer lives only at the level of idea. The difficult leap was building something that does not reset every time you touch it. That part is done.
+								It maintains durable repository orientation, then serves the smallest useful bundle of code and context for the task at hand. The goal is not more text in the window. The goal is less guesswork before reasoning starts.
 							</p>
+						</div>
+						<div class="mimir-diagram-stack">
+							<figure class="mimir-figure">
+								<div class="mimir-figure-frame">
+									<img src="/images/mimir/mimir-structured-map-to-context.png" alt="Structured map approach that narrows from subsystem to file to symbol before assembling working context." loading="lazy" />
+								</div>
+								<figcaption>
+									<strong>Navigation model</strong>
+									Rehydration narrows from subsystem to file to symbol to exact working span instead of dumping large source fragments into context.
+								</figcaption>
+							</figure>
+						</div>
+						<p class="mimir-inline-callout">Mímir is a GPS for a codebase, not a search engine.</p>
+						<div class="mimir-capability-grid">
+							{capabilityCards.map((card) => (
+								<article class="mimir-capability-card">
+									<h3>{card.title}</h3>
+									<p>{card.copy}</p>
+								</article>
+							))}
+						</div>
+					</div>
+				</section>
+
+				<section class="mimir-section">
+					<div class="container">
+						<div class="mimir-proof-shell">
+							<div class="mimir-section-heading">
+								<p class="mimir-eyebrow">Built Already, Not Hypothetical</p>
+								<h2>Current implementation status</h2>
+								<p>
+									The project is already useful at the structure and rehydration layer. What remains is hardening, expansion, and disciplined productization, not proving the category should exist.
+								</p>
+							</div>
 							<div class="mimir-proof-grid">
-								{momentumSignals.map((signal) => (
-									<div class="mimir-proof-card">
-										<h3>Current signal</h3>
-										<p>{signal}</p>
-									</div>
-								))}
+								<div class="mimir-proof-column">
+									<h3>In place now</h3>
+									<ul class="mimir-proof-list">
+										{builtItems.map((item) => (
+											<li>{item}</li>
+										))}
+									</ul>
+								</div>
+								<div class="mimir-proof-column">
+									<h3>Current scope</h3>
+									<ul class="mimir-proof-list">
+										{scopeItems.map((item) => (
+											<li>{item}</li>
+										))}
+									</ul>
+								</div>
 							</div>
-							<p>
-								The open work is hardening and finishing the repository self-model: maintaining the structural graph, enriching the semantic and topology layer, preserving bindings across refactors, tracking change over time, and turning a working technical system into something robust enough to become foundational.
-							</p>
-							<p>
-								That is not a vague research prompt. It is a concrete product and infrastructure agenda with category-level implications for AI software development.
-							</p>
+							<p class="mimir-proof-note">Current direction: relationship-aware rehydration bundles before heavier semantic expansion.</p>
 						</div>
 					</div>
 				</section>
 
-				<section class="section">
-					<div class="container section-inner">
-						<div class="mimir-cta-panel">
-							<p class="mimir-kicker">Conversations</p>
-							<h2>Who I want in the room</h2>
+				<section class="mimir-section">
+					<div class="container">
+						<div class="mimir-section-heading">
+							<p class="mimir-eyebrow">Why This Matters</p>
+							<h2>Repository-scale reliability needs orientation, not just recall.</h2>
 							<p>
-								I am looking for people who see early that reliable AI software development will require more than bigger context windows and better retrieval. I am interested in the people who understand how to harden a working technical system, position it correctly, and help turn it into a company and a category.
+								Without a structural memory layer, every session spends tokens rebuilding context, first-target selection stays noisy, and trust erodes as repositories get larger, older, and more heavily refactored.
 							</p>
-							<ul class="mimir-contact-list">
-								{conversationTargets.map((target) => (
-									<li>{target}</li>
-								))}
-							</ul>
+						</div>
+						<div class="mimir-outcome-grid">
+							{outcomeCards.map((card) => (
+								<article class="mimir-outcome-card">
+									<h3>{card.title}</h3>
+									<p>{card.copy}</p>
+								</article>
+							))}
+						</div>
+					</div>
+				</section>
+
+				<section class="mimir-section">
+					<div class="container">
+						<div class="mimir-section-heading">
+							<p class="mimir-eyebrow">Who This Is For</p>
+							<h2>The people who can place this layer correctly.</h2>
+						</div>
+						<div class="mimir-audience-grid">
+							{audienceCards.map((card) => (
+								<article class="mimir-audience-card">
+									<h3>{card.title}</h3>
+									<p>{card.copy}</p>
+								</article>
+							))}
+						</div>
+					</div>
+				</section>
+
+				<section class="mimir-section">
+					<div class="container">
+						<div class="mimir-closing-shell">
+							<p class="mimir-eyebrow">Closing</p>
+							<h2>If you see where this layer fits, let's talk.</h2>
 							<p>
-								If that describes you, I would like to talk.
+								I'm looking for technical, product, and strategic conversations around where persistent codebase intelligence should live.
 							</p>
-							<div class="cta-actions">
-								<a class="button button-primary" href="mailto:auston.horras@gmail.com?subject=M%C3%ADmir%20investor%20conversation">Start a conversation</a>
-								<a class="button button-secondary" href="https://www.linkedin.com/in/auston-horras-17022614/" target="_blank" rel="noreferrer">LinkedIn</a>
-								<a class="button button-secondary" href="tel:+15152990161">515-299-0161</a>
+							<div class="mimir-cta-row">
+								<a class="mimir-button mimir-button-primary" href="mailto:auston.horras@gmail.com?subject=M%C3%ADmir%20conversation">Contact by email</a>
+								<a class="mimir-button mimir-button-secondary" href="https://github.com/austontatious" target="_blank" rel="noreferrer">GitHub</a>
 							</div>
-							<ul class="mimir-contact-meta">
-								<li><a href="mailto:auston.horras@gmail.com">auston.horras@gmail.com</a></li>
-								<li><a href="https://www.austontatious.dev/Mimir" target="_blank" rel="noreferrer">www.austontatious.dev/Mimir</a></li>
-							</ul>
+							<p class="mimir-contact-line">
+								<a href="mailto:auston.horras@gmail.com">auston.horras@gmail.com</a> | <a href="tel:+15152990161">515-299-0161</a>
+							</p>
 						</div>
 					</div>
 				</section>
 			</main>
 
-			<footer class="site-footer">
-				<div class="container footer-inner">
+			<footer class="mimir-footer">
+				<div class="container mimir-footer-inner">
 					<p>Calm systems for clear outcomes.</p>
-					<div class="footer-links">
+					<div class="mimir-footer-links">
+						<a href="/">Home</a>
 						<a href="mailto:auston.horras@gmail.com">Contact</a>
 						<a href="https://www.linkedin.com/in/auston-horras-17022614/" target="_blank" rel="noreferrer">LinkedIn</a>
-						<a href="https://github.com/austontatious" target="_blank" rel="noreferrer">GitHub</a>
 					</div>
 				</div>
 			</footer>
