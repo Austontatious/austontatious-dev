@@ -2,7 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 
 const MIMIR_TITLE = 'Mímir | austontatious.dev';
-const MIMIR_DESCRIPTION = 'A persistent memory and navigation layer for AI systems working inside real codebases.';
+const MIMIR_DESCRIPTION = 'A persistent repository self-model for AI coding systems.';
 
 const valueChips = ['Persistent structure', 'Stable references', 'Relationship-aware context'];
 
@@ -17,19 +17,19 @@ const failureSymptoms = [
 const capabilityCards = [
 	{
 		title: 'Cards',
-		copy: 'Capture durable repository meaning so the system is working with normalized understanding, not loose snippets.',
+		copy: 'Units of understanding about the codebase: subsystem, file, symbol, boundary, workflow, or invariant.',
 	},
 	{
 		title: 'Bindings',
-		copy: 'Preserve attachment to real code locations as paths move, names change, and local structure shifts.',
+		copy: 'Attachments that keep understanding anchored as code moves, is renamed, or is partially rewritten.',
 	},
 	{
 		title: 'Signals',
-		copy: 'Separate meaningful change from churn so memory quality improves instead of accumulating noise.',
+		copy: 'Evidence that shapes confidence through structure, traces, edit history, retrieval success, and verified outcomes.',
 	},
 	{
 		title: 'Adjacencies',
-		copy: 'Expose structural relationships so retrieval follows the system topology rather than surface similarity alone.',
+		copy: 'Relationships that reveal what is nearby, upstream, downstream, dependent, or otherwise relevant in the system.',
 	},
 ];
 
@@ -637,7 +637,7 @@ const audienceCards = [
 								<h1>Mímir</h1>
 								<p class="mimir-hero-subhead">A persistent memory and navigation layer for AI systems working inside real codebases.</p>
 								<p class="mimir-hero-support">
-									Most AI coding systems still behave like first-time visitors in unfamiliar repositories. Mímir gives them durable orientation so context can be navigated instead of reconstructed.
+									Most AI coding systems still behave like first-time visitors in unfamiliar repositories. Mímir gives them durable orientation: where they are, what is nearby, what changed, and what path through the system is safest.
 								</p>
 								<div class="mimir-cta-row">
 									<a class="button button-primary" href="mailto:auston.horras@gmail.com?subject=M%C3%ADmir%20conversation">Start a conversation</a>
@@ -669,7 +669,7 @@ const audienceCards = [
 								<p class="mimir-eyebrow">The Problem</p>
 								<h2>AI coding tools keep re-solving orientation from scratch.</h2>
 								<p>
-									Search, reranking, and larger context windows can help, but they still ask the model to reconstruct where it is before it can act safely. That makes repository-scale work slower, noisier, and less trustworthy than it looks in a demo.
+									The failure is not that the model produced code. It is that it gave the appearance of understanding without actually being oriented inside the thing it was changing. Search, reranking, and larger context windows still begin from the same disadvantage: reconstructing the repository from fragments before meaningful work can begin.
 								</p>
 							</div>
 							<div class="mimir-problem-panel mimir-problem-visual">
@@ -701,7 +701,7 @@ const audienceCards = [
 							<p class="mimir-eyebrow">What Mímir Changes</p>
 							<h2>Mímir is a structural layer, not a search feature.</h2>
 							<p>
-								It maintains durable repository orientation, then serves the smallest useful bundle of code and context for the task at hand. The goal is not more text in the window. The goal is less guesswork before reasoning starts.
+								Mímir is a persistent repository self-model for AI coding systems. It turns a repository into a navigable topology, then serves context at the right level of abstraction. The shift is from "find similar text" to "understand what this part of the system is."
 							</p>
 						</div>
 						<div class="mimir-diagram-stack">
@@ -711,7 +711,7 @@ const audienceCards = [
 								</div>
 								<figcaption>
 									<strong>Navigation model</strong>
-									Rehydration narrows from subsystem to file to symbol to exact working span instead of dumping large source fragments into context.
+									Rehydration narrows from likely subsystem to likely file to likely symbol, then returns exact spans with summaries, adjacencies, confidence, and continuity where it matters.
 								</figcaption>
 							</figure>
 						</div>
@@ -734,7 +734,7 @@ const audienceCards = [
 								<p class="mimir-eyebrow">Built Already, Not Hypothetical</p>
 								<h2>Current implementation status</h2>
 								<p>
-									The project is already useful at the structure and rehydration layer. What remains is hardening, expansion, and disciplined productization, not proving the category should exist.
+									The memory layer exists. Rehydration works. Telemetry exists at both the "what happened" level and the "why did this path get taken" level. The open work is hardening and finishing the repository self-model, not proving the category should exist.
 								</p>
 							</div>
 							<div class="mimir-proof-grid">
@@ -766,7 +766,7 @@ const audienceCards = [
 							<p class="mimir-eyebrow">Why This Matters</p>
 							<h2>Repository-scale reliability needs orientation, not just recall.</h2>
 							<p>
-								Without a structural memory layer, every session spends tokens rebuilding context, first-target selection stays noisy, and trust erodes as repositories get larger, older, and more heavily refactored.
+								This changes more than retrieval. It changes the scaling problem itself: less repeated context reconstruction, better first-target selection, more stable memory across refactors, more reliable navigation in large repositories, and lower context cost for the same task depth.
 							</p>
 						</div>
 						<div class="mimir-outcome-grid">
