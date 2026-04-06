@@ -1,0 +1,138 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+
+const SYSTEMS_TITLE = 'For Teams | austontatious.dev';
+const SYSTEMS_DESCRIPTION =
+	'AI systems positioning: building systems that behave in the real world, not just models that demo well.';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SYSTEMS_TITLE} description={SYSTEMS_DESCRIPTION} />
+	</head>
+	<body>
+		<div class="page-shell">
+			<header class="main-nav">
+				<nav class="container nav-inner" aria-label="Primary">
+					<a href="/" class="brand">austontatious.dev</a>
+					<div class="nav-links nav-links-primary">
+						<a href="/">Home</a>
+						<a href="/workshops/">Workshops</a>
+						<a href="/Mimir">Mímir</a>
+						<a href="https://github.com/austontatious" target="_blank" rel="noreferrer">GitHub</a>
+						<a href="mailto:auston.horras@gmail.com">Contact</a>
+					</div>
+				</nav>
+			</header>
+
+			<main class="systems-main">
+				<section class="section systems-hero">
+					<div class="container section-inner">
+						<p class="eyebrow">AI Systems Positioning</p>
+						<h1>What teams usually need from AI work</h1>
+						<p class="lead systems-lead">Not just a model that can answer. A system that can behave.</p>
+						<p class="systems-intro">
+							Most teams think they are hiring someone to build AI systems. What they often actually need,
+							and usually discover too late, is someone who can make those systems behave in the real world.
+						</p>
+						<p class="systems-intro">That sounds like a small difference until you live inside it.</p>
+						<div class="systems-hero-actions">
+							<a class="button button-primary" href="mailto:auston.horras@gmail.com?subject=AI%20systems%20conversation">Start a conversation</a>
+							<a class="button button-secondary" href="#questions">Questions worth asking</a>
+						</div>
+						<a class="back-link" href="/">Back to home</a>
+					</div>
+				</section>
+
+				<section class="section">
+					<div class="container section-inner systems-stack">
+						<article class="systems-panel">
+							<h2>Why teams get this wrong</h2>
+							<p>
+								A surprising number of AI projects do not fail because the model is weak. They fail because the task was
+								never properly bounded in the first place. Or because memory was added as a feature instead of justified as
+								a behavior improvement. Or because tool use looked impressive in a demo and then broke quietly in production.
+								Or because the evaluation framework produced clean numbers that had very little to do with whether the system
+								was trustworthy once people depended on it.
+							</p>
+							<p>
+								Teams end up optimizing average-case capability while the real cost comes from worst-case behavior: quiet
+								failures, uncontrolled widening, and confidence without grounding. The gap between prototype and production
+								keeps widening because the system layer is treated as an afterthought.
+							</p>
+						</article>
+						<article class="systems-panel">
+							<h2>What I actually work on</h2>
+							<p>
+								I focus on turning vague requests into bounded, testable specifications. I design for behavioral consistency,
+								not just one clean demo. I want tool use to be reliable, memory to be useful, and failure to be visible,
+								predictable, and recoverable.
+							</p>
+							<p>
+								That means measuring whether outputs are trustworthy, not just technically plausible. It means closing the
+								gap between something that works in a notebook and something a team can ship without crossing its fingers.
+							</p>
+						</article>
+					</div>
+				</section>
+
+				<section class="section" id="questions">
+					<div class="container section-inner">
+						<div class="systems-question-panel">
+							<h2>Questions worth asking</h2>
+							<p class="systems-question-intro">
+								If these feel familiar, you are already working on the layer that usually decides whether an AI system can be trusted.
+							</p>
+							<ul class="systems-question-list">
+								<li>How do you distinguish model failure from orchestration failure?</li>
+								<li>How do you know memory is improving outcomes rather than just increasing context size?</li>
+								<li>What happens when the system chooses the wrong tool?</li>
+								<li>How do you measure consistency under repeated identical conditions?</li>
+								<li>What is your strategy for detecting when the system is confidently wrong?</li>
+								<li>How well do your evaluation metrics predict actual business outcomes?</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+
+				<section class="section">
+					<div class="container section-inner">
+						<div class="systems-position-panel">
+							<p class="systems-position-line">Most ML engineers are very good at getting models to work.</p>
+							<p class="systems-position-line">I have been focused on getting systems to behave.</p>
+						</div>
+					</div>
+				</section>
+
+				<section class="section">
+					<div class="container section-inner">
+						<div class="systems-cta">
+							<h2>If your team is already asking questions like these, we should probably talk.</h2>
+							<p>
+								If those questions already have clear, measurable answers, you probably have strong coverage in this layer.
+								If they do not, that is likely where I can help.
+							</p>
+							<p class="systems-cta-line">I work on the layer between AI capability and operational trust.</p>
+							<div class="cta-actions">
+								<a class="button button-primary" href="mailto:auston.horras@gmail.com?subject=AI%20systems%20conversation">Start a conversation</a>
+								<a class="button button-secondary" href="/Mimir">Explore Mímir</a>
+							</div>
+						</div>
+					</div>
+				</section>
+			</main>
+
+			<footer class="site-footer">
+				<div class="container footer-inner">
+					<p>Calm systems for clear outcomes.</p>
+					<div class="footer-links">
+						<a href="mailto:auston.horras@gmail.com">Contact</a>
+						<a href="https://www.linkedin.com/in/auston-horras-17022614/" target="_blank" rel="noreferrer">LinkedIn</a>
+						<a href="https://github.com/austontatious" target="_blank" rel="noreferrer">GitHub</a>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</body>
+</html>

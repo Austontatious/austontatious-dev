@@ -274,6 +274,32 @@ p {
 	color: rgba(233, 238, 255, 0.76) !important;
 }
 
+.home-systems-panel {
+	padding: clamp(1.3rem, 3vw, 2rem);
+	border-radius: 1rem;
+	border: 1px solid rgba(255, 255, 255, 0.14);
+	background: linear-gradient(180deg, rgba(18, 26, 46, 0.72), rgba(15, 21, 37, 0.88));
+}
+
+.home-systems-panel h2 {
+	font-size: clamp(1.4rem, 2.6vw, 2.1rem);
+}
+
+.home-systems-panel p {
+	margin-top: 0.85rem;
+	max-width: 76ch;
+	font-size: 0.98rem;
+	color: rgba(233, 238, 255, 0.86);
+}
+
+.home-systems-panel p + p {
+	margin-top: 0.8rem;
+}
+
+.home-systems-panel .button {
+	margin-top: 1.1rem;
+}
+
 .home-section-copy {
 	margin-top: 0.95rem;
 	max-width: 74ch;
@@ -1058,6 +1084,145 @@ p {
 	background: linear-gradient(180deg, rgba(12, 18, 32, 0.58), rgba(12, 18, 32, 0.72));
 }
 
+.systems-main .section {
+	border-top: 1px solid var(--line);
+}
+
+.systems-hero .section-inner {
+	padding-top: clamp(4.8rem, 10vw, 7rem);
+	padding-bottom: clamp(3.8rem, 8vw, 5.8rem);
+}
+
+.systems-hero h1 {
+	max-width: 26ch;
+}
+
+.systems-lead {
+	max-width: 32ch;
+}
+
+.systems-intro {
+	margin-top: 1rem;
+	max-width: 72ch;
+	font-size: 1rem;
+	color: rgba(233, 238, 255, 0.86);
+}
+
+.systems-intro + .systems-intro {
+	margin-top: 0.8rem;
+}
+
+.systems-hero-actions {
+	margin-top: 1.2rem;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.7rem;
+}
+
+.systems-stack {
+	display: grid;
+	gap: 1rem;
+}
+
+.systems-panel {
+	padding: clamp(1.2rem, 2.8vw, 1.85rem);
+	border-radius: 1rem;
+	border: 1px solid rgba(255, 255, 255, 0.14);
+	background: linear-gradient(180deg, rgba(18, 26, 46, 0.76), rgba(15, 21, 37, 0.88));
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.systems-panel h2 {
+	font-size: clamp(1.3rem, 2.4vw, 1.85rem);
+}
+
+.systems-panel p {
+	margin-top: 0.85rem;
+	max-width: 78ch;
+	font-size: 0.96rem;
+	color: rgba(233, 238, 255, 0.86);
+}
+
+.systems-panel p + p {
+	margin-top: 0.75rem;
+}
+
+.systems-question-panel {
+	padding: clamp(1.2rem, 2.8vw, 1.85rem);
+	border-radius: 1rem;
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	background: linear-gradient(180deg, rgba(18, 26, 46, 0.82), rgba(15, 21, 37, 0.92));
+}
+
+.systems-question-panel h2 {
+	font-size: clamp(1.25rem, 2.3vw, 1.7rem);
+}
+
+.systems-question-intro {
+	margin-top: 0.8rem;
+	max-width: 70ch;
+	font-size: 0.95rem;
+	color: rgba(233, 238, 255, 0.82);
+}
+
+.systems-question-list {
+	margin: 0.95rem 0 0;
+	padding-left: 1.1rem;
+	display: grid;
+	gap: 0.55rem;
+}
+
+.systems-question-list li {
+	font-size: 0.95rem;
+	color: rgba(233, 238, 255, 0.86);
+}
+
+.systems-position-panel {
+	padding: clamp(1.2rem, 2.8vw, 1.8rem);
+	border-radius: 1rem;
+	border: 1px solid rgba(255, 255, 255, 0.14);
+	background: linear-gradient(180deg, rgba(18, 26, 46, 0.72), rgba(15, 21, 37, 0.86));
+}
+
+.systems-position-line {
+	margin: 0;
+	font-size: 1.05rem;
+	color: rgba(233, 238, 255, 0.9);
+}
+
+.systems-position-line + .systems-position-line {
+	margin-top: 0.6rem;
+	color: rgba(233, 238, 255, 0.98);
+	font-weight: 600;
+}
+
+.systems-cta {
+	padding: clamp(1.3rem, 3vw, 2rem);
+	border-radius: 1rem;
+	border: 1px solid rgba(255, 255, 255, 0.16);
+	background: linear-gradient(180deg, rgba(18, 26, 46, 0.78), rgba(15, 21, 37, 0.9));
+}
+
+.systems-cta h2 {
+	font-size: clamp(1.4rem, 2.6vw, 2rem);
+}
+
+.systems-cta p {
+	margin-top: 0.85rem;
+	max-width: 70ch;
+	font-size: 0.96rem;
+	color: rgba(233, 238, 255, 0.86);
+}
+
+.systems-cta-line {
+	font-size: 1rem;
+	color: rgba(233, 238, 255, 0.94);
+}
+
+.systems-cta .cta-actions {
+	margin-top: 1.1rem;
+}
+
 .mimir-work-item h3 {
 	font-size: 0.95rem;
 	line-height: 1.35;
@@ -1180,6 +1345,10 @@ p {
 	}
 
 	.hero-cta-row .button {
+		width: 100%;
+	}
+
+	.systems-hero-actions .button {
 		width: 100%;
 	}
 
